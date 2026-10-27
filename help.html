@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스마트 단체 여행 매니저 - 종합 이용 가이드 & 도움말 (Ver 1.5)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        // 아코디언(접이식) 토글 헬퍼 함수
+        function toggleSection(contentId, chevronId) {
+            const content = document.getElementById(contentId);
+            const chevron = document.getElementById(chevronId);
+            if (!content) return;
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
+    <style id="theme-modern">
+        :root { --g100: #F2EEE6; --g200: #DCD5C7; --g600: #67635C; --g900: #1E2A38; --blue: #2E4256; }
+        body { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', system-ui, sans-serif !important;
+               background: var(--g100) !important; color: var(--g900); -webkit-font-smoothing: antialiased; letter-spacing: -0.02em; word-break: keep-all; }
+        body .rounded-2xl { border-radius: 12px !important; }
+        body .rounded-xl { border-radius: 8px !important; }
+        body .shadow-sm, body .shadow-md { box-shadow: 0 1px 2px rgba(0,23,51,.04), 0 4px 16px rgba(0,23,51,.04) !important; }
+        body [class*="border-"] { border-color: var(--g200) !important; }
+        body .border-2 { border-width: 1px !important; }
+        body .text-slate-800, body .text-slate-900 { color: var(--g900) !important; }
+        body .text-slate-500, body .text-slate-600 { color: var(--g600) !important; }
+        body .bg-blue-600 { background-color: var(--blue) !important; }
+        body .text-xs { font-size: 13px !important; line-height: 1.6 !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 p-4 max-w-2xl mx-auto space-y-4">
+    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 space-y-5">
+        
+        <!-- 상단 헤더 -->
+        <div class="flex justify-between items-center border-b pb-3">
+            <div>
+                <span class="bg-blue-100 text-blue-700 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">Official Guide (Ver 1.5)</span>
+                <h1 class="font-extrabold text-base sm:text-lg text-slate-900 mt-1 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-blue-600"></i> 스마트 단체 여행 매니저 도움말
+                </h1>
+            </div>
+            <button onclick="window.close()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1.5 rounded-xl text-xs font-bold cursor-pointer">닫기 ✕</button>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- [상단 대표 이미지] 카카오톡 공유 링크용 배경 이미지 -->
+        <!-- ========================================== -->
+        <div class="overflow-hidden rounded-2xl shadow-sm border border-slate-200">
+            <img src="image-link2.png" onerror="this.onerror=null; this.src='image-link.png';" alt="스마트 단체 여행 매니저 대표 이미지" class="w-full h-auto object-cover">
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 1. 버전별 업데이트 히스토리 -->
+        <!-- ========================================== -->
+        <div class="space-y-2.5">
+            <h2 class="font-extrabold text-slate-900 text-xs uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <i class="fa-solid fa-code-branch text-blue-600"></i> 버전 업그레이드 소식
+            </h2>
+
+            <!-- [추가 기능] 여행도구 탭 -->
+            <div class="border-2 border-pink-200 rounded-xl bg-white p-3.5 text-xs text-slate-700 space-y-1.5 leading-relaxed shadow-sm">
+                <p class="font-extrabold text-pink-700">🌏 추가 기능: 여행도구 탭 (하단 4번째)</p>
+                <p>• <b>D-day·여행 일차</b>와 일정 수·총 지출·1인당 금액을 한눈에 보여줍니다.</p>
+                <p>• <b>여행지 날씨:</b> 첫 일정 장소(좌표) 기준으로 여행 기간 날씨를 보여줍니다. (예보는 약 16일 이내만 가능)</p>
+                <p>• <b>현지 시각·시차</b>(해외 여행), <b>환율 계산기</b>와 가격표용 빠른 환산표를 제공합니다. 통화는 여행별로 기억됩니다.</p>
+                <p>• <b>안전·긴급:</b> 해외는 영사콜센터(+82-2-3210-0404)와 외교부 해외안전여행, 국내는 112·119로 바로 연결됩니다.</p>
+                <p>• 길찾기 앱 선택 창에서 <b>자동차·대중교통·도보</b>를 고를 수 있습니다. (구글맵·카카오맵 적용)</p>
+            </div>
+
+            <!-- [추가 기능] 길찾기·지도 앱 선택 -->
+            <div class="border-2 border-emerald-200 rounded-xl bg-white p-3.5 text-xs text-slate-700 space-y-1.5 leading-relaxed shadow-sm">
+                <p class="font-extrabold text-emerald-800">🧭 추가 기능: 길찾기·지도 앱 선택</p>
+                <p>• 상단 <b>[🧭 네이버]</b> 버튼을 눌러 <b>네이버지도 · 카카오맵 · 티맵 · 구글맵</b> 중 하나를 고르면, 일정·지출 카드의 [지도] 버튼과 구간별 [길찾기] 버튼이 모두 그 앱으로 열립니다.</p>
+                <p>• 해외 여행은 카카오맵·티맵이 지원되지 않아 자동으로 구글맵으로 연결됩니다.</p>
+                <p>• 티맵은 앱 전용이며 현재 위치에서 다음 목적지까지 안내합니다. 앱이 열리지 않으면 카카오맵(웹)으로 대신 열 수 있습니다.</p>
+            </div>
+
+            <!-- [최신] Ver 1.5 (기본 열림) -->
+            <div class="border-2 border-blue-200 rounded-xl bg-white overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('ver-15-content', 'ver-15-chev')" class="w-full p-3.5 bg-blue-50/70 hover:bg-blue-50 flex justify-between items-center text-xs font-extrabold text-blue-900 cursor-pointer text-left">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <span>🚀 Ver 1.5 업데이트</span>
+                        <span class="text-[11px] text-blue-600 font-semibold">(2026.10.25)</span>
+                        <span class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded-full font-normal">최신 New</span>
+                    </div>
+                    <i id="ver-15-chev" class="fa-solid fa-chevron-down text-blue-600 transition-transform" style="transform: rotate(180deg);"></i>
+                </button>
+                <div id="ver-15-content" class="p-3.5 border-t border-blue-100 text-xs text-slate-700 space-y-2 leading-relaxed bg-blue-50/20">
+                    <p>• <b>11대 가계부 전용 카테고리 신설 (`항공비` 포함):</b> 정산 목적과 지출 성격에 맞춘 11대 표준 카테고리(항공비, 교통·주유·주차, 숙박비, 식비, 카페·간식, 마트·장보기, 회식·주류·야식, 관광·입장·체험, 쇼핑·기념품, 통신·보험·비상, 기타·예비비)를 도입하여 일정 카테고리에서 가계부로 자동 변환·집계됩니다.</p>
+                    <p>• <b>[🏁 여행완료하기] 확정 및 일정 보호(수정잠금) 시스템:</b> 여행 종료 후 '여행완료하기'를 누르면 중간 일정이 안전하게 보호(잠금)되며, 곧바로 카테고리별 비교 통계 리포트가 열립니다. 여행 목록이나 내부에서 언제든 <b>[재수정 열기]</b>를 눌러 다시 수정할 수 있습니다.</p>
+                    <p>• <b>3가지 모드 카테고리 통계 대시보드:</b> ① ⚖️ 여행전·후 비교 통계, ② 📋 여행전 통계만 보기, ③ 🧾 여행중·완료 통계만 보기 모드를 탭으로 간편하게 전환하며 확인할 수 있습니다.</p>
+                    <p>• <b>상·하단 레이아웃 최적화:</b> 상단 헤더에 좌측 여행 제목과 우측 <code>[편집중]</code>·<code>[도움말(1.5)]</code>를 깔끔하게 정렬하고, 하단 고정 내비게이션 바 맨 왼쪽에 <b>[⬅ 목록]</b> 버튼을 배치해 한 손 조작성을 극대화했습니다.</p>
+                </div>
+            </div>
+
+            <!-- [과거 버전 통합 아코디언] (Ver 1.35 ~ Ver 1.0) -->
+            <div class="border border-slate-200 rounded-xl bg-slate-50/70 overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('past-versions-list', 'past-versions-chev')" class="w-full p-3.5 bg-slate-100 hover:bg-slate-200/70 flex justify-between items-center text-xs font-extrabold text-slate-700 cursor-pointer text-left transition">
+                    <span class="flex items-center gap-1.5">
+                        <i class="fa-solid fa-clock-rotate-left text-slate-500"></i> 과거 버전 내용 보기 (Ver 1.35 ~ Ver 1.0)
+                    </span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] text-slate-500 font-semibold">터치하여 목록 열기</span>
+                        <i id="past-versions-chev" class="fa-solid fa-chevron-down text-slate-500 transition-transform"></i>
+                    </div>
+                </button>
+
+                <div id="past-versions-list" class="hidden p-3 space-y-2 border-t border-slate-200 bg-slate-50">
+                    <!-- Ver 1.35 -->
+                    <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                        <button type="button" onclick="toggleSection('ver-135-content', 'ver-135-chev')" class="w-full p-3 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                            <span>📦 Ver 1.35 업데이트 <span class="text-[11px] text-slate-400 font-normal ml-1">(2026.10.25)</span></span>
+                            <i id="ver-135-chev" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform"></i>
+                        </button>
+                        <div id="ver-135-content" class="hidden p-3 border-t border-slate-100 text-xs text-slate-600 space-y-1.5 leading-relaxed bg-slate-50/50">
+                            <p>• <b>타임라인·일정관리 단일 탭 통합 및 2단계 스마트 아코디언:</b> 반나절(오전/오후) 대분류 구조 및 구간별 맞춤 일정 추가 버튼 배치, 가계부 지출 내역 요약 아코디언을 적용했습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ver 1.3 -->
+                    <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                        <button type="button" onclick="toggleSection('ver-13-content', 'ver-13-chev')" class="w-full p-3 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                            <span>📦 Ver 1.3 업데이트 <span class="text-[11px] text-slate-400 font-normal ml-1">(2026.10.24)</span></span>
+                            <i id="ver-13-chev" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform"></i>
+                        </button>
+                        <div id="ver-13-content" class="hidden p-3 border-t border-slate-100 text-xs text-slate-600 space-y-1.5 leading-relaxed bg-slate-50/50">
+                            <p>• <b>첫 화면 [최근 여행 실시간 브리핑 위젯] 탑재:</b> 현재 진행 중인 여행의 직전·다음 일정을 요약 표시하고 즉시 입장 기능을 추가했습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ver 1.25 -->
+                    <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                        <button type="button" onclick="toggleSection('ver-125-content', 'ver-125-chev')" class="w-full p-3 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                            <span>📦 Ver 1.25 업데이트 <span class="text-[11px] text-slate-400 font-normal ml-1">(2026.10.24)</span></span>
+                            <i id="ver-125-chev" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform"></i>
+                        </button>
+                        <div id="ver-125-content" class="hidden p-3 border-t border-slate-100 text-xs text-slate-600 space-y-1.5 leading-relaxed bg-slate-50/50">
+                            <p>• <b>구간별 이동거리·소요시간 [자동계산 ⇄ 수동입력] 기능 탑재:</b> 실제 길찾기 정보를 반영할 수 있도록 개선했습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ver 1.2 ~ 1.0 -->
+                    <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+                        <button type="button" onclick="toggleSection('ver-10-content', 'ver-10-chev')" class="w-full p-3 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                            <span>📦 Ver 1.0 ~ 1.2 (초기 출시 및 영수증 기능)</span>
+                            <i id="ver-10-chev" class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform"></i>
+                        </button>
+                        <div id="ver-10-content" class="hidden p-3 border-t border-slate-100 text-xs text-slate-600 space-y-1.5 leading-relaxed bg-slate-50/50">
+                            <p>• 듀얼 지도 시스템(카카오맵/구글맵), 영수증 사진 첨부, 엑셀 백업/복원 기능 탑재.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- [배너 광고 1] 도움말 화면 중간 (coffee-1.png) -->
+        <!-- ========================================== -->
+        <div class="py-2">
+            <a href="https://ohyaksa.github.io/bluebottle-dialer/" target="_blank" class="block overflow-hidden rounded-2xl shadow-md border border-slate-200 hover:opacity-95 transition">
+                <img src="coffee-1.png" alt="Blue Bottle Dialer 광고 배너 1" class="w-full h-auto object-cover">
+            </a>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- 2. 프로그램 페이지별 도움말 -->
+        <!-- ========================================== -->
+        <div class="space-y-2.5">
+            <h2 class="font-extrabold text-slate-900 text-xs uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <i class="fa-solid fa-list-check text-indigo-600"></i> 화면 페이지별 상세 이용 가이드
+            </h2>
+
+            <!-- 페이지 1: 첫 화면 (실시간 브리핑 위젯 + 폴더 목록 + 완료 여행 재수정) -->
+            <div class="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('page-1-content', 'page-1-chev')" class="w-full p-3.5 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-blue-600 font-extrabold">[첫 화면]</span> 실시간 브리핑 위젯, 폴더 목록 & 완료된 여행 재수정 연동
+                    </div>
+                    <i id="page-1-chev" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="page-1-content" class="hidden p-3.5 border-t border-slate-100 text-xs text-slate-600 space-y-2 leading-relaxed bg-slate-50/50">
+                    <p>• <b>최근 여행 실시간 브리핑 위젯:</b> 진행 중인 여행이 있으면 상단에 현재 시각 기준 [직전 일정]과 [다음 일정]을 요약 표시하고, 클릭 시 해당 구간으로 즉시 이동합니다. (완료된 여행은 위젯에서 제외됩니다.)</p>
+                    <p>• <b>완료된 여행 재수정 지원:</b> 완료된(🏆) 여행 카드에는 <code>[📊 최종통계]</code> 버튼과 함께 언제든 완료 잠금을 풀고 일정을 수정할 수 있는 <code>[🔓 일정재수정]</code> 버튼이 제공됩니다.</p>
+                </div>
+            </div>
+
+            <!-- 페이지 2: 통합 타임라인·일정 탭 -->
+            <div class="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('page-2-content', 'page-2-chev')" class="w-full p-3.5 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-blue-600 font-extrabold">[타임라인·일정 탭]</span> 오전·오후 대분류, 구간별 추가 버튼 및 직전·다음 자동 펼침
+                    </div>
+                    <i id="page-2-chev" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="page-2-content" class="hidden p-3.5 border-t border-slate-100 text-xs text-slate-600 space-y-2 leading-relaxed bg-slate-50/50">
+                    <p>• <b>구간별 맞춤 일정 추가 버튼:</b> <code>1일차 오전</code>, <code>1일차 오후</code> 등 각 반나절 목록 바로 위의 <b>[+ N일차 오전/오후 일정 추가하기]</b>를 누르면 해당 일차와 시간대가 자동 세팅됩니다.</p>
+                    <p>• <b>2단계 아코디언 & 자동 펼침:</b> 반나절 제목을 눌러 목록(시간·장소·사진)을 열고, 장소를 한 번 더 누르면 상세 정보와 이동 거리 박스가 펼쳐집니다. 현재 시간 기준 직전·다음 일정은 자동으로 활짝 펼쳐집니다.</p>
+                </div>
+            </div>
+
+            <!-- 페이지 3: 가계부·회비 탭 -->
+            <div class="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('page-3-content', 'page-3-chev')" class="w-full p-3.5 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-blue-600 font-extrabold">[가계부·회비 탭]</span> 11대 가계부 전용 카테고리(항공비 포함), 3모드 통계 및 2단 목록
+                    </div>
+                    <i id="page-3-chev" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="page-3-content" class="hidden p-3.5 border-t border-slate-100 text-xs text-slate-600 space-y-2 leading-relaxed bg-slate-50/50">
+                    <p>• <b>11대 가계부 전용 카테고리:</b> 항공비, 교통·주유·주차, 숙박비, 식비, 카페·간식, 마트·장보기, 회식·주류·야식, 관광·입장·체험, 쇼핑·기념품, 통신·보험·비상, 기타·예비비 분류를 제공합니다.</p>
+                    <p>• <b>3모드 통계 대시보드:</b> <code>① ⚖️ 여행전·후 비교</code>, <code>② 📋 여행전 통계만</code>, <code>③ 🧾 여행중·완료 통계만</code> 탭을 자유롭게 전환하며 재정 상태를 분석합니다.</p>
+                    <p>• <b>2단 목록 구조 ([1. 여행전 예산 목록] & [2. 여행중·완료 지출 목록]):</b> 평소에는 제목과 금액만 보이고 터치하면 상세 내용과 영수증 사진이 펼쳐집니다. 카카오톡 공유 시 카테고리별 요약표도 함께 복사됩니다.</p>
+                </div>
+            </div>
+
+            <!-- 페이지 4: 체크·차량 탭 -->
+            <div class="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('page-4-content', 'page-4-chev')" class="w-full p-3.5 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-blue-600 font-extrabold">[체크·차량 탭]</span> 차량 배치, 준비물 체크리스트 및 [마트·장보기] 가계부 연동
+                    </div>
+                    <i id="page-4-chev" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="page-4-content" class="hidden p-3.5 border-t border-slate-100 text-xs text-slate-600 space-y-2 leading-relaxed bg-slate-50/50">
+                    <p>• <b>구입품목 가계부 원터치 연동:</b> 체크리스트의 '현장 구입품목'에서 [가계부반영]을 누르면 <code>[마트·장보기]</code> 카테고리로 예산 및 지출에 자동 등록됩니다.</p>
+                </div>
+            </div>
+
+            <!-- 페이지 5: 하단 고정 바 & 여행완료/잠금 모드 -->
+            <div class="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-sm">
+                <button type="button" onclick="toggleSection('page-5-content', 'page-5-chev')" class="w-full p-3.5 hover:bg-slate-50 flex justify-between items-center text-xs font-bold text-slate-800 cursor-pointer text-left">
+                    <div class="space-y-0.5">
+                        <span class="text-rose-600 font-extrabold">[하단 [⬅ 목록] 바 & 여행완료 잠금]</span> 한 손 목록 이동 및 완료 모드
+                    </div>
+                    <i id="page-5-chev" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                </button>
+                <div id="page-5-content" class="hidden p-3.5 border-t border-slate-100 text-xs text-slate-600 space-y-2 leading-relaxed bg-slate-50/50">
+                    <p>• <b>하단 [⬅ 목록] 버튼:</b> 하단 고정 내비게이션 바 맨 왼쪽에 <b>[⬅ 목록]</b> 버튼이 배치되어 언제든 첫 화면으로 편리하게 나갈 수 있습니다.</p>
+                    <p>• <b>[🏁 여행완료하기] 및 완료잠금:</b> 여행 완료 시 일정이 자동으로 보호(수정잠금)되어 실수로 지워지는 것을 방지하며, 상단 배너와 목록에서 언제든 해제할 수 있습니다.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- [배너 광고 2] 도움말 화면 마지막 (coffee-2.png) -->
+        <!-- ========================================== -->
+        <div class="py-2">
+            <a href="https://ohyaksa.github.io/bluebottle-dialer/" target="_blank" class="block overflow-hidden rounded-2xl shadow-md border border-slate-200 hover:opacity-95 transition">
+                <img src="coffee-2.png" alt="Blue Bottle Dialer 광고 배너 2" class="w-full h-auto object-cover">
+            </a>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- [하단 배치] 인스타그램 개발자 & 채널 소개 -->
+        <!-- ========================================== -->
+        <section class="bg-gradient-to-r from-pink-50 via-purple-50 to-indigo-50 p-4 rounded-2xl border border-pink-200/80 space-y-3">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white flex items-center justify-center text-sm shrink-0 shadow-sm">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div>
+                    <h3 class="font-extrabold text-xs sm:text-sm text-slate-900">✨ 개발자 오찬욱의 인스타그램 채널</h3>
+                    <p class="text-[11px] text-slate-600">유익한 정보와 일상을 나누고 있어요! 팔로우와 응원 부탁드립니다 🙏</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                <!-- 첫 번째: 개인 인스타그램 -->
+                <a href="https://www.instagram.com/chanwuk_oh?rpxt=M21hZ3F0a3F6YXNs" target="_blank" class="bg-white hover:bg-pink-50 border border-pink-200/70 p-2.5 rounded-xl flex items-center justify-between gap-1.5 transition shadow-sm group">
+                    <div class="truncate">
+                        <p class="font-extrabold text-[11px] text-slate-800 group-hover:text-pink-600 truncate">👤 오찬욱 개인</p>
+                        <p class="text-[10px] text-slate-400">일상 소통 공간</p>
+                    </div>
+                    <span class="bg-pink-100 text-pink-700 text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0">팔로우</span>
+                </a>
+
+                <!-- 두 번째: 약물정보 안내 약찬욱 -->
+                <a href="https://www.instagram.com/yakchanwuk?dlrf=Mjk1OW94MGVocHU5" target="_blank" class="bg-white hover:bg-purple-50 border border-purple-200/70 p-2.5 rounded-xl flex items-center justify-between gap-1.5 transition shadow-sm group">
+                    <div class="truncate">
+                        <p class="font-extrabold text-[11px] text-slate-800 group-hover:text-purple-600 truncate">💊 약찬욱 (약물정보)</p>
+                        <p class="text-[10px] text-slate-400">유용한 복약 정보</p>
+                    </div>
+                    <span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0">팔로우</span>
+                </a>
+
+                <!-- 세 번째: 일상 라이프 -->
+                <a href="https://www.instagram.com/daily_life_of_oh?dlrf=cTZ1MWN5NHpvMGRx" target="_blank" class="bg-white hover:bg-indigo-50 border border-indigo-200/70 p-2.5 rounded-xl flex items-center justify-between gap-1.5 transition shadow-sm group">
+                    <div class="truncate">
+                        <p class="font-extrabold text-[11px] text-slate-800 group-hover:text-indigo-600 truncate">☕ 일상 라이프</p>
+                        <p class="text-[10px] text-slate-400">소소한 취미 생활</p>
+                    </div>
+                    <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0">팔로우</span>
+                </a>
+            </div>
+        </section>
+
+        <button onclick="window.close()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-xs font-bold cursor-pointer">
+            도움말 닫기
+        </button>
+    </div>
+</body>
+</html>
