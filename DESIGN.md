@@ -7,7 +7,7 @@
 
 1. **종이와 잉크.** 크림 종이 위에 네이비 잉크로 쓴 듯한 화면. 그림자 대신 얇은 선으로 구분합니다.
 2. **색은 정보에만.** 장식용 색·그라데이션·이모지 강조는 쓰지 않습니다. 색은 상태(계획전·방문완료·경고)와 일차 구분에만 씁니다.
-3. **세리프는 제목에만.** 큰 제목과 큰 숫자만 명조, 본문은 고딕, 작은 라벨은 모노 서체 + 넓은 자간.
+3. **서체는 세 가지만.** 한글 큰 제목은 명조(Noto Serif KR), 영문 제목·큰 숫자·작은 영문 라벨은 Inter, 본문은 Pretendard. 이탤릭·장식 서체는 쓰지 않습니다.
 4. **한 화면, 한 개의 주 버튼.** 네이비 채움 버튼은 화면의 핵심 행동 하나에만, 나머지는 아웃라인.
 
 ## 2. 토큰
@@ -46,11 +46,11 @@
 |---|---|---|
 | 화면 제목 (헤더) | Noto Serif KR | 18px / 600 |
 | 섹션 제목 (h2) | Noto Serif KR | 20px / 600 |
-| 큰 숫자 (D-day) | Noto Serif KR | 36px / 500 |
+| 큰 숫자 (D-day) | Inter | 54px / 600, 자간 -0.04em |
 | 카드 제목 (h3) | Pretendard | 17px / 700 |
 | 본문 | Pretendard | 13~15px / 400~600 |
-| 라벨·상태값 | IBM Plex Mono | 11px / 500, 자간 0.08~0.12em |
-| 디스플레이 (영문 마스트헤드·D-day 숫자) | Playfair Display Italic | 58~60px / 400 |
+| 영문 라벨 (OVERSEAS 등) | Inter | 10.5~11px / 500, 대문자, 자간 0.16em |
+| 영문 마스트헤드 (Journeys) | Inter | 52px / 600, 자간 -0.045em |
 
 ### 간격 · 모서리 · 선
 
@@ -97,21 +97,52 @@
 
 ### Masthead (매거진 표지 머리)
 
-첫 화면 맨 위. 모노 라벨(`SMART GROUP TRAVEL · VOL. 1.5`, 자간 0.18em) → 이탤릭 디스플레이 `Journeys` 58px → 명조 부제 15px → 1px 잉크 선.
+첫 화면 맨 위. Inter 라벨(`SMART GROUP TRAVEL · VOL. 1.5`, 자간 0.16em) → Inter 600 `Journeys` 52px → 명조 부제 15px → 1px 잉크 선.
 
 ### Cover Card (여행 카드)
 
 | 영역 | 규칙 |
 |---|---|
 | 커버 (위) | 높이 164px 이상, 잉크 톤 그라데이션. 국내 `#7A90A2→#3A5168→#1E2A38`, 해외 `#8A9C92→#43606A→#1E2A38`, 완료 `#A39D91→#625D55→#3B3934` |
-| 라벨 | 왼쪽 `DOMESTIC / OVERSEAS · 지역` 모노 10.5px, 오른쪽 상태 칩(D-day 아웃라인, 여행중은 흰 채움) |
+| 라벨 | 왼쪽 `DOMESTIC / OVERSEAS · 지역` Inter 10.5px, 오른쪽 상태 칩(D-day 아웃라인, 여행중은 흰 채움) |
 | 제목 | 명조 25px 흰색, 그 아래 날짜·인원 12.5px |
 | 워터마크 | 여행명 첫 글자, 명조 156px, 흰색 7% 투명도, 오른쪽 아래 |
 | 본문 (아래) | 페이퍼 바탕, 주 버튼 1개 + 아웃라인 버튼 |
 
 ### Hero Cover (여행도구 D-day)
 
-일정에 사진이 있으면 첫 사진을 커버로 깔고 위→아래 `rgba(20,28,38,.30)→.88` 그라데이션을 덮습니다. 사진이 없으면 잉크 단색. 숫자는 이탤릭 디스플레이 60px.
+일정에 사진이 있으면 첫 사진을 커버로 깔고 위→아래 `rgba(20,28,38,.30)→.88` 그라데이션을 덮습니다. 사진이 없으면 잉크 단색. 숫자는 Inter 600 54px.
+
+### Bilingual Title (영문 제목 + 작은 한글)
+
+화면 제목·섹션 제목·하단 탭은 영문을 크게, 한글을 작게 함께 씁니다. 설명 문구·입력칸·버튼·알림은 한국어 그대로 둡니다.
+
+| 위치 | 영문 | 한글 |
+|---|---|---|
+| 섹션 제목 (h2) | Inter 600 22px, 자간 -0.02em | Pretendard 500 11.5px, `--g500` |
+| 카드·폼 제목 (h3) | Inter 600 17px | 같음 |
+| 하단 탭 | Inter 11px | 9px, 75% 투명도 |
+| 일차 헤더 | `Day 1 · Morning` Inter 600 15px | `1일차 오전 (날짜)` 11.5px |
+
+마크업: `<span class="bi"><span class="bi-en">Weather</span><span class="bi-ko">여행지 날씨</span></span>`
+
+| 한글 | 영문 |
+|---|---|
+| 내 여행 일정 목록 | My Trips |
+| 새 여행 만들기 / 여행 정보 수정 | New Trip / Edit Trip |
+| 엑셀 백업·복원 | Backup & Restore |
+| 연도별 / 지역별 | By Year / By Region |
+| 타임라인 지도 / 타임라인 | Route Map / Timeline |
+| 일정 추가 / 수정 | Add Schedule / Edit Schedule |
+| 예산 비교·회비 정산 | Budget & Split |
+| 카테고리 통계 / 최종 통계 | Spending Insights / Final Report |
+| 지출 입력 / 수정 | Add Expense / Edit Expense |
+| 여행전 예산 / 실제 지출 | Planned Budget / Actual Spending |
+| 차량 배치 | Vehicles / Edit Vehicle |
+| 체크리스트 / 항목 추가 | Checklist / Add Item, Edit Item |
+| 날씨·현지 시각·환율·안전 | Weather · Local Time · Currency · Safety |
+| 길찾기 앱 선택 | Navigation App |
+| 하단 탭 | Trips · Plan · Budget · Checklist · Tools |
 
 ## 4. 하지 말 것
 

@@ -49,10 +49,10 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@1,400;1,500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&family=Inter:wght@500;600&display=swap">
 
     <!-- ================================================================
-         [디자인 레이어 v4] Paper & Ink 테마 (크림 페이퍼 + 네이비 잉크, 얇은 선, 세리프 제목) — 규칙은 DESIGN.md 참고
+         [디자인 레이어 v4] Paper & Ink 테마 (크림 페이퍼 + 네이비 잉크, 얇은 선, 한글 명조 제목 + 영문 Inter) — 규칙은 DESIGN.md 참고
          - 기존 Tailwind 클래스를 덮어쓰는 방식이라 기능 코드는 그대로입니다.
          - 이 <style> 블록을 지우면 원래 디자인으로 돌아갑니다.
          ================================================================ -->
@@ -73,7 +73,7 @@
             --red: #B5563C;
             --ig: #1E2A38;
             --serif: 'Noto Serif KR', 'Nanum Myeongjo', serif;
-            --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            --mono: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, sans-serif;   /* 영문 라벨 */
             --card-shadow: 0 0 0 1px var(--line), 0 1px 0 rgba(30, 42, 56, 0.04);
             color-scheme: light;
         }
@@ -1029,9 +1029,9 @@
         /* ---------- 인스타 포인트 (스토리·D-day·브리핑) ---------- */
         #recent-trip-widget { background: var(--g900) !important; box-shadow: none !important; border-radius: 12px !important; }
         #tools-hero > div { box-shadow: none !important; }
-        #tools-hero p.opacity-90:first-child { color: var(--mist) !important; opacity: 1 !important; font-family: var(--mono) !important; letter-spacing: 0.12em; font-size: 11px !important; }
+        #tools-hero p.opacity-90:first-child { color: var(--mist) !important; opacity: 1 !important; font-family: var(--mono) !important; letter-spacing: 0.04em; font-size: 11px !important; }
         #tools-hero > div { border-radius: 12px !important; }
-        #tools-hero .text-\[10px\] { font-family: var(--mono) !important; letter-spacing: 0.08em; color: var(--mist) !important; opacity: 1 !important; }
+        #tools-hero .text-\[10px\] { font-family: var(--mono) !important; letter-spacing: 0.02em; color: var(--mist) !important; opacity: 1 !important; }
         .map-box { border-radius: 16px !important; background: var(--g100) !important; }
         .ig-stories { display: flex; gap: 14px; overflow-x: auto; padding: 2px 2px 6px; scroll-snap-type: x proximity; scrollbar-width: none; }
         .ig-stories::-webkit-scrollbar { display: none; }
@@ -1090,10 +1090,10 @@
         main h2 i, main h3 i { color: var(--slate) !important; }
         body button:disabled, body button[disabled] { background-color: var(--g200) !important; color: var(--g400) !important; border-color: transparent !important; cursor: not-allowed; transform: none !important; }
         /* ---------- 에디토리얼(매거진) 요소: 마스트헤드 · 커버 카드 · D-day 커버 ---------- */
-        :root { --display: 'Playfair Display', 'Noto Serif KR', serif; }
+        :root { --display: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
         .editorial-masthead { padding: 18px 4px 2px; }
-        .editorial-masthead .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; color: var(--slate); }
-        .editorial-masthead .display { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 58px; line-height: 1.05; color: var(--g900); margin: 10px 0 22px; letter-spacing: -0.01em; }
+        .editorial-masthead .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; color: var(--slate); }
+        .editorial-masthead .display { font-family: var(--display); font-style: normal; font-weight: 600; font-size: 52px; line-height: 1.05; color: var(--g900); margin: 10px 0 22px; letter-spacing: -0.045em; }
         .editorial-masthead .dek { font-family: var(--serif); font-size: 15px; color: var(--g600); padding-bottom: 16px; border-bottom: 1px solid var(--g900); }
         .trip-cover-card { border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 0 0 1px var(--line); }
         .trip-cover { position: relative; min-height: 164px; padding: 18px 20px 20px; color: #FFFFFF; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
@@ -1102,16 +1102,34 @@
         .trip-cover.tone-done { background: linear-gradient(160deg, #A39D91 0%, #625D55 55%, #3B3934 100%); }
         .trip-cover::after { content: attr(data-mono); position: absolute; right: -4px; bottom: -40px; font-family: var(--serif); font-size: 156px; line-height: 1; color: rgba(255, 255, 255, 0.07); pointer-events: none; }
         .cover-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; position: relative; z-index: 1; }
-        .cover-kicker { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; color: rgba(255, 255, 255, 0.78); }
-        .cover-pill { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; padding: 3px 8px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 3px; color: #FFFFFF; white-space: nowrap; }
+        .cover-kicker { font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; color: rgba(255, 255, 255, 0.78); }
+        .cover-pill { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 3px 8px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 3px; color: #FFFFFF; white-space: nowrap; }
         .cover-pill.is-live { background: #FFFFFF; color: var(--g900); border-color: #FFFFFF; }
         .trip-cover .cover-title { position: relative; z-index: 1; font-family: var(--serif) !important; font-weight: 600 !important; font-size: 25px !important; line-height: 1.28; letter-spacing: -0.02em; margin-top: 24px; color: #FFFFFF !important; }
         .cover-meta { position: relative; z-index: 1; font-size: 12.5px; color: rgba(255, 255, 255, 0.82); margin-top: 6px; }
         .trip-cover-body { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; }
         .trip-cover-body > button:first-child { flex: 1 1 auto; }
         /* D-day 커버: 영문 숫자는 이탤릭 디스플레이 서체 */
-        #tools-hero .text-4xl { font-family: var(--display) !important; font-style: italic; font-weight: 400 !important; font-size: 60px !important; line-height: 1 !important; margin: 6px 0 4px; }
+        #tools-hero .text-4xl { font-family: var(--display) !important; font-style: normal; font-weight: 600 !important; font-size: 54px !important; line-height: 1 !important; margin: 6px 0 4px; letter-spacing: -0.04em; }
         #tools-hero .hero-cover { background-size: cover !important; background-position: center !important; min-height: 220px; }
+        /* ---------- 영문 제목 + 작은 한글 부제 (bilingual) ---------- */
+        .bi { display: inline-flex; flex-direction: column; gap: 2px; min-width: 0; line-height: 1.2; text-align: left; }
+        .bi-en { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; color: inherit; }
+        .bi-ko { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; font-size: 11.5px !important; font-weight: 500 !important; letter-spacing: 0; color: var(--g500) !important; }
+        main h2 .bi-en, main h2.bi-host .bi-en { font-size: 22px; }
+        main h3 .bi-en, main span[id$="-form-title"] .bi-en, #account-stats-title .bi-en { font-size: 17px; }
+        #trip-completed-banner .bi-ko, .text-white .bi-ko { color: rgba(255, 255, 255, 0.7) !important; }
+        button.w-full.text-white.justify-between .bi-ko { color: var(--g500) !important; }
+        button.w-full.text-white.justify-between .bi-en { color: var(--g900) !important; }
+        /* 영문 헤더 제목 */
+        body > header[class] h1 { font-family: var(--display) !important; font-weight: 600 !important; letter-spacing: -0.03em; }
+        /* 하단 탭: 영문 + 작은 한글 */
+        #bottom-nav-bar .tab-en { font-family: var(--display); font-size: 11px; line-height: 1.1; }
+        #bottom-nav-bar .tab-ko { font-size: 9px; line-height: 1.1; opacity: 0.75; font-weight: 500; }
+        #bottom-nav-bar button { gap: 1px !important; padding-top: 7px !important; padding-bottom: 7px !important; }
+        /* 일차 헤더 */
+        .day-en { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+        .day-ko { font-size: 11.5px; color: var(--g500); font-weight: 500; }
     </style>
 </head>
 <body class="text-slate-800 pb-28">
@@ -1122,7 +1140,7 @@
             <!-- 상단 메인 행: 왼쪽 여행 제목 & 오른쪽 [편집중] · [도움말(1.5)] -->
             <div class="flex justify-between items-center gap-2">
                 <div class="flex items-center gap-1.5 flex-1 min-w-0 text-left">
-                    <h1 id="header-trip-title" class="font-extrabold text-sm sm:text-base leading-snug break-words text-left">여행 일정 목록</h1>
+                    <h1 id="header-trip-title" class="font-extrabold text-sm sm:text-base leading-snug break-words text-left">My Trips</h1>
                     <span id="header-completed-badge" class="hidden bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full shrink-0">🏆완료됨</span>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0 justify-end">
@@ -1131,13 +1149,13 @@
                     </button>
                     <!-- help.html 도움말(1.5) 새창 열기 버튼 -->
                     <a href="help.html" target="_blank" title="도움말 보기" class="bg-amber-300 hover:bg-amber-400 text-slate-900 px-2.5 py-1 rounded-full text-[11px] font-extrabold flex items-center gap-1 cursor-pointer shadow-sm">
-                        <i class="fa-solid fa-circle-question text-blue-800"></i> 도움말(1.5)
+                        <i class="fa-solid fa-circle-question text-blue-800"></i> Help
                     </a>
                 </div>
             </div>
             <!-- 상단 보조 행: 좌측 여행 기간·인원 & 우측 지도전환·새로고침·동기화상태 -->
             <div class="flex justify-between items-center gap-2 pt-0.5">
-                <p id="header-trip-dates" class="text-[11px] text-blue-100 font-medium leading-tight break-words text-left flex-1 min-w-0">스마트 단체 여행 매니저 Ver 1.5</p>
+                <p id="header-trip-dates" class="text-[11px] text-blue-100 font-medium leading-tight break-words text-left flex-1 min-w-0">Smart Group Travel · 단체 여행 매니저</p>
                 <div class="flex items-center gap-1 shrink-0">
                     <button id="btn-nav-app" onclick="openNavAppPicker()" title="길찾기·지도 앱 선택" class="bg-green-500 text-white px-2 py-0.5 rounded-full text-[10px] font-extrabold cursor-pointer shadow-sm">
                         <span class="nav-dot" style="background:#03C75A"></span>네이버
@@ -1196,7 +1214,7 @@
         <section id="all-trips-folder-section" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
             <div class="flex justify-between items-center">
                 <div>
-                    <h2 class="text-base font-extrabold text-slate-800"><i class="fa-solid fa-suitcase-rolling text-blue-600 mr-1.5"></i>내 여행 일정 목록</h2>
+                    <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-suitcase-rolling text-blue-600"></i><span class="bi"><span class="bi-en">My Trips</span><span class="bi-ko">내 여행 일정 목록</span></span></h2>
                     <p class="text-[11px] text-slate-500 mt-0.5">연도별 또는 국내·해외 지역별 폴더를 눌러 일정을 확인하세요. (완료된 여행도 [수정]을 누르면 재수정 가능)</p>
                 </div>
             </div>
@@ -1210,7 +1228,7 @@
         <section id="trip-accordion-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <button type="button" onclick="toggleAccordion('trip-form-body', 'trip-form-chevron')" class="w-full p-4 flex justify-between items-center bg-slate-50 hover:bg-slate-100 cursor-pointer text-left">
                 <span id="trip-form-title" class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle-plus text-emerald-600"></i> 새로운 여행 직접 만들기 (터치하여 열기)
+                    <i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">New Trip</span><span class="bi-ko">새로운 여행 직접 만들기 · 터치하여 열기</span></span>
                 </span>
                 <i id="trip-form-chevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
             </button>
@@ -1269,7 +1287,7 @@
         <section class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
             <div class="flex justify-between items-center">
                 <h2 class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-file-excel text-emerald-600"></i> 전체 여행 데이터 엑셀 백업 · 복원
+                    <i class="fa-solid fa-file-excel text-emerald-600"></i> <span class="bi"><span class="bi-en">Backup &amp; Restore</span><span class="bi-ko">전체 여행 데이터 엑셀 백업 · 복원</span></span>
                 </h2>
                 <span id="backup-cache-status" class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold">백업 준비중</span>
             </div>
@@ -1351,7 +1369,7 @@
 
             <!-- 1. 상단 지도 화면 -->
             <div id="plan-map-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                <h3 class="text-xs sm:text-sm font-extrabold text-blue-800"><i class="fa-solid fa-map-location-dot mr-1"></i>통합 여행 타임라인 지도 (방문전=실선 / 방문완료=굵은강조선)</h3>
+                <h3 class="text-xs sm:text-sm font-extrabold text-blue-800 flex items-center gap-2"><i class="fa-solid fa-map-location-dot"></i><span class="bi"><span class="bi-en">Route Map</span><span class="bi-ko">통합 타임라인 지도 · 방문전 실선 / 방문완료 굵은 선</span></span></h3>
                 <p class="text-[11px] text-slate-500">* 마커나 선을 클릭하면 장소 정보와 구간 이동거리·소요시간(자동/수동)이 표시됩니다.</p>
                 <div class="flex flex-wrap gap-3 text-[11px] font-bold pt-0.5 pb-1">
                     <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>1일차 오전</span>
@@ -1366,7 +1384,7 @@
             <div id="exp-accordion-card" class="bg-white rounded-2xl shadow-sm border-2 border-blue-200 overflow-hidden">
                 <button type="button" onclick="toggleExpFormAccordion()" class="w-full p-3.5 flex justify-between items-center bg-blue-50/70 hover:bg-blue-100/60 cursor-pointer text-left">
                     <span id="exp-form-title" class="text-xs sm:text-sm font-extrabold text-blue-900 flex items-center gap-1.5">
-                        <i class="fa-solid fa-calendar-plus text-blue-600"></i> 새 여행 일정 직접 입력 / 수정 창 (아래 구간별 추가 버튼과 연동)
+                        <i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">새 일정 직접 입력 · 수정</span></span>
                     </span>
                     <i id="exp-form-chevron" class="fa-solid fa-chevron-down text-blue-600 transition-transform"></i>
                 </button>
@@ -1516,7 +1534,7 @@
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
                     <div>
-                        <h3 class="text-sm font-extrabold text-slate-800"><i class="fa-regular fa-calendar-check text-blue-600 mr-1"></i>스마트 통합 타임라인 (오전·오후 분류 & 직전·다음 자동 펼침)</h3>
+                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-regular fa-calendar-check text-blue-600"></i><span class="bi"><span class="bi-en">Timeline</span><span class="bi-ko">오전·오후별 일정 · 직전·다음 자동 펼침</span></span></h3>
                         <p class="text-[11px] text-slate-500 mt-0.5">오전/오후 제목을 누르면 요약 목록(시간·장소·사진)이 열리고, 장소를 한 번 더 누르면 상세 정보가 펼쳐집니다. (현재 시간 직전·다음 일정은 자동 펼침)</p>
                     </div>
                     <div class="flex items-center gap-1.5 shrink-0">
@@ -1545,7 +1563,7 @@
             <!-- 1. 상단 정산 요약 및 [🏁 여행완료하기] 확정 보드 -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
-                    <h3 class="text-sm font-extrabold text-slate-800"><i class="fa-solid fa-calculator text-emerald-600 mr-1.5"></i>실시간 예산 비교 및 1/N 회비 정산</h3>
+                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-calculator text-emerald-600"></i><span class="bi"><span class="bi-en">Budget &amp; Split</span><span class="bi-ko">실시간 예산 비교 · 1/N 회비 정산</span></span></h3>
                     <div class="flex items-center gap-2">
                         <div class="flex items-center gap-1 text-xs">
                             <span class="text-slate-500 font-semibold">인원:</span>
@@ -1586,7 +1604,7 @@
                 <button type="button" onclick="toggleAccordion('account-stats-body', 'account-stats-chev')" class="w-full p-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white flex justify-between items-center cursor-pointer text-left">
                     <div>
                         <span id="account-stats-title" class="text-xs sm:text-sm font-extrabold flex items-center gap-1.5">
-                            <i class="fa-solid fa-chart-pie text-amber-300"></i> 📊 카테고리별 여행 통계 & 여행전·후 비교 (터치하여 열기/닫기)
+                            <i class="fa-solid fa-chart-pie text-amber-300"></i> <span class="bi"><span class="bi-en">Spending Insights</span><span class="bi-ko">카테고리별 통계 · 여행 전후 비교</span></span>
                         </span>
                         <p class="text-[11px] text-indigo-100 mt-0.5">여행전(예상) vs 여행후(실제) 비교 및 각각 독립 통계를 확인하세요.</p>
                     </div>
@@ -1614,7 +1632,7 @@
             <div id="act-accordion-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <button type="button" onclick="toggleActFormAccordion()" class="w-full p-4 flex justify-between items-center bg-emerald-50/60 hover:bg-emerald-50 cursor-pointer text-left">
                     <span id="act-form-title" class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-plus text-emerald-600"></i> 실제 방문 및 지출 내역 · 영수증 입력하기 (터치하여 열기)
+                        <i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">Add Expense</span><span class="bi-ko">실제 방문·지출·영수증 입력 · 터치하여 열기</span></span>
                     </span>
                     <i id="act-form-chevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
                 </button>
@@ -1750,7 +1768,7 @@
                 <button type="button" onclick="toggleAccordion('pre-trip-budget-body', 'pre-trip-budget-chev')" class="w-full p-4 bg-amber-50 hover:bg-amber-100/70 flex justify-between items-center cursor-pointer text-left">
                     <div>
                         <h3 class="text-sm font-extrabold text-amber-900 flex items-center gap-1.5">
-                            <i class="fa-solid fa-clipboard-list text-amber-600"></i> 📋 1. 여행전 예산 목록 (터치하여 목록 열기/닫기)
+                            <i class="fa-solid fa-clipboard-list text-amber-600"></i> <span class="bi"><span class="bi-en">Planned Budget</span><span class="bi-ko">1. 여행전 예산 목록 · 터치하여 열기</span></span>
                         </h3>
                         <p class="text-[11px] text-amber-700 mt-0.5">출발 전 계획한 예상 일정 예산입니다. 각 항목을 누르면 상세 내용이 펼쳐집니다.</p>
                     </div>
@@ -1769,7 +1787,7 @@
                 <button type="button" onclick="toggleAccordion('post-trip-actual-body', 'post-trip-actual-chev')" class="w-full p-4 bg-sky-50 hover:bg-sky-100/70 flex justify-between items-center cursor-pointer text-left">
                     <div>
                         <h3 class="text-sm font-extrabold text-sky-900 flex items-center gap-1.5">
-                            <i class="fa-solid fa-receipt text-sky-600"></i> 🧾 2. 여행중(여행완료 포함) 실제 지출 목록
+                            <i class="fa-solid fa-receipt text-sky-600"></i> <span class="bi"><span class="bi-en">Actual Spending</span><span class="bi-ko">2. 여행중·완료 실제 지출 목록</span></span>
                         </h3>
                         <p class="text-[11px] text-sky-700 mt-0.5">일정 제목과 금액만 깔끔하게 표시되며, 항목을 터치하면 상세 내역과 영수증이 펼쳐집니다.</p>
                     </div>
@@ -1793,7 +1811,7 @@
             <!-- 1. 차량 배치 및 참가자 명단 -->
             <div id="car-section-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 id="car-form-title" class="text-sm font-extrabold text-slate-800">🚗 차량 배치 (운전자·탑승자 명단)</h3>
+                    <h3 id="car-form-title" class="text-sm font-extrabold text-slate-800"><span class="bi"><span class="bi-en">Vehicles</span><span class="bi-ko">차량 배치 · 운전자·탑승자 명단</span></span></h3>
                     <button type="button" onclick="toggleAccordion('car-form-wrap', 'car-form-chevron')" class="bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1">
                         <span>+ 차량 추가/수정</span>
                         <i id="car-form-chevron" class="fa-solid fa-chevron-down text-[10px] transition-transform"></i>
@@ -1824,7 +1842,7 @@
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
                     <div>
-                        <h3 class="text-sm font-extrabold text-slate-800"><i class="fa-solid fa-clipboard-check text-indigo-600 mr-1"></i>준비물 · 먹거리 · 현장구입 체크리스트</h3>
+                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-clipboard-check text-indigo-600"></i><span class="bi"><span class="bi-en">Checklist</span><span class="bi-ko">준비물 · 먹거리 · 현장구입</span></span></h3>
                         <p id="chk-progress-text" class="text-xs font-bold text-indigo-600 mt-0.5">0% (0/0 완료)</p>
                     </div>
                     <div class="flex items-center gap-1.5">
@@ -1844,7 +1862,7 @@
             <div id="chk-editor-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <button type="button" onclick="toggleAccordion('chk-form-body', 'chk-form-chevron')" class="w-full p-4 flex justify-between items-center bg-indigo-50/60 hover:bg-indigo-50 cursor-pointer text-left">
                     <span id="chk-form-title" class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus-circle text-indigo-600"></i> 체크리스트 항목 추가 / 수정 (터치하여 열기)
+                        <i class="fa-solid fa-plus-circle text-indigo-600"></i> <span class="bi"><span class="bi-en">Add Item</span><span class="bi-ko">체크리스트 항목 추가 · 터치하여 열기</span></span>
                     </span>
                     <i id="chk-form-chevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
                 </button>
@@ -1943,24 +1961,24 @@
 
             <div class="bg-white rounded-2xl shadow-sm p-4 space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-sm font-extrabold text-slate-900"><i class="fa-solid fa-cloud-sun text-amber-500 mr-1.5"></i>여행지 날씨</h3>
+                    <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-cloud-sun text-amber-500"></i><span class="bi"><span class="bi-en">Weather</span><span class="bi-ko">여행지 날씨</span></span></h3>
                     <button type="button" onclick="renderToolsWeather(true)" class="text-[11px] font-bold text-blue-600 bg-slate-100 px-2.5 py-1 rounded-full cursor-pointer"><i class="fa-solid fa-rotate mr-0.5"></i>새로고침</button>
                 </div>
                 <div id="tools-weather"><p class="text-xs text-slate-400">날씨를 불러오는 중...</p></div>
             </div>
 
             <div id="tools-time-card" class="hidden bg-white rounded-2xl shadow-sm p-4 space-y-2">
-                <h3 class="text-sm font-extrabold text-slate-900"><i class="fa-regular fa-clock text-indigo-600 mr-1.5"></i>현지 시각 · 시차</h3>
+                <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2"><i class="fa-regular fa-clock text-indigo-600"></i><span class="bi"><span class="bi-en">Local Time</span><span class="bi-ko">현지 시각 · 시차</span></span></h3>
                 <div id="tools-time"></div>
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm p-4 space-y-3">
-                <h3 class="text-sm font-extrabold text-slate-900"><i class="fa-solid fa-money-bill-transfer text-emerald-600 mr-1.5"></i>환율 계산기</h3>
+                <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-money-bill-transfer text-emerald-600"></i><span class="bi"><span class="bi-en">Currency</span><span class="bi-ko">환율 계산기</span></span></h3>
                 <div id="tools-fx"></div>
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm p-4 space-y-2">
-                <h3 class="text-sm font-extrabold text-slate-900"><i class="fa-solid fa-shield-heart text-red-500 mr-1.5"></i>안전 · 긴급 연락</h3>
+                <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-shield-heart text-red-500"></i><span class="bi"><span class="bi-en">Safety</span><span class="bi-ko">안전 · 긴급 연락</span></span></h3>
                 <div id="tools-safety"></div>
             </div>
         </section>
@@ -1972,23 +1990,23 @@
             <div class="max-w-3xl mx-auto flex text-xs">
                 <button id="btn-back" onclick="goTripSelector()" class="w-20 sm:w-24 py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 font-extrabold text-slate-700 bg-slate-100/80 hover:bg-slate-200/80 border-r border-slate-200 cursor-pointer shrink-0">
                     <i class="fa-solid fa-arrow-left text-sm text-blue-600"></i>
-                    <span>목록</span>
+                    <span class="tab-en">Trips</span><span class="tab-ko">목록</span>
                 </button>
                 <button id="btn-tab-plan" onclick="switchTab('plan')" class="flex-1 py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 font-extrabold text-blue-600 border-t-2 border-blue-600 bg-blue-50/40 cursor-pointer">
                     <i class="fa-solid fa-route text-sm"></i>
-                    <span>일정</span>
+                    <span class="tab-en">Plan</span><span class="tab-ko">일정</span>
                 </button>
                 <button id="btn-tab-actual" onclick="switchTab('actual')" class="flex-1 py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 font-semibold text-slate-500 cursor-pointer">
                     <i class="fa-solid fa-receipt text-sm"></i>
-                    <span>가계부</span>
+                    <span class="tab-en">Budget</span><span class="tab-ko">가계부</span>
                 </button>
                 <button id="btn-tab-checklist" onclick="switchTab('checklist')" class="flex-1 py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 font-semibold text-slate-500 cursor-pointer">
                     <i class="fa-solid fa-clipboard-check text-sm"></i>
-                    <span>체크·차량</span>
+                    <span class="tab-en">Checklist</span><span class="tab-ko">체크·차량</span>
                 </button>
                 <button id="btn-tab-tools" onclick="switchTab('tools')" class="flex-1 py-2.5 px-1 flex flex-col items-center justify-center gap-0.5 font-semibold text-slate-500 cursor-pointer">
                     <i class="fa-solid fa-earth-asia text-sm"></i>
-                    <span>여행도구</span>
+                    <span class="tab-en">Tools</span><span class="tab-ko">여행도구</span>
                 </button>
             </div>
         </nav>
@@ -2409,7 +2427,7 @@
                     actBtn.className = "bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold cursor-pointer flex items-center gap-1 shadow-sm";
                 }
                 if (statsTitle) {
-                    statsTitle.innerHTML = `<i class="fa-solid fa-trophy text-amber-300"></i> 🏆 최종 이번 여행 통계 리포트 (여행전·후 비교 및 독립 통계)`;
+                    statsTitle.innerHTML = `<i class="fa-solid fa-trophy text-amber-300"></i> <span class="bi"><span class="bi-en">Final Report</span><span class="bi-ko">최종 여행 통계 · 여행 전후 비교</span></span>`;
                 }
             } else {
                 if (headerBadge) headerBadge.classList.add('hidden');
@@ -2425,7 +2443,7 @@
                     actBtn.className = "bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold cursor-pointer flex items-center gap-1 shadow-sm";
                 }
                 if (statsTitle) {
-                    statsTitle.innerHTML = `<i class="fa-solid fa-chart-pie text-amber-300"></i> 📊 카테고리별 여행 통계 & 여행전·후 비교 (터치하여 열기/닫기)`;
+                    statsTitle.innerHTML = `<i class="fa-solid fa-chart-pie text-amber-300"></i> <span class="bi"><span class="bi-en">Spending Insights</span><span class="bi-ko">카테고리별 통계 · 여행 전후 비교</span></span>`;
                 }
             }
             updateEditLockButtonUI();
@@ -2536,7 +2554,7 @@
 
             document.getElementById('exp-day').value = String(targetDay);
             document.getElementById('exp-time').value = defaultTime;
-            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-blue-600"></i> [${targetDay}일차 ${periodLabel}] 새 여행 일정 추가하기`;
+            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">[${targetDay}일차 ${periodLabel}] 새 일정 추가</span></span>`;
             document.getElementById('exp-submit-btn').innerText = `${targetDay}일차 ${periodLabel} 일정 저장하기`;
 
             const halfKey = `${targetDay}_${isPM ? 'PM' : 'AM'}`;
@@ -2634,8 +2652,8 @@
             document.getElementById('trip-selector-screen').classList.remove('hidden');
             document.getElementById('main-app-screen').classList.add('hidden');
             document.getElementById('btn-map-provider').classList.add('hidden');
-            document.getElementById('header-trip-title').innerText = "여행 일정 목록";
-            document.getElementById('header-trip-dates').innerText = "스마트 단체 여행 매니저 Ver 1.5";
+            document.getElementById('header-trip-title').innerText = "My Trips";
+            document.getElementById('header-trip-dates').innerText = "Smart Group Travel · 단체 여행 매니저";
             updateTripCompletedUI();
 
             if (typeof renderTripCards === 'function') renderTripCards();
@@ -2935,7 +2953,7 @@
             document.getElementById('trip-count').value = trip.memberCount || 8;
             document.getElementById('trip-start').value = trip.startDate || '';
             document.getElementById('trip-end').value = trip.endDate || '';
-            document.getElementById('trip-form-title').innerHTML = `<i class="fa-solid fa-pen text-blue-600"></i> [${esc(trip.name)}] 여행 정보 수정`;
+            document.getElementById('trip-form-title').innerHTML = `<i class="fa-solid fa-pen text-blue-600"></i> <span class="bi"><span class="bi-en">Edit Trip</span><span class="bi-ko">[${esc(trip.name)}] 여행 정보 수정</span></span>`;
             document.getElementById('trip-submit-btn').innerText = "수정 내용 저장";
             document.getElementById('trip-accordion-card').scrollIntoView({ behavior: 'smooth' });
         };
@@ -2946,7 +2964,7 @@
             document.getElementById('trip-count').value = 8;
             document.getElementById('trip-region').value = 'kr';
             onChangeTripRegion('강원도');
-            document.getElementById('trip-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> 새로운 여행 직접 만들기 (터치하여 열기)`;
+            document.getElementById('trip-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">New Trip</span><span class="bi-ko">새로운 여행 직접 만들기 · 터치하여 열기</span></span>`;
             document.getElementById('trip-submit-btn').innerText = "새 여행 저장";
             toggleAccordion('trip-form-body', 'trip-form-chevron', false);
         };
@@ -4037,8 +4055,8 @@
                             <button type="button" onclick="toggleHalfDayGroup('${halfKey}', ${isAutoFocusGroup})" class="w-full ${headerBgClass} text-white px-3.5 py-2.5 flex flex-wrap justify-between items-center gap-2 cursor-pointer text-left transition">
                                 <div class="flex flex-wrap items-center gap-1.5">
                                     <i class="fa-solid ${isPM ? 'fa-cloud-sun' : 'fa-sun'} text-amber-200"></i>
-                                    <span class="text-xs sm:text-sm font-extrabold">${esc(day)}일차 ${periodLabel} 일정</span>
-                                    <span class="text-[11px] text-amber-100 font-bold">${esc(dayDateLabel)}</span>
+                                    <span class="day-en">Day ${esc(day)} · ${isPM ? 'Afternoon' : 'Morning'}</span>
+                                    <span class="day-ko">${esc(day)}일차 ${periodLabel} ${esc(dayDateLabel)}</span>
                                     ${isAutoFocusGroup ? `<span class="bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full font-extrabold animate-pulse">현재 진행구간</span>` : ''}
                                 </div>
                                 <div class="flex items-center gap-1.5 shrink-0">
@@ -4956,7 +4974,7 @@
             document.getElementById('chk-person').value = item.person || '공통(총무)';
             document.getElementById('chk-price').value = item.price || 0;
             document.getElementById('chk-memo').value = item.memo || '';
-            document.getElementById('chk-form-title').innerText = `✏️ [${item.title}] 항목 수정하기`;
+            document.getElementById('chk-form-title').innerHTML = `<i class="fa-solid fa-pen text-indigo-600"></i> <span class="bi"><span class="bi-en">Edit Item</span><span class="bi-ko">[${esc(item.title)}] 항목 수정</span></span>`;
             document.getElementById('chk-submit-btn').innerText = "수정 완료";
             document.getElementById('chk-editor-card').scrollIntoView({ behavior: 'smooth' });
         };
@@ -4965,7 +4983,7 @@
             document.getElementById('chk-form').reset();
             document.getElementById('chk-edit-id').value = '';
             onChangeChkMajor();
-            document.getElementById('chk-form-title').innerHTML = `<i class="fa-solid fa-plus-circle text-indigo-600"></i> 체크리스트 항목 추가 / 수정 (터치하여 열기)`;
+            document.getElementById('chk-form-title').innerHTML = `<i class="fa-solid fa-plus-circle text-indigo-600"></i> <span class="bi"><span class="bi-en">Add Item</span><span class="bi-ko">체크리스트 항목 추가 · 터치하여 열기</span></span>`;
             document.getElementById('chk-submit-btn').innerText = "체크리스트에 저장하기";
             if (!keepOpen) toggleAccordion('chk-form-body', 'chk-form-chevron', false);
         };
@@ -5098,7 +5116,7 @@
                 item.alternatives.forEach(alt => addAlternativeRow(alt));
             }
 
-            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-pen text-blue-600"></i> [${esc(item.place_name)}] 일정 수정하기`;
+            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-pen text-blue-600"></i> <span class="bi"><span class="bi-en">Edit Schedule</span><span class="bi-ko">[${esc(item.place_name)}] 일정 수정</span></span>`;
             document.getElementById('exp-submit-btn').innerText = "일정 수정 완료";
             if (item.lat && item.lng) setTimeout(() => placePickerMarker('exp', item.lat, item.lng), 250);
             setTimeout(() => {
@@ -5114,7 +5132,7 @@
             document.getElementById('exp-alternatives-container').innerHTML = '';
             currentExpPhotos = [];
             renderExpPhotoPreviews();
-            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-blue-600"></i> 새 여행 일정 직접 입력 / 수정 창 (아래 구간별 추가 버튼과 연동)`;
+            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">새 일정 직접 입력 · 수정</span></span>`;
             document.getElementById('exp-submit-btn').innerText = "예상 일정 저장하기";
             if (!keepOpen) toggleExpFormAccordion(false);
         };
@@ -5143,7 +5161,7 @@
             currentActReceipt = item.receipt || '';
             renderActReceiptPreview();
 
-            document.getElementById('act-form-title').innerHTML = `<i class="fa-solid fa-pen text-emerald-600"></i> [${esc(item.place)}] 방문·지출 수정하기`;
+            document.getElementById('act-form-title').innerHTML = `<i class="fa-solid fa-pen text-emerald-600"></i> <span class="bi"><span class="bi-en">Edit Expense</span><span class="bi-ko">[${esc(item.place)}] 방문·지출 수정</span></span>`;
             document.getElementById('act-submit-btn').innerText = "수정 완료";
             if (item.lat && item.lng) setTimeout(() => placePickerMarker('act', item.lat, item.lng), 250);
             document.getElementById('act-accordion-card').scrollIntoView({ behavior: 'smooth' });
@@ -5154,7 +5172,7 @@
             document.getElementById('act-edit-id').value = '';
             currentActReceipt = '';
             renderActReceiptPreview();
-            document.getElementById('act-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> 실제 방문 및 지출 내역 · 영수증 입력하기 (터치하여 열기)`;
+            document.getElementById('act-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">Add Expense</span><span class="bi-ko">실제 방문·지출·영수증 입력 · 터치하여 열기</span></span>`;
             document.getElementById('act-submit-btn').innerText = "가계부 지출 내역 저장하기";
             if (!keepOpen) toggleActFormAccordion(false);
         };
@@ -5169,7 +5187,7 @@
             document.getElementById('car-name').value = item.carName || '';
             document.getElementById('car-driver').value = item.driver || '';
             document.getElementById('car-members').value = item.members || '';
-            document.getElementById('car-form-title').innerText = "✏️ 차량 배치 수정";
+            document.getElementById('car-form-title').innerHTML = `<span class="bi"><span class="bi-en">Edit Vehicle</span><span class="bi-ko">차량 배치 수정</span></span>`;
             document.getElementById('car-submit-btn').innerText = "차량 수정 완료";
             document.getElementById('car-section-card').scrollIntoView({ behavior: 'smooth' });
         };
@@ -5177,7 +5195,7 @@
         window.resetCarForm = function(keepOpen = false) {
             document.getElementById('car-form').reset();
             document.getElementById('car-edit-id').value = '';
-            document.getElementById('car-form-title').innerText = "🚗 차량 배치 (운전자·탑승자 명단)";
+            document.getElementById('car-form-title').innerHTML = `<span class="bi"><span class="bi-en">Vehicles</span><span class="bi-ko">차량 배치 · 운전자·탑승자 명단</span></span>`;
             document.getElementById('car-submit-btn').innerText = "차량 배치 저장";
             if (!keepOpen) toggleAccordion('car-form-wrap', 'car-form-chevron', false);
         };
@@ -5831,7 +5849,7 @@
                 <div class="border-2 border-blue-200 rounded-2xl overflow-hidden shadow-sm">
                     <button type="button" onclick="toggleAccordion('major-year-body', 'major-year-chev')" class="w-full p-4 bg-blue-600 text-white flex justify-between items-center cursor-pointer text-left">
                         <div>
-                            <h3 class="text-sm sm:text-base font-extrabold"><i class="fa-solid fa-calendar-days mr-1.5"></i>연도별 여행 일정 보기</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i><span class="bi"><span class="bi-en">By Year</span><span class="bi-ko">연도별 여행 일정</span></span></h3>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-xs bg-white text-blue-700 px-2.5 py-0.5 rounded-full font-extrabold">총 ${sortedTrips.length}건</span>
@@ -5847,7 +5865,7 @@
                 <div class="border-2 border-emerald-200 rounded-2xl overflow-hidden shadow-sm">
                     <button type="button" onclick="toggleAccordion('major-region-body', 'major-region-chev')" class="w-full p-4 bg-emerald-600 text-white flex justify-between items-center cursor-pointer text-left">
                         <div>
-                            <h3 class="text-sm sm:text-base font-extrabold"><i class="fa-solid fa-earth-asia mr-1.5"></i>국내 여행 · 해외 여행 지역별 보기</h3>
+                            <h3 class="text-sm sm:text-base font-extrabold flex items-center gap-2"><i class="fa-solid fa-earth-asia"></i><span class="bi"><span class="bi-en">By Region</span><span class="bi-ko">국내 · 해외 지역별</span></span></h3>
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="text-xs bg-white text-emerald-700 px-2.5 py-0.5 rounded-full font-extrabold">국내 ${totalKrCount} · 해외 ${totalGlobalCount}</span>
@@ -6607,7 +6625,7 @@
     <div id="nav-app-modal" class="hidden fixed inset-0 z-[9999] bg-slate-900/50 items-end sm:items-center justify-center p-3" onclick="if (event.target === this) closeNavAppPicker()">
         <div class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-4 space-y-3">
             <div class="flex justify-between items-center">
-                <h3 class="text-sm font-extrabold text-slate-900"><i class="fa-solid fa-diamond-turn-right text-blue-600 mr-1"></i>길찾기·지도 앱 선택</h3>
+                <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2"><i class="fa-solid fa-diamond-turn-right text-blue-600"></i><span class="bi"><span class="bi-en">Navigation App</span><span class="bi-ko">길찾기·지도 앱 선택</span></span></h3>
                 <button type="button" onclick="closeNavAppPicker()" class="w-7 h-7 rounded-full hover:bg-slate-100 text-slate-500 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="grid grid-cols-2 gap-2">
