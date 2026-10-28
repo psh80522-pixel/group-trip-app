@@ -2530,6 +2530,30 @@
             }, 220);
         }
 
+        // [수정] 지도 칸 크기가 바뀌면(첫 그리기, 탭 전환, 화면 회전 등) 자동으로 지도를 다시 맞춤
+        // - 지도를 그리는 순간 칸 크기를 잘못 읽어 지도가 일부만 보이던 문제 방지
+        (function setupMapAutoRelayout() {
+            if (typeof ResizeObserver === 'undefined') return;
+            const pairs = [['map-plan', () => mapPlan], ['map-expected', () => mapExp], ['map-actual', () => mapAct]];
+            const lastW = {};
+            let timer = null;
+            const ro = new ResizeObserver(entries => {
+                let changed = false;
+                entries.forEach(en => {
+                    const w = Math.round(en.contentRect.width);
+                    if (w > 0 && lastW[en.target.id] !== w) { lastW[en.target.id] = w; changed = true; }
+                });
+                if (!changed) return;
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    pairs.forEach(([, get]) => { try { refreshSingleMapLayout(get()); } catch (_) {} });
+                    setTimeout(() => { try { if (currentTripId) renderTimelineMaps(); } catch (_) {} }, 260);
+                }, 150);
+            });
+            const attach = () => pairs.forEach(([id]) => { const el = document.getElementById(id); if (el) ro.observe(el); });
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', attach); else attach();
+        })();
+
         window.toggleExpFormAccordion = function(forceOpen) {
             if (isCurrentTripCompleted && forceOpen !== false) {
                 checkEditable();
