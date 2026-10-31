@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" style="color-scheme: light dark;">
 <head>
     <!--
     ================================================================
@@ -21,7 +21,8 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#F2EEE6">
+    <meta name="theme-color" content="#FFF7EF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0A1820" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-title" content="여행매니저">
     <meta property="og:type" content="website">
     <meta property="og:title" content="스마트 단체 여행 매니저 Ver 1.5">
@@ -49,72 +50,83 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600&family=Inter:wght@500;600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 
     <!-- ================================================================
-         [디자인 레이어 v4] Paper & Ink 테마 (크림 페이퍼 + 네이비 잉크, 얇은 선, 한글 명조 제목 + 영문 Inter) — 규칙은 DESIGN.md 참고
-         - 기존 Tailwind 클래스를 덮어쓰는 방식이라 기능 코드는 그대로입니다.
-         - 이 <style> 블록을 지우면 원래 디자인으로 돌아갑니다.
+         [디자인 레이어 v5] Polarsteps 스타일 (지도 중심 · 레드핑크 포인트 · 휴대폰 설정 따라 라이트/다크 자동)
+         - 기존 Tailwind 클래스를 덮어쓰는 방식이라 기능 코드는 그대로입니다. 규칙은 DESIGN.md 참고
          ================================================================ -->
     <style id="theme-modern">
         :root {
-            /* Paper & Ink 토큰 (DESIGN.md 와 동일) */
-            --bg: #F2EEE6;            /* paper */
-            --card: #FBF9F4;          /* surface */
-            --line: #DCD5C7;          /* hairline */
-            --line-strong: #C9C0AF;
-            --g50: #F7F4EE; --g100: #EFEAE0; --g200: #E4DED2; --g300: #D2CABB; --g400: #ADA698;
-            --g500: #8A857B; --g600: #67635C; --g700: #4B4943; --g800: #2F3540; --g900: #1E2A38;
-            --blue: #2E4256;          /* ink-primary (버튼 기본) */
-            --blue-press: #1E2A38;    /* ink-pressed */
-            --blue-tint: #EDF1F4;
-            --slate: #5B7489; --mist: #A9B8C3; --sage: #8BA287; --ochre: #D3AE66; --terracotta: #C77657; --blush: #E9C8B6;
-            --gold: #2E4256;
-            --red: #B5563C;
-            --ig: #1E2A38;
-            --serif: 'Noto Serif KR', 'Nanum Myeongjo', serif;
-            --mono: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, sans-serif;   /* 영문 라벨 */
-            --card-shadow: 0 0 0 1px var(--line), 0 1px 0 rgba(30, 42, 56, 0.04);
+            --bg: #FFF7EF; --card: #FFFFFF; --glass: rgba(255, 247, 239, 0.86);
+            --line: rgba(0, 41, 61, 0.09); --line-strong: rgba(0, 41, 61, 0.18);
+            --g50: #FBF7F2; --g100: #F4EFE8; --g200: #E8E2DA; --g300: #D3CCC3; --g400: #A7A49F;
+            --g500: #69788C; --g600: #4D5A6E; --g700: #34404F; --g800: #1C2A36; --g900: #00293D;
+            --accent: #F11F4C; --accent-press: #D0103C; --accent-tint: #FFE8EE;
+            --ink: #00293D; --forest: #2E4C43;
+            --red: #D9363E;
+            --t-warm-1: #FFF4E3; --t-warm-2: #FFE6BF; --t-warm-solid: #FFB938; --t-warm-text: #8A5300; --t-warm-mid: #E0921A;
+            --t-blue-1: #EAF5FC; --t-blue-2: #D3ECFA; --t-blue-solid: var(--accent); --t-blue-text: #00527A; --t-blue-mid: #0099E5;
+            --t-green-1: #EAF3EF; --t-green-2: #D5E8DF; --t-green-solid: var(--accent); --t-green-text: #2E4C43; --t-green-mid: #3F7F69;
+            --t-violet-1: #F2F0FA; --t-violet-2: #E3DEF5; --t-violet-solid: var(--accent); --t-violet-text: #4E3F8C; --t-violet-mid: #7A68C9;
+            --t-red-1: #FFEDF1; --t-red-2: #FFD5DE; --t-red-solid: var(--red); --t-red-text: #C0123A; --t-red-mid: #F11F4C;
+            --shadow: 0 1px 2px rgba(0, 41, 61, 0.04), 0 10px 28px rgba(0, 41, 61, 0.07);
+            --display: 'Plus Jakarta Sans', 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+            --mono: var(--display); --serif: var(--display);
+            --ig: linear-gradient(165deg, #00293D 0%, #0E4A63 55%, #2E4C43 100%);
             color-scheme: light;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0A1820; --card: #11232D; --glass: rgba(10, 24, 32, 0.86);
+                --line: rgba(255, 255, 255, 0.08); --line-strong: rgba(255, 255, 255, 0.16);
+                --g50: #162934; --g100: #1B303C; --g200: #233D4B; --g300: #2E4C5C; --g400: #557080;
+                --g500: #8199A7; --g600: #A5B7C2; --g700: #C5D3DB; --g800: #E2EAEF; --g900: #F5F9FB;
+                --accent: #FF3B66; --accent-press: #FF5C80; --accent-tint: rgba(255, 59, 102, 0.16);
+                --ink: #2A4555; --forest: #3B6457;
+                --red: #FF5A62;
+                --t-warm-1: rgba(255, 185, 56, 0.12); --t-warm-2: rgba(255, 185, 56, 0.22); --t-warm-solid: #E7A22B; --t-warm-text: #FFCF7A; --t-warm-mid: #FFB938;
+                --t-blue-1: rgba(0, 153, 229, 0.14); --t-blue-2: rgba(0, 153, 229, 0.24); --t-blue-text: #8FD3FF; --t-blue-mid: #38B6FF;
+                --t-green-1: rgba(95, 199, 155, 0.13); --t-green-2: rgba(95, 199, 155, 0.22); --t-green-text: #9FDCC0; --t-green-mid: #5FC79B;
+                --t-violet-1: rgba(160, 140, 245, 0.14); --t-violet-2: rgba(160, 140, 245, 0.24); --t-violet-text: #C9BEFF; --t-violet-mid: #A08CF5;
+                --t-red-1: rgba(255, 59, 102, 0.14); --t-red-2: rgba(255, 59, 102, 0.26); --t-red-text: #FF8FA8; --t-red-mid: #FF4D75;
+                --shadow: none;
+                --ig: linear-gradient(165deg, #12313F 0%, #0E2430 55%, #1C3A33 100%);
+                color-scheme: dark;
+            }
         }
         html { -webkit-text-size-adjust: 100%; }
         body {
             font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', system-ui, sans-serif !important;
-            background: var(--bg) !important;
-            color: var(--g900);
-            -webkit-font-smoothing: antialiased;
-            letter-spacing: -0.015em;
-            word-break: keep-all;
+            background: var(--bg) !important; color: var(--g900) !important;
+            -webkit-font-smoothing: antialiased; letter-spacing: -0.01em; word-break: keep-all;
         }
-        /* 큰 제목·숫자만 명조로 */
-        body > header[class] h1, main h2, #tools-hero .text-4xl, .ig-avatar { font-family: var(--serif) !important; font-weight: 600 !important; letter-spacing: -0.02em; }
-        #tools-hero .text-4xl { font-weight: 500 !important; letter-spacing: 0; }
 
-        /* ---------- 글자 크기·굵기: 한 단계 크게, 한 단계 가볍게 ---------- */
+        /* ---------- 글자 ---------- */
         main .text-\[10px\], #nav-app-modal .text-\[10px\] { font-size: 11px !important; }
         main .text-\[11px\], #nav-app-modal .text-\[11px\] { font-size: 12px !important; }
         main .text-xs, #nav-app-modal .text-xs { font-size: 13px !important; line-height: 1.5 !important; }
         main .text-sm { font-size: 15px !important; }
-        main h2 { font-size: 20px !important; }
-        main h3.text-sm, main h3.text-base { font-size: 17px !important; letter-spacing: -0.03em; }
-        body .font-extrabold { font-weight: 700 !important; }
-        body .font-bold { font-weight: 600 !important; }
-        body .font-semibold { font-weight: 500 !important; }
+        main h2 { font-size: 20px !important; font-weight: 800 !important; letter-spacing: -0.02em; }
+        main h3.text-sm, main h3.text-base { font-size: 17px !important; font-weight: 800 !important; letter-spacing: -0.02em; }
+        body .font-extrabold { font-weight: 800 !important; }
+        body .font-bold { font-weight: 700 !important; }
+        body .font-semibold { font-weight: 600 !important; }
 
-        /* ---------- 회색 스케일 ---------- */
+        /* ---------- 회색·잉크 ---------- */
         body .text-slate-900, body .text-slate-800 { color: var(--g900) !important; }
         body .text-slate-700 { color: var(--g800) !important; }
         body .text-slate-600 { color: var(--g700) !important; }
-        body .text-slate-500 { color: var(--g600) !important; }
-        body .text-slate-400 { color: var(--g500) !important; }
-        body .text-slate-300 { color: var(--g400) !important; }
-        body .bg-slate-50, body .bg-slate-50\/30, body .bg-slate-50\/40, body .bg-slate-50\/50, body .bg-slate-50\/60 { background-color: var(--g50) !important; }
-        body .bg-slate-100, body .bg-slate-100\/60, body .bg-slate-100\/70, body .bg-slate-100\/80 { background-color: var(--g100) !important; }
-        body .bg-slate-200, body .bg-slate-200\/80 { background-color: var(--g200) !important; }
-        body .bg-slate-800, body .bg-slate-900 { background-color: var(--g900) !important; }
+        body .text-slate-500 { color: var(--g500) !important; }
+        body .text-slate-400 { color: var(--g400) !important; }
+        body .text-slate-300 { color: var(--g300) !important; }
+        body [class*="bg-slate-50"] { background-color: var(--g50) !important; }
+        body [class*="bg-slate-100"] { background-color: var(--g100) !important; }
+        body [class*="bg-slate-200"] { background-color: var(--g200) !important; }
+        body .bg-slate-800, body .bg-slate-900 { background-color: var(--ink) !important; }
         body .bg-black\/20 { background-color: var(--g100) !important; color: var(--g600) !important; }
 
-        /* ---------- 계열별 색 정리 (자동 생성) ---------- */
+        /* ---------- 계열별 색 (자동 생성, 라이트/다크 변수) ---------- */
         body .bg-amber-50,
         body .bg-amber-50\/10,
         body .bg-amber-50\/20,
@@ -147,7 +159,7 @@
         body .bg-orange-50\/70,
         body .bg-orange-50\/80,
         body .bg-orange-50\/90,
-        body .bg-orange-50\/95 { background-color: #F6EFDF !important; }
+        body .bg-orange-50\/95 { background-color: var(--t-warm-1) !important; }
         body .bg-amber-100,
         body .bg-amber-100\/10,
         body .bg-amber-100\/20,
@@ -213,7 +225,7 @@
         body .bg-orange-200\/70,
         body .bg-orange-200\/80,
         body .bg-orange-200\/90,
-        body .bg-orange-200\/95 { background-color: #EEDFBE !important; }
+        body .bg-orange-200\/95 { background-color: var(--t-warm-2) !important; }
         body .bg-amber-300,
         body .bg-amber-400,
         body .bg-amber-500,
@@ -234,7 +246,7 @@
         body .bg-orange-600,
         body .bg-orange-700,
         body .bg-orange-800,
-        body .bg-orange-900 { background-color: #D3AE66 !important; }
+        body .bg-orange-900 { background-color: var(--t-warm-solid) !important; }
         body .text-amber-600,
         body .text-amber-700,
         body .text-amber-800,
@@ -246,13 +258,22 @@
         body .text-orange-600,
         body .text-orange-700,
         body .text-orange-800,
-        body .text-orange-900 { color: #7A5A22 !important; }
+        body .text-orange-900 { color: var(--t-warm-text) !important; }
+        body .text-amber-100,
+        body .text-amber-200,
+        body .text-amber-300,
         body .text-amber-400,
         body .text-amber-500,
+        body .text-yellow-100,
+        body .text-yellow-200,
+        body .text-yellow-300,
         body .text-yellow-400,
         body .text-yellow-500,
+        body .text-orange-100,
+        body .text-orange-200,
+        body .text-orange-300,
         body .text-orange-400,
-        body .text-orange-500 { color: #C29A4E !important; }
+        body .text-orange-500 { color: var(--t-warm-mid) !important; }
         body .bg-sky-50,
         body .bg-sky-50\/10,
         body .bg-sky-50\/20,
@@ -285,7 +306,7 @@
         body .bg-cyan-50\/70,
         body .bg-cyan-50\/80,
         body .bg-cyan-50\/90,
-        body .bg-cyan-50\/95 { background-color: #EDF1F4 !important; }
+        body .bg-cyan-50\/95 { background-color: var(--t-blue-1) !important; }
         body .bg-sky-100,
         body .bg-sky-100\/10,
         body .bg-sky-100\/20,
@@ -351,7 +372,7 @@
         body .bg-cyan-200\/70,
         body .bg-cyan-200\/80,
         body .bg-cyan-200\/90,
-        body .bg-cyan-200\/95 { background-color: #DCE4EA !important; }
+        body .bg-cyan-200\/95 { background-color: var(--t-blue-2) !important; }
         body .bg-sky-300,
         body .bg-sky-400,
         body .bg-sky-500,
@@ -372,7 +393,7 @@
         body .bg-cyan-600,
         body .bg-cyan-700,
         body .bg-cyan-800,
-        body .bg-cyan-900 { background-color: var(--blue) !important; }
+        body .bg-cyan-900 { background-color: var(--t-blue-solid) !important; }
         body .text-sky-600,
         body .text-sky-700,
         body .text-sky-800,
@@ -384,13 +405,22 @@
         body .text-cyan-600,
         body .text-cyan-700,
         body .text-cyan-800,
-        body .text-cyan-900 { color: #2E4A63 !important; }
+        body .text-cyan-900 { color: var(--t-blue-text) !important; }
+        body .text-sky-100,
+        body .text-sky-200,
+        body .text-sky-300,
         body .text-sky-400,
         body .text-sky-500,
+        body .text-blue-100,
+        body .text-blue-200,
+        body .text-blue-300,
         body .text-blue-400,
         body .text-blue-500,
+        body .text-cyan-100,
+        body .text-cyan-200,
+        body .text-cyan-300,
         body .text-cyan-400,
-        body .text-cyan-500 { color: #5B7489 !important; }
+        body .text-cyan-500 { color: var(--t-blue-mid) !important; }
         body .bg-emerald-50,
         body .bg-emerald-50\/10,
         body .bg-emerald-50\/20,
@@ -434,7 +464,7 @@
         body .bg-lime-50\/70,
         body .bg-lime-50\/80,
         body .bg-lime-50\/90,
-        body .bg-lime-50\/95 { background-color: #EDF1EA !important; }
+        body .bg-lime-50\/95 { background-color: var(--t-green-1) !important; }
         body .bg-emerald-100,
         body .bg-emerald-100\/10,
         body .bg-emerald-100\/20,
@@ -522,7 +552,7 @@
         body .bg-lime-200\/70,
         body .bg-lime-200\/80,
         body .bg-lime-200\/90,
-        body .bg-lime-200\/95 { background-color: #DCE5D7 !important; }
+        body .bg-lime-200\/95 { background-color: var(--t-green-2) !important; }
         body .bg-emerald-300,
         body .bg-emerald-400,
         body .bg-emerald-500,
@@ -550,7 +580,7 @@
         body .bg-lime-600,
         body .bg-lime-700,
         body .bg-lime-800,
-        body .bg-lime-900 { background-color: var(--blue) !important; }
+        body .bg-lime-900 { background-color: var(--t-green-solid) !important; }
         body .text-emerald-600,
         body .text-emerald-700,
         body .text-emerald-800,
@@ -566,15 +596,27 @@
         body .text-lime-600,
         body .text-lime-700,
         body .text-lime-800,
-        body .text-lime-900 { color: #4D6A49 !important; }
+        body .text-lime-900 { color: var(--t-green-text) !important; }
+        body .text-emerald-100,
+        body .text-emerald-200,
+        body .text-emerald-300,
         body .text-emerald-400,
         body .text-emerald-500,
+        body .text-green-100,
+        body .text-green-200,
+        body .text-green-300,
         body .text-green-400,
         body .text-green-500,
+        body .text-teal-100,
+        body .text-teal-200,
+        body .text-teal-300,
         body .text-teal-400,
         body .text-teal-500,
+        body .text-lime-100,
+        body .text-lime-200,
+        body .text-lime-300,
         body .text-lime-400,
-        body .text-lime-500 { color: #7F9A7B !important; }
+        body .text-lime-500 { color: var(--t-green-mid) !important; }
         body .bg-indigo-50,
         body .bg-indigo-50\/10,
         body .bg-indigo-50\/20,
@@ -629,7 +671,7 @@
         body .bg-pink-50\/70,
         body .bg-pink-50\/80,
         body .bg-pink-50\/90,
-        body .bg-pink-50\/95 { background-color: #F0EEF2 !important; }
+        body .bg-pink-50\/95 { background-color: var(--t-violet-1) !important; }
         body .bg-indigo-100,
         body .bg-indigo-100\/10,
         body .bg-indigo-100\/20,
@@ -739,7 +781,7 @@
         body .bg-pink-200\/70,
         body .bg-pink-200\/80,
         body .bg-pink-200\/90,
-        body .bg-pink-200\/95 { background-color: #E2DDE7 !important; }
+        body .bg-pink-200\/95 { background-color: var(--t-violet-2) !important; }
         body .bg-indigo-300,
         body .bg-indigo-400,
         body .bg-indigo-500,
@@ -774,7 +816,7 @@
         body .bg-pink-600,
         body .bg-pink-700,
         body .bg-pink-800,
-        body .bg-pink-900 { background-color: var(--blue) !important; }
+        body .bg-pink-900 { background-color: var(--t-violet-solid) !important; }
         body .text-indigo-600,
         body .text-indigo-700,
         body .text-indigo-800,
@@ -794,17 +836,32 @@
         body .text-pink-600,
         body .text-pink-700,
         body .text-pink-800,
-        body .text-pink-900 { color: #5B5270 !important; }
+        body .text-pink-900 { color: var(--t-violet-text) !important; }
+        body .text-indigo-100,
+        body .text-indigo-200,
+        body .text-indigo-300,
         body .text-indigo-400,
         body .text-indigo-500,
+        body .text-purple-100,
+        body .text-purple-200,
+        body .text-purple-300,
         body .text-purple-400,
         body .text-purple-500,
+        body .text-violet-100,
+        body .text-violet-200,
+        body .text-violet-300,
         body .text-violet-400,
         body .text-violet-500,
+        body .text-fuchsia-100,
+        body .text-fuchsia-200,
+        body .text-fuchsia-300,
         body .text-fuchsia-400,
         body .text-fuchsia-500,
+        body .text-pink-100,
+        body .text-pink-200,
+        body .text-pink-300,
         body .text-pink-400,
-        body .text-pink-500 { color: #7D7392 !important; }
+        body .text-pink-500 { color: var(--t-violet-mid) !important; }
         body .bg-red-50,
         body .bg-red-50\/10,
         body .bg-red-50\/20,
@@ -826,7 +883,7 @@
         body .bg-rose-50\/70,
         body .bg-rose-50\/80,
         body .bg-rose-50\/90,
-        body .bg-rose-50\/95 { background-color: #F6E9E3 !important; }
+        body .bg-rose-50\/95 { background-color: var(--t-red-1) !important; }
         body .bg-red-100,
         body .bg-red-100\/10,
         body .bg-red-100\/20,
@@ -870,7 +927,7 @@
         body .bg-rose-200\/70,
         body .bg-rose-200\/80,
         body .bg-rose-200\/90,
-        body .bg-rose-200\/95 { background-color: #EFD2C6 !important; }
+        body .bg-rose-200\/95 { background-color: var(--t-red-2) !important; }
         body .bg-red-300,
         body .bg-red-400,
         body .bg-red-500,
@@ -884,7 +941,7 @@
         body .bg-rose-600,
         body .bg-rose-700,
         body .bg-rose-800,
-        body .bg-rose-900 { background-color: var(--red) !important; }
+        body .bg-rose-900 { background-color: var(--t-red-solid) !important; }
         body .text-red-600,
         body .text-red-700,
         body .text-red-800,
@@ -892,14 +949,19 @@
         body .text-rose-600,
         body .text-rose-700,
         body .text-rose-800,
-        body .text-rose-900 { color: #9A4A31 !important; }
+        body .text-rose-900 { color: var(--t-red-text) !important; }
+        body .text-red-100,
+        body .text-red-200,
+        body .text-red-300,
         body .text-red-400,
         body .text-red-500,
+        body .text-rose-100,
+        body .text-rose-200,
+        body .text-rose-300,
         body .text-rose-400,
-        body .text-rose-500 { color: #C77657 !important; }
-        body .bg-amber-500.text-white, body .bg-amber-600.text-white, body .bg-orange-500.text-white { background-color: #C29A4E !important; }
+        body .text-rose-500 { color: var(--t-red-mid) !important; }
 
-        /* ---------- 테두리: 색 테두리 제거, 회색 구분선만 ---------- */
+        /* ---------- 테두리 ---------- */
         body [class*="border-amber-"],
         body [class*="border-yellow-"],
         body [class*="border-orange-"],
@@ -918,42 +980,37 @@
         body [class*="border-red-"],
         body [class*="border-rose-"] { border-color: transparent !important; }
         body [class*="border-slate-"] { border-color: var(--line) !important; }
-        body .border-dashed { border-color: var(--g300) !important; }
+        body .border-dashed { border-color: var(--line-strong) !important; }
         body .border-2 { border-width: 1px !important; }
 
-        /* ---------- 모서리·그림자 ---------- */
-        body .rounded-2xl { border-radius: 12px !important; }
-        body .rounded-xl { border-radius: 8px !important; }
-        body .rounded-lg { border-radius: 6px !important; }
-        body .shadow-sm, body .shadow-md { box-shadow: var(--card-shadow) !important; }
-        body .shadow-xl { box-shadow: 0 24px 60px rgba(28, 27, 25, 0.16) !important; }
-        main section.bg-white, main div.bg-white.rounded-2xl { background-color: var(--card) !important; border-color: transparent !important; box-shadow: var(--card-shadow) !important; }
+        /* ---------- 모서리·카드 ---------- */
+        body .rounded-2xl { border-radius: 22px !important; }
+        body .rounded-xl { border-radius: 14px !important; }
+        body .rounded-lg { border-radius: 10px !important; }
+        body .shadow-sm, body .shadow-md { box-shadow: var(--shadow) !important; }
+        body .shadow-xl { box-shadow: 0 24px 60px rgba(0, 41, 61, 0.22) !important; }
+        main section.bg-white, main div.bg-white.rounded-2xl { background-color: var(--card) !important; border-color: transparent !important; box-shadow: var(--shadow), 0 0 0 1px var(--line) !important; }
         main .bg-white:not(button):not(a):not(input):not(select) { background-color: var(--card); }
-        main > section, main > div > section { border-radius: 12px !important; }
+        main [class*="bg-white\/"] { background-color: var(--card) !important; }
+        main > section, main > div > section { border-radius: 22px !important; }
+        main span.rounded-full, main span.rounded-md, main span.rounded { border-radius: 999px !important; }
 
-        /* ---------- 버튼 ---------- */
+        /* ---------- 버튼: 알약형, 주 버튼은 레드핑크 ---------- */
         body button, body a, body [onclick] { -webkit-tap-highlight-color: transparent; }
         body button { transition: transform .12s ease, background-color .15s ease, opacity .15s ease; }
         body button:active { transform: scale(0.97); }
-        body .bg-blue-600, body .bg-blue-700 { background-color: var(--blue) !important; }
-        body [class*="hover:bg-"]:hover.text-white { filter: brightness(0.95); }
-        /* 흰 바탕+테두리 보조 버튼 → 회색 채움 (세그먼트 활성 버튼은 제외) */
+        body button.rounded-xl, body button.rounded-lg, body a.rounded-xl, body a.rounded-lg, body button.rounded-md { border-radius: 999px !important; }
+        body [class*="hover:bg-"]:hover.text-white { filter: brightness(1.06); }
         body button.bg-white:not(.shadow-sm):not(.shadow-md),
         body a.bg-white:not(.shadow-sm):not(.shadow-md),
         body button.bg-slate-50 {
-            background-color: transparent !important;
-            border: 1px solid var(--line-strong) !important;
-            color: var(--g800);
+            background-color: var(--card) !important; border: 1px solid var(--line-strong) !important; color: var(--g800);
         }
-        /* 큰 실행 버튼은 높이 확보 */
-        main button[type="submit"] { min-height: 46px; font-size: 15px !important; border-radius: 6px !important; letter-spacing: 0.01em; }
+        main button[type="submit"] { min-height: 50px; font-size: 15px !important; font-weight: 800 !important; border-radius: 999px !important; }
+        body button:disabled, body button[disabled] { background-color: var(--g200) !important; color: var(--g400) !important; border-color: transparent !important; cursor: not-allowed; transform: none !important; }
 
-        /* ---------- 아코디언·섹션 헤더 막대 → 흰 바탕 ---------- */
-        body button.w-full.text-white.justify-between {
-            background: var(--card) !important;
-            color: var(--g900) !important;
-            box-shadow: inset 0 -1px 0 var(--line);
-        }
+        /* ---------- 아코디언·섹션 헤더 막대 ---------- */
+        body button.w-full.text-white.justify-between { background: var(--card) !important; color: var(--g900) !important; box-shadow: inset 0 -1px 0 var(--line); }
         body button.w-full.text-white.justify-between i,
         body button.w-full.text-white.justify-between p,
         body button.w-full.text-white.justify-between [class*="text-amber-"],
@@ -962,174 +1019,187 @@
         body button.w-full.text-white.justify-between .font-extrabold:not([class*="bg-"]),
         body button.w-full.text-white.justify-between h3 { color: var(--g900) !important; }
         body button.w-full.text-white.justify-between .bg-white { background: var(--g100) !important; color: var(--g700) !important; }
-        /* 일차 헤더: 지도 범례 색을 왼쪽 띠·아이콘으로 */
-        body button.w-full.text-white.justify-between[class*="hover:bg-"] { box-shadow: inset 3px 0 0 var(--acc, var(--blue)), inset 0 -1px 0 var(--line) !important; padding-left: 18px !important; }
-        body button.w-full.text-white.justify-between.bg-blue-600 { --acc: #5B7489; }
-        body button.w-full.text-white.justify-between.bg-purple-600 { --acc: #8C7EA3; }
-        body button.w-full.text-white.justify-between.bg-amber-600 { --acc: #D3AE66; }
-        body button.w-full.text-white.justify-between.bg-emerald-600 { --acc: #8BA287; }
+        /* 일차 헤더: 지도 경로 색과 같은 왼쪽 띠 */
+        body button.w-full.text-white.justify-between[class*="hover:bg-"] { box-shadow: inset 4px 0 0 var(--acc, var(--accent)), inset 0 -1px 0 var(--line) !important; padding-left: 18px !important; }
+        body button.w-full.text-white.justify-between.bg-blue-600 { --acc: #2563eb; }
+        body button.w-full.text-white.justify-between.bg-purple-600 { --acc: #9333ea; }
+        body button.w-full.text-white.justify-between.bg-emerald-600 { --acc: #059669; }
+        body button.w-full.text-white.justify-between.bg-amber-600 { --acc: #d97706; }
         body button.w-full.text-white.justify-between[class*="hover:bg-"] i.fa-sun,
         body button.w-full.text-white.justify-between[class*="hover:bg-"] i.fa-cloud-sun { color: var(--acc) !important; }
-        /* 여행완료 배너·일자별 지출 막대 */
-        #trip-completed-banner { background: var(--card) !important; color: var(--g900) !important; box-shadow: inset 3px 0 0 var(--gold), var(--card-shadow) !important; }
+        /* 지도 범례 점은 실제 경로 색 그대로 */
+        body span.rounded-full.inline-block.bg-blue-600 { background-color: #2563eb !important; }
+        body span.rounded-full.inline-block.bg-purple-600 { background-color: #9333ea !important; }
+        body span.rounded-full.inline-block.bg-emerald-600 { background-color: #059669 !important; }
+        body span.rounded-full.inline-block.bg-amber-500 { background-color: #d97706 !important; }
+        #trip-completed-banner { background: var(--card) !important; color: var(--g900) !important; box-shadow: inset 4px 0 0 var(--accent), var(--shadow) !important; }
         #trip-completed-banner [class*="text-"]:not([class*="bg-"]) { color: var(--g700) !important; }
-        body div.bg-emerald-600.text-white.rounded-xl, body div.bg-blue-600.text-white.rounded-xl { background: var(--g900) !important; }
+        body div.bg-emerald-600.text-white.rounded-xl, body div.bg-blue-600.text-white.rounded-xl { background: var(--forest) !important; }
 
         /* ---------- 입력창 ---------- */
         body input[type="text"], body input[type="number"], body input[type="date"], body input[type="time"],
         body input[type="tel"], body input[type="email"], body input[type="search"], body input:not([type]),
         body select, body textarea {
-            background-color: var(--g50) !important;
-            border: 1px solid var(--line) !important;
-            border-radius: 6px !important;
-            color: var(--g900);
-            min-height: 44px;
-            font-size: 15px !important;
+            background-color: var(--g50) !important; border: 1px solid var(--line) !important; border-radius: 14px !important;
+            color: var(--g900) !important; min-height: 46px; font-size: 15px !important;
             transition: box-shadow .15s ease, background-color .15s ease;
         }
-        body textarea { min-height: 80px; }
+        body textarea { min-height: 84px; }
         body input::placeholder, body textarea::placeholder { color: var(--g400); }
         body input:focus, body select:focus, body textarea:focus {
-            outline: none !important;
-            background-color: #FFFFFF !important;
-            border-color: var(--slate) !important;
-            box-shadow: 0 0 0 3px rgba(91, 116, 137, 0.18) !important;
+            outline: none !important; background-color: var(--card) !important;
+            border-color: var(--accent) !important; box-shadow: 0 0 0 3px var(--accent-tint) !important;
         }
-        body input[type="checkbox"], body input[type="radio"] { accent-color: var(--blue); min-height: 0; }
+        body input[type="checkbox"], body input[type="radio"] { accent-color: var(--accent); min-height: 0; }
 
         /* ---------- 상단 헤더 ---------- */
         body > header.sticky, body > header[class] {
-            background: rgba(242, 238, 230, 0.94) !important;
-            -webkit-backdrop-filter: blur(16px);
-            backdrop-filter: blur(16px);
-            color: var(--g900) !important;
-            box-shadow: 0 1px 0 var(--line) !important;
+            background: var(--glass) !important; -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px);
+            color: var(--g900) !important; box-shadow: 0 1px 0 var(--line) !important;
         }
         body > header[class] .text-white, body > header[class] h1 { color: var(--g900) !important; }
         body > header[class] .text-blue-100 { color: var(--g500) !important; }
-        body > header[class] h1 { font-size: 20px !important; }
+        body > header[class] h1 { font-family: var(--display) !important; font-weight: 800 !important; font-size: 19px !important; line-height: 1.3 !important; letter-spacing: -0.02em; }
         body > header[class] button, body > header[class] a {
-            background: transparent !important;
-            color: var(--g800) !important;
-            border: 1px solid var(--line-strong) !important;
-            border-radius: 6px !important;
-            box-shadow: none !important;
-            font-weight: 600 !important;
+            background: var(--card) !important; color: var(--g800) !important; border: 1px solid var(--line) !important;
+            border-radius: 999px !important; box-shadow: none !important; font-weight: 700 !important;
         }
-        body > header[class] #btn-edit-lock { color: #FFFFFF !important; background: var(--blue) !important; border-color: var(--blue) !important; }
-        body > header[class] #btn-edit-lock.bg-rose-600 { color: var(--red) !important; background: transparent !important; border-color: #E1BBAE !important; }
-        body > header[class] #btn-edit-lock.bg-indigo-800 { color: #7A5A22 !important; background: transparent !important; border-color: #DCC79C !important; }
+        body > header[class] #btn-edit-lock { color: #FFFFFF !important; background: var(--accent) !important; border-color: var(--accent) !important; }
+        body > header[class] #btn-edit-lock.bg-rose-600 { color: var(--red) !important; background: var(--card) !important; border-color: var(--line-strong) !important; }
+        body > header[class] #btn-edit-lock.bg-indigo-800 { color: var(--t-warm-text) !important; background: var(--card) !important; border-color: var(--line-strong) !important; }
         body > header[class] #btn-edit-lock i { color: inherit !important; }
-        body > header #sync-status { font-weight: 600 !important; }
-        body > header #sync-status.bg-emerald-500 { background: transparent !important; color: #4D6A49 !important; font-family: var(--mono) !important; letter-spacing: 0.04em; }
-        body > header #sync-status.bg-amber-500 { background: transparent !important; color: #8A6A35 !important; }
-        body > header #sync-status.bg-red-600 { background: transparent !important; color: var(--red) !important; }
+        body > header #sync-status { font-weight: 700 !important; background: transparent !important; }
+        body > header #sync-status.bg-emerald-500 { color: var(--t-green-mid) !important; }
+        body > header #sync-status.bg-amber-500 { color: var(--t-warm-mid) !important; }
+        body > header #sync-status.bg-red-600 { color: var(--red) !important; }
         .nav-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
 
-        /* ---------- 인스타 포인트 (스토리·D-day·브리핑) ---------- */
-        #recent-trip-widget { background: var(--g900) !important; box-shadow: none !important; border-radius: 12px !important; }
-        #tools-hero > div { box-shadow: none !important; }
-        #tools-hero p.opacity-90:first-child { color: var(--mist) !important; opacity: 1 !important; font-family: var(--mono) !important; letter-spacing: 0.04em; font-size: 11px !important; }
-        #tools-hero > div { border-radius: 12px !important; }
-        #tools-hero .text-\[10px\] { font-family: var(--mono) !important; letter-spacing: 0.02em; color: var(--mist) !important; opacity: 1 !important; }
-        .map-box { border-radius: 16px !important; background: var(--g100) !important; }
-        .ig-stories { display: flex; gap: 14px; overflow-x: auto; padding: 2px 2px 6px; scroll-snap-type: x proximity; scrollbar-width: none; }
-        .ig-stories::-webkit-scrollbar { display: none; }
-        .ig-story { flex: 0 0 auto; width: 70px; text-align: center; cursor: pointer; background: none; border: 0; padding: 0; scroll-snap-align: start; }
-        .ig-ring { width: 64px; height: 64px; border-radius: 50%; padding: 1.5px; background: var(--g900); margin: 0 auto; }
-        .ig-ring.seen { background: var(--g300); }
-        .ig-ring.seen .ig-avatar { color: var(--g500); }
-        .ig-ring-inner { width: 100%; height: 100%; border-radius: 50%; background: var(--bg); padding: 3px; }
-        .ig-ring { background: var(--g900) !important; }
-        .ig-ring.seen { background: var(--line-strong) !important; }
-        .ig-avatar { width: 100%; height: 100%; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; background: var(--card); color: var(--g900); }
-        .ig-story-name { font-size: 12px; color: var(--g800); margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .ig-story.is-new .ig-story-name { font-weight: 600; color: var(--g900); }
-        .ig-ring.sm { width: 44px; height: 44px; padding: 1px; flex: 0 0 auto; }
-        .ig-ring.sm .ig-ring-inner { padding: 2px; }
-        .ig-ring.sm .ig-avatar { font-size: 17px; }
-
-        /* ---------- 하단 탭바 ---------- */
+        /* ---------- 하단 탭바: 아이콘 + 작은 라벨, 선택 탭은 레드핑크 ---------- */
         #bottom-nav-bar {
-            background: rgba(242, 238, 230, 0.96) !important;
-            -webkit-backdrop-filter: blur(16px);
-            backdrop-filter: blur(16px);
-            border-top: 0 !important;
-            box-shadow: 0 -1px 0 var(--line) !important;
-            padding-bottom: env(safe-area-inset-bottom);
+            background: var(--glass) !important; -webkit-backdrop-filter: saturate(160%) blur(18px); backdrop-filter: saturate(160%) blur(18px);
+            border-top: 0 !important; box-shadow: 0 -1px 0 var(--line) !important; padding-bottom: env(safe-area-inset-bottom);
         }
         #bottom-nav-bar button {
             position: relative; border: 0 !important; background: transparent !important;
-            color: var(--g400) !important; font-weight: 500 !important; font-size: 11px !important;
-            padding-top: 9px !important; padding-bottom: 9px !important;
+            color: var(--g400) !important; font-weight: 600 !important; gap: 1px !important;
+            padding-top: 8px !important; padding-bottom: 8px !important;
         }
-        #bottom-nav-bar button i { font-size: 20px !important; margin-bottom: 3px; color: inherit !important; }
-        #bottom-nav-bar button.text-blue-600 { color: var(--g900) !important; font-weight: 700 !important; }
-        #bottom-nav-bar button.text-blue-600::after {
-            content: ''; position: absolute; bottom: 3px; left: 50%;
-            width: 18px; height: 2px; margin-left: -9px; border-radius: 0; background: var(--blue);
-        }
-        #bottom-nav-bar #btn-back { color: var(--g700) !important; width: 58px !important; }
+        #bottom-nav-bar button i { font-size: 21px !important; margin-bottom: 3px; color: inherit !important; }
+        #bottom-nav-bar button.text-blue-600 { color: var(--accent) !important; }
+        #bottom-nav-bar #btn-back { color: var(--g600) !important; width: 58px !important; }
+        #bottom-nav-bar .tab-en { font-family: var(--display); font-size: 11px; font-weight: 700; line-height: 1.1; }
+        #bottom-nav-bar .tab-ko { font-size: 9px; line-height: 1.1; opacity: 0.75; font-weight: 500; }
 
-        /* ---------- 길찾기 앱 선택 시트 ---------- */
-        #nav-app-modal { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); background: rgba(30, 42, 56, 0.30) !important; }
-        
-        #nav-app-modal > div { background: var(--card) !important; border-radius: 14px !important; }
-        #nav-app-modal [data-nav-opt] { border-color: var(--line) !important; background: var(--g50) !important; border-radius: 8px !important; }
-        #nav-app-modal [data-nav-opt].ring-2 { box-shadow: 0 0 0 1.5px var(--g900) !important; background: var(--g50) !important; }
+        /* ---------- 시트·모달 ---------- */
+        #nav-app-modal { -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); background: rgba(0, 41, 61, 0.35) !important; }
+        #nav-app-modal > div { background: var(--card) !important; border-radius: 28px !important; }
+        #nav-app-modal [data-nav-opt] { border-color: var(--line) !important; background: var(--g50) !important; border-radius: 18px !important; }
+        #nav-app-modal [data-nav-opt].ring-2 { box-shadow: 0 0 0 2px var(--accent) !important; background: var(--accent-tint) !important; }
 
-        /* ---------- 타임라인 연결선: 1px 잉크 선 + 점 ---------- */
-        body .border-l-2.border-blue-200 { border-left: 1px solid var(--line-strong) !important; }
+        /* ---------- 일정 탭: 지도 먼저, 일정은 아래에서 올라온 시트처럼 ---------- */
+        #tab-plan:not(.hidden) { display: flex; flex-direction: column; }
+        #tab-plan:not(.hidden) > * { margin-top: 0 !important; margin-bottom: 16px; }
+        #plan-map-card { order: 1; padding: 14px 14px 46px !important; }
+        #plan-timeline-card { order: 2; margin-top: -40px !important; position: relative; z-index: 2; border-radius: 28px 28px 22px 22px !important; box-shadow: 0 -10px 30px rgba(0, 41, 61, 0.10), 0 0 0 1px var(--line) !important; }
+        #plan-timeline-card::before { content: ''; display: block; width: 40px; height: 4px; border-radius: 4px; background: var(--g300); margin: -4px auto 10px; }
+        #exp-accordion-card { order: 3; }
+        #plan-map-card .map-box { height: 380px !important; }
+        .map-box { border-radius: 20px !important; background: var(--g100) !important; }
+        body .border-l-2.border-blue-200 { border-left: 2px dashed var(--line-strong) !important; }
         body .ring-white { --tw-ring-color: var(--card) !important; }
-        /* ---------- 방문완료(블루) 구분 ---------- */
-        body .bg-sky-400, body .bg-sky-500 { background-color: var(--slate) !important; }
-        /* ---------- 작은 라벨: 모노 서체 + 넓은 자간 (이미지의 TOKENS / COMPONENT 라벨) ---------- */
-        main .rounded-full.text-\[10px\], main .rounded-full.text-\[11px\] { letter-spacing: 0.02em; }
-        main span.rounded-full { border-radius: 4px !important; }
-        body > header[class] h1 { font-size: 18px !important; line-height: 1.35 !important; }
-        main h2 i, main h3 i { color: var(--slate) !important; }
-        body button:disabled, body button[disabled] { background-color: var(--g200) !important; color: var(--g400) !important; border-color: transparent !important; cursor: not-allowed; transform: none !important; }
-        /* ---------- 에디토리얼(매거진) 요소: 마스트헤드 · 커버 카드 · D-day 커버 ---------- */
-        :root { --display: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, sans-serif; }
-        .editorial-masthead { padding: 18px 4px 2px; }
-        .editorial-masthead .eyebrow { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.16em; color: var(--slate); }
-        .editorial-masthead .display { font-family: var(--display); font-style: normal; font-weight: 600; font-size: 52px; line-height: 1.05; color: var(--g900); margin: 10px 0 22px; letter-spacing: -0.045em; }
-        .editorial-masthead .dek { font-family: var(--serif); font-size: 15px; color: var(--g600); padding-bottom: 16px; border-bottom: 1px solid var(--g900); }
-        .trip-cover-card { border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 0 0 1px var(--line); }
-        .trip-cover { position: relative; min-height: 164px; padding: 18px 20px 20px; color: #FFFFFF; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
-        .trip-cover.tone-kr { background: linear-gradient(160deg, #7A90A2 0%, #3A5168 52%, #1E2A38 100%); }
-        .trip-cover.tone-global { background: linear-gradient(160deg, #8A9C92 0%, #43606A 52%, #1E2A38 100%); }
-        .trip-cover.tone-done { background: linear-gradient(160deg, #A39D91 0%, #625D55 55%, #3B3934 100%); }
-        .trip-cover::after { content: attr(data-mono); position: absolute; right: -4px; bottom: -40px; font-family: var(--serif); font-size: 156px; line-height: 1; color: rgba(255, 255, 255, 0.07); pointer-events: none; }
-        .cover-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; position: relative; z-index: 1; }
-        .cover-kicker { font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.16em; color: rgba(255, 255, 255, 0.78); }
-        .cover-pill { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 3px 8px; border: 1px solid rgba(255, 255, 255, 0.45); border-radius: 3px; color: #FFFFFF; white-space: nowrap; }
-        .cover-pill.is-live { background: #FFFFFF; color: var(--g900); border-color: #FFFFFF; }
-        .trip-cover .cover-title { position: relative; z-index: 1; font-family: var(--serif) !important; font-weight: 600 !important; font-size: 25px !important; line-height: 1.28; letter-spacing: -0.02em; margin-top: 24px; color: #FFFFFF !important; }
-        .cover-meta { position: relative; z-index: 1; font-size: 12.5px; color: rgba(255, 255, 255, 0.82); margin-top: 6px; }
-        .trip-cover-body { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; }
-        .trip-cover-body > button:first-child { flex: 1 1 auto; }
-        /* D-day 커버: 영문 숫자는 이탤릭 디스플레이 서체 */
-        #tools-hero .text-4xl { font-family: var(--display) !important; font-style: normal; font-weight: 600 !important; font-size: 54px !important; line-height: 1 !important; margin: 6px 0 4px; letter-spacing: -0.04em; }
-        #tools-hero .hero-cover { background-size: cover !important; background-position: center !important; min-height: 220px; }
-        /* ---------- 영문 제목 + 작은 한글 부제 (bilingual) ---------- */
+        main h2 i, main h3 i { color: var(--accent) !important; }
+
+        /* ---------- 영문 제목 + 작은 한글 ---------- */
         .bi { display: inline-flex; flex-direction: column; gap: 2px; min-width: 0; line-height: 1.2; text-align: left; }
-        .bi-en { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; color: inherit; }
+        .bi-en { font-family: var(--display); font-weight: 800; letter-spacing: -0.02em; color: inherit; }
         .bi-ko { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif; font-size: 11.5px !important; font-weight: 500 !important; letter-spacing: 0; color: var(--g500) !important; }
-        main h2 .bi-en, main h2.bi-host .bi-en { font-size: 22px; }
+        main h2 .bi-en { font-size: 22px; }
         main h3 .bi-en, main span[id$="-form-title"] .bi-en, #account-stats-title .bi-en { font-size: 17px; }
         #trip-completed-banner .bi-ko, .text-white .bi-ko { color: rgba(255, 255, 255, 0.7) !important; }
         button.w-full.text-white.justify-between .bi-ko { color: var(--g500) !important; }
         button.w-full.text-white.justify-between .bi-en { color: var(--g900) !important; }
-        /* 영문 헤더 제목 */
-        body > header[class] h1 { font-family: var(--display) !important; font-weight: 600 !important; letter-spacing: -0.03em; }
-        /* 하단 탭: 영문 + 작은 한글 */
-        #bottom-nav-bar .tab-en { font-family: var(--display); font-size: 11px; line-height: 1.1; }
-        #bottom-nav-bar .tab-ko { font-size: 9px; line-height: 1.1; opacity: 0.75; font-weight: 500; }
-        #bottom-nav-bar button { gap: 1px !important; padding-top: 7px !important; padding-bottom: 7px !important; }
-        /* 일차 헤더 */
-        .day-en { font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+        .day-en { font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: -0.01em; }
         .day-ko { font-size: 11.5px; color: var(--g500); font-weight: 500; }
+
+        /* ---------- 첫 화면: 헤드라인 · 검색 · 사진 카드 ---------- */
+        .ps-hero { padding: 14px 4px 4px; }
+        .ps-kicker { font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+        .ps-title { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1.12; letter-spacing: -0.035em; color: var(--g900); margin: 8px 0 6px; }
+        .ps-title em { font-style: normal; color: var(--accent); }
+        .ps-sub { font-size: 14px; color: var(--g500); margin-bottom: 16px; }
+        .ps-search { display: flex; align-items: center; gap: 10px; background: var(--card); border-radius: 999px; padding: 0 18px; box-shadow: var(--shadow), 0 0 0 1px var(--line); }
+        .ps-search i { color: var(--g400); }
+        body .ps-search input[type="search"], body .ps-search input[type="search"]:focus { flex: 1; border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; min-height: 50px; border-radius: 0 !important; }
+        .ps-search:focus-within { box-shadow: 0 0 0 2px var(--accent), var(--shadow) !important; }
+        .ps-section-head { display: flex; align-items: baseline; justify-content: space-between; padding: 6px 4px 10px; }
+        .ps-section-head b { font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: var(--g900); }
+        .ps-section-head span { font-size: 12px; color: var(--g500); }
+        .ps-carousel { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 2px 4px 10px; margin: 0 -12px; padding-left: 16px; padding-right: 16px; scrollbar-width: none; }
+        .ps-carousel::-webkit-scrollbar { display: none; }
+        .ps-card { position: relative; flex: 0 0 78%; max-width: 330px; height: 360px; border-radius: 28px; overflow: hidden; scroll-snap-align: start; cursor: pointer; color: #FFFFFF; background-size: cover !important; background-position: center !important; box-shadow: 0 14px 30px rgba(0, 41, 61, 0.18); }
+        .ps-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 38%, rgba(0, 20, 30, 0.72) 100%); }
+        .ps-card-top { position: absolute; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center; z-index: 1; }
+        .ps-chip { font-family: var(--display); font-size: 11.5px; font-weight: 800; padding: 6px 11px; border-radius: 999px; background: rgba(255, 255, 255, 0.22); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #FFFFFF; white-space: nowrap; }
+        .ps-chip.is-live { background: var(--accent); }
+        .ps-chip.is-done { background: rgba(0, 0, 0, 0.35); }
+        .ps-card-body { position: absolute; left: 20px; right: 20px; bottom: 20px; z-index: 1; }
+        .ps-card-kicker { font-family: var(--display); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; }
+        .ps-card-title { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1.12; letter-spacing: -0.03em; margin: 6px 0 8px; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.18); }
+        .ps-card-meta { font-size: 13px; opacity: 0.9; }
+        .ps-card.ps-new { background: var(--card); color: var(--g900); box-shadow: inset 0 0 0 2px var(--line-strong); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+        .ps-card.ps-new::after { display: none; }
+        .ps-card.ps-new .ps-plus { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+        .ps-empty-search { padding: 18px; text-align: center; font-size: 13px; color: var(--g500); }
+
+        /* 사진이 없을 때 쓰는 풍경 톤 그라데이션 */
+        .ps-tone-0 { background: radial-gradient(circle at 72% 30%, rgba(255, 240, 200, 0.55), transparent 32%), linear-gradient(170deg, #2F6FD8 0%, #78A7F0 40%, #F4A3B4 72%, #FFC48A 100%); }
+        .ps-tone-1 { background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.35), transparent 30%), linear-gradient(170deg, #0F4C75 0%, #1E7FA8 45%, #6FD0CC 100%); }
+        .ps-tone-2 { background: radial-gradient(circle at 70% 70%, rgba(255, 210, 170, 0.5), transparent 35%), linear-gradient(170deg, #1F2140 0%, #4B3F72 42%, #C06C84 78%, #F8B195 100%); }
+        .ps-tone-3 { background: radial-gradient(circle at 30% 20%, rgba(230, 255, 220, 0.35), transparent 30%), linear-gradient(170deg, #173A2D 0%, #2E6B4E 50%, #9FD19A 100%); }
+        .ps-tone-4 { background: radial-gradient(circle at 65% 28%, rgba(255, 236, 190, 0.55), transparent 30%), linear-gradient(170deg, #5B2A86 0%, #C0587E 48%, #F7B267 100%); }
+        .ps-tone-5 { background: radial-gradient(circle at 75% 22%, rgba(255, 255, 255, 0.3), transparent 18%), linear-gradient(170deg, #0B132B 0%, #1C2541 50%, #3A506B 100%); }
+        .ps-tone-done { filter: grayscale(0.55); }
+
+        /* 목록 카드 (연도별·지역별 폴더 안) */
+        .trip-cover-card { border-radius: 22px; overflow: hidden; background: var(--card); box-shadow: var(--shadow), 0 0 0 1px var(--line); }
+        .trip-cover { position: relative; min-height: 170px; padding: 16px 18px 18px; color: #FFFFFF; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; background-size: cover !important; background-position: center !important; }
+        .trip-cover::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 20, 30, 0.7) 100%); }
+        .cover-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; position: relative; z-index: 1; }
+        .cover-kicker { font-family: var(--display); font-size: 10.5px; font-weight: 800; letter-spacing: 0.14em; color: rgba(255, 255, 255, 0.88); }
+        .cover-pill { font-family: var(--display); font-size: 11px; font-weight: 800; padding: 5px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.22); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: #FFFFFF; white-space: nowrap; }
+        .cover-pill.is-live { background: var(--accent); }
+        .trip-cover .cover-title { position: relative; z-index: 1; font-family: var(--display) !important; font-weight: 800 !important; font-size: 24px !important; line-height: 1.2; letter-spacing: -0.03em; margin-top: 22px; color: #FFFFFF !important; }
+        .cover-meta { position: relative; z-index: 1; font-size: 12.5px; color: rgba(255, 255, 255, 0.88); margin-top: 4px; }
+        .trip-cover-body { display: flex; flex-wrap: wrap; gap: 6px; padding: 12px; }
+        .trip-cover-body > button:first-child { flex: 1 1 auto; }
+
+        /* ---------- 여행 헤더 (일정 탭 위, 지도 위 칩처럼) ---------- */
+        #trip-hero { margin-bottom: 0; }
+        .ps-trip-head { display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 10px; border-radius: 999px; background: var(--card); box-shadow: var(--shadow), 0 0 0 1px var(--line); }
+        .ps-avatar { position: relative; flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%; background-size: cover !important; background-position: center !important; cursor: pointer; box-shadow: 0 0 0 3px var(--card), 0 0 0 4px var(--line-strong); }
+        .ps-avatar .ps-cam { position: absolute; right: -4px; bottom: -4px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #FFFFFF; font-size: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px var(--card); }
+        .ps-trip-name { font-family: var(--display); font-weight: 800; font-size: 17px; letter-spacing: -0.02em; line-height: 1.2; color: var(--g900); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .ps-trip-meta { font-size: 12px; color: var(--g500); margin-top: 2px; }
+        .ps-pill { font-family: var(--display); font-size: 12px; font-weight: 800; padding: 7px 12px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); white-space: nowrap; }
+        .ps-pill.is-live { background: var(--accent); color: #FFFFFF; }
+
+        /* ---------- 여행도구 히어로 (Antigua 스타일) ---------- */
+        #tools-hero > div { border-radius: 28px !important; box-shadow: none !important; background-size: cover !important; background-position: center !important; min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; }
+        #tools-hero p.opacity-90:first-child { font-family: var(--display) !important; font-weight: 800 !important; font-size: 11px !important; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.9 !important; }
+        #tools-hero .text-4xl { font-family: var(--display) !important; font-weight: 800 !important; font-size: 58px !important; line-height: 1 !important; letter-spacing: -0.04em; margin: 6px 0 4px; }
+        #tools-hero .text-\[10px\] { font-family: var(--display) !important; font-weight: 700; opacity: 0.85 !important; }
+        #tools-hero [style*="rgba(255,255,255,0.06)"] { background: rgba(255, 255, 255, 0.16) !important; border: 0 !important; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-radius: 18px !important; }
+        .ps-cover-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 9px 16px; border-radius: 999px; background: #FFFFFF; color: #00293D; font-weight: 800; font-size: 13px; border: 0; cursor: pointer; }
+
+        /* 최근 여행 브리핑 */
+        #recent-trip-widget { background: var(--ig) !important; box-shadow: none !important; border-radius: 28px !important; }
+
+        /* ---------- 다크 모드 보정 ---------- */
+        @media (prefers-color-scheme: dark) {
+            body [class*="hover:bg-slate-"]:hover, body [class*="hover:bg-white"]:hover, body [class*="hover:bg-gray-"]:hover { background-color: var(--g100) !important; }
+            main .bg-amber-400.text-slate-900, main .bg-amber-300.text-slate-900 { color: #1C1300 !important; }
+            #photo-modal img { background: #000; }
+        }
     </style>
 </head>
 <body class="text-slate-800 pb-28">
@@ -1199,10 +1269,18 @@
     <main id="trip-selector-screen" class="max-w-3xl mx-auto p-3 space-y-4">
 
         <!-- [디자인] 매거진 마스트헤드 -->
-        <section id="editorial-masthead" class="editorial-masthead">
-            <p class="eyebrow">SMART GROUP TRAVEL · VOL. 1.5</p>
-            <h1 class="display">Journeys</h1>
-            <p class="dek">함께 떠나는 여행의 일정과 기록을 한곳에.</p>
+        <section id="editorial-masthead" class="ps-hero">
+            <p class="ps-kicker">Smart Group Travel</p>
+            <h1 class="ps-title">Plan your next<br><em>adventure</em> together</h1>
+            <p class="ps-sub">함께 떠나는 여행의 일정과 기록을 한곳에.</p>
+            <label class="ps-search"><i class="fa-solid fa-magnifying-glass"></i><input id="trip-search" type="search" placeholder="여행 검색 (예: 제주, 도쿄)" autocomplete="off" oninput="onTripSearch(this.value)"></label>
+        </section>
+
+        <!-- [디자인] 여행 사진 카드 캐러셀 -->
+        <section id="trip-carousel-section">
+            <div class="ps-section-head"><b>Your Trips</b><span id="trip-carousel-count"></span></div>
+            <div id="trip-carousel" class="ps-carousel"></div>
+            <p id="trip-search-empty" class="ps-empty-search hidden">검색 결과가 없습니다.</p>
         </section>
 
         <!-- 0. 최근 열었던(진행중) 여행의 현재 시간 기준 [직전 일정] & [다음 일정] 브리핑 카드 -->
@@ -1214,7 +1292,7 @@
         <section id="all-trips-folder-section" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
             <div class="flex justify-between items-center">
                 <div>
-                    <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-suitcase-rolling text-blue-600"></i><span class="bi"><span class="bi-en">My Trips</span><span class="bi-ko">내 여행 일정 목록</span></span></h2>
+                    <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-suitcase-rolling text-blue-600"></i><span class="bi"><span class="bi-en">All Trips</span><span class="bi-ko">연도별 · 지역별 전체 여행</span></span></h2>
                     <p class="text-[11px] text-slate-500 mt-0.5">연도별 또는 국내·해외 지역별 폴더를 눌러 일정을 확인하세요. (완료된 여행도 [수정]을 누르면 재수정 가능)</p>
                 </div>
             </div>
@@ -1322,6 +1400,10 @@
     <!-- 화면 2: 개별 여행 메인 화면 (Ver 1.5: 타임라인·일정 통합 + 가계부 3단 통계 + 하단 [←목록] 포함 바) -->
     <!-- ========================================== -->
     <main id="main-app-screen" class="hidden max-w-3xl mx-auto p-3 space-y-4">
+
+        <!-- [디자인] 여행 헤더 (커버 사진 · 제목 · D-day) -->
+        <section id="trip-hero" class="hidden"></section>
+        <input type="file" id="trip-cover-input" accept="image/*" class="hidden" onchange="onTripCoverSelected(event)">
 
         <!-- 여행완료 상태 알림 및 [최종 통계 바로보기 / 재수정] 상단 안내 배너 (여행완료 시 자동 노출) -->
         <div id="trip-completed-banner" class="hidden bg-gradient-to-r from-indigo-700 via-blue-700 to-emerald-700 text-white p-3.5 rounded-2xl shadow-md flex flex-wrap justify-between items-center gap-2">
@@ -1531,7 +1613,7 @@
             </div>
 
             <!-- 3. 일차별 오전/오후 2단계 스마트 아코디언 타임라인 목록 -->
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+            <div id="plan-timeline-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
                     <div>
                         <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-regular fa-calendar-check text-blue-600"></i><span class="bi"><span class="bi-en">Timeline</span><span class="bi-ko">오전·오후별 일정 · 직전·다음 자동 펼침</span></span></h3>
@@ -3023,6 +3105,11 @@
             if (filterBar) {
                 if (targetTab === 'plan') filterBar.classList.remove('hidden');
                 else filterBar.classList.add('hidden');
+            }
+            const tripHero = document.getElementById('trip-hero');
+            if (tripHero) {
+                tripHero.classList.toggle('hidden', targetTab !== 'plan');
+                if (targetTab === 'plan') { try { renderTripHero(); } catch (_) {} }
             }
 
             setTimeout(() => {
@@ -4709,6 +4796,7 @@
                 const toolsTab = document.getElementById('tab-tools');
                 if (toolsTab && !toolsTab.classList.contains('hidden')) renderToolsHero();
             } catch (_) {}
+            try { renderTripHero(); } catch (_) {}
             const sortedExpAll = sortByDayAndTime(expectedData);
             const sortedActAll = sortByDayAndTime(actualData);
 
@@ -5398,15 +5486,13 @@
             const spent = actualData.reduce((s, a) => s + Number(a.expense || 0), 0);
             const members = Math.max(1, Number(currentMemberCount || trip.memberCount || 1));
             const perPerson = Math.round(spent / members);
-            // 일정에 첨부된 첫 사진을 매거진 커버처럼 사용 (없으면 잉크 톤)
-            const photoItem = sortByDayAndTime(expectedData).find(x => Array.isArray(x.photos) && x.photos.length > 0);
-            const coverSrc = photoItem ? String(photoItem.photos[0] || '') : '';
-            const safeCover = coverSrc && !/["'()\s]/.test(coverSrc.slice(0, 80)) && !/["'\\]/.test(coverSrc);
-            const heroBg = safeCover
-                ? `background:linear-gradient(180deg, rgba(20,28,38,0.30) 0%, rgba(20,28,38,0.88) 100%), url('${coverSrc}')`
-                : 'background:var(--ig)';
+            // 커버: 여행 커버 사진 → 일정 첫 사진 → 풍경 톤
+            const cover = getTripCover(trip, true);
+            const heroBg = cover.hasPhoto
+                ? cover.style.replace('background-image:', 'background-image:linear-gradient(180deg, rgba(0,20,30,0.10) 0%, rgba(0,20,30,0.82) 100%),')
+                : '';
             box.innerHTML = `
-            <div class="rounded-2xl p-5 text-white shadow-md ${safeCover ? 'hero-cover' : ''}" style="${heroBg}">
+            <div class="rounded-2xl p-5 text-white shadow-md ${cover.hasPhoto ? 'hero-cover' : cover.cls}" style="${heroBg}">
                 <div class="flex justify-between items-start gap-3">
                     <div class="min-w-0">
                         <p class="text-[11px] font-semibold opacity-90">${esc(info.sub)}</p>
@@ -5414,12 +5500,15 @@
                         <p class="text-sm font-bold mt-1 truncate">${esc(trip.name || '')}</p>
                         <p class="text-[11px] opacity-90 mt-0.5">${esc(formatWithDayOfWeek(trip.startDate))} ~ ${esc(formatWithDayOfWeek(trip.endDate))} · ${trip.region === 'global' ? '🌍' : '🇰🇷'} ${esc(inferTripSubRegion(trip))}</p>
                     </div>
-                    <div class="shrink-0 w-14 h-14 rounded-full border border-white/30 flex items-center justify-center text-2xl" style="font-family:var(--serif)">${getTripMonogram(trip)}</div>
                 </div>
                 <div class="grid grid-cols-3 gap-2 mt-4">
                     <div class="rounded-xl px-2 py-2 text-center" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10)"><p class="text-[10px] opacity-90">일정</p><p class="text-sm font-extrabold">${placeCount}곳</p></div>
                     <div class="rounded-xl px-2 py-2 text-center" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10)"><p class="text-[10px] opacity-90">총 지출</p><p class="text-sm font-extrabold">${spent.toLocaleString()}원</p></div>
                     <div class="rounded-xl px-2 py-2 text-center" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10)"><p class="text-[10px] opacity-90">1인당 (${members}명)</p><p class="text-sm font-extrabold">${perPerson.toLocaleString()}원</p></div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" class="ps-cover-btn" onclick="openTripCoverPicker()"><i class="fa-solid fa-camera"></i> 커버 사진 ${isSafeImg(trip.coverPhoto) ? '변경' : '넣기'}</button>
+                    ${isSafeImg(trip.coverPhoto) ? `<button type="button" class="ps-cover-btn" style="background:rgba(255,255,255,0.18);color:#FFFFFF" onclick="removeTripCover()">삭제</button>` : ''}
                 </div>
             </div>`;
         }
@@ -5731,25 +5820,167 @@
         function buildTripAvatarHtml(trip, size) {
             return `<div class="ig-ring ${size || ''} ${trip.isCompleted ? 'seen' : ''}"><div class="ig-ring-inner"><div class="ig-avatar">${getTripMonogram(trip)}</div></div></div>`;
         }
-        function renderTripStoriesBar() {
-            const bar = document.getElementById('trip-stories-bar');
-            if (!bar) return;
-            if (!Array.isArray(tripsData) || tripsData.length === 0) {
-                bar.classList.add('hidden');
-                bar.innerHTML = '';
-                return;
-            }
-            const sorted = [...tripsData].sort((a, b) => {
-                if (!!a.isCompleted !== !!b.isCompleted) return a.isCompleted ? 1 : -1;
-                return String(b.startDate || '').localeCompare(String(a.startDate || ''));
-            });
-            bar.innerHTML = sorted.map(trip => `
-                <button type="button" class="ig-story ${trip.isCompleted ? '' : 'is-new'}" onclick="selectTrip('${trip.id}', '${trip.isCompleted ? 'actual' : 'plan'}')" title="${esc(trip.name || '')}">
-                    ${buildTripAvatarHtml(trip)}
-                    <div class="ig-story-name">${esc(trip.name || '제목 없음')}</div>
-                </button>`).join('');
-            bar.classList.remove('hidden');
+        // ==========================================
+        // [디자인] Polarsteps 스타일: 커버 사진 · 사진 카드 · 여행 헤더 · 검색
+        // ==========================================
+        function isSafeImg(src) {
+            return typeof src === 'string' && src.length < 1500000 && /^data:image\/(jpeg|jpg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(src);
         }
+        function getTripTone(trip) {
+            const key = String(trip.id || trip.name || '');
+            let h = 0;
+            for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+            return h % 6;
+        }
+        // 커버: ① 여행 커버 사진 → ② (현재 여행이면) 일정 첫 사진 → ③ 풍경 톤 그라데이션
+        function getTripCover(trip, allowExpected) {
+            let src = isSafeImg(trip.coverPhoto) ? trip.coverPhoto : '';
+            if (!src && allowExpected && trip.id === currentTripId) {
+                const p = sortByDayAndTime(expectedData).find(x => Array.isArray(x.photos) && isSafeImg(x.photos[0]));
+                if (p) src = p.photos[0];
+            }
+            const doneCls = trip.isCompleted ? ' ps-tone-done' : '';
+            if (src) return { cls: doneCls.trim(), style: `background-image:url('${src}')`, hasPhoto: true };
+            return { cls: `ps-tone-${getTripTone(trip)}${doneCls}`, style: '', hasPhoto: false };
+        }
+        function getTripStatusChip(trip, liveCls) {
+            const info = getTripDdayInfo(trip);
+            if (trip.isCompleted) return { text: '완료', cls: 'is-done' };
+            if (!info) return { text: '', cls: '' };
+            if (info.state === 'ongoing') return { text: `● 여행중 ${info.big}`, cls: liveCls || 'is-live' };
+            if (info.state === 'upcoming') return { text: info.big, cls: '' };
+            if (info.state === 'past') return { text: '다녀옴', cls: 'is-done' };
+            return { text: '', cls: '' };
+        }
+
+        // 첫 화면 가로 사진 카드 (함수 이름은 기존 호출부 호환을 위해 유지)
+        function renderTripStoriesBar() {
+            const wrap = document.getElementById('trip-carousel');
+            const countEl = document.getElementById('trip-carousel-count');
+            if (!wrap) return;
+            const list = Array.isArray(tripsData) ? [...tripsData] : [];
+            const rank = t => {
+                const st = (getTripDdayInfo(t) || {}).state;
+                if (t.isCompleted) return 3;
+                if (st === 'ongoing') return 0;
+                if (st === 'upcoming' || st === 'none') return 1;
+                return 2;
+            };
+            list.sort((a, b) => {
+                const r = rank(a) - rank(b);
+                if (r) return r;
+                return rank(a) === 1
+                    ? String(a.startDate || '').localeCompare(String(b.startDate || ''))
+                    : String(b.startDate || '').localeCompare(String(a.startDate || ''));
+            });
+            if (countEl) countEl.textContent = list.length ? `${list.length}개의 여행` : '';
+            const cards = list.map(trip => {
+                const cover = getTripCover(trip, false);
+                const chip = getTripStatusChip(trip);
+                const isGlobal = trip.region === 'global';
+                const key = `${trip.name || ''} ${inferTripSubRegion(trip)} ${isGlobal ? '해외' : '국내'}`.toLowerCase();
+                return `
+                <article class="ps-card ${cover.cls}" style="${cover.style}" data-search="${esc(key)}" onclick="selectTrip('${trip.id}', '${trip.isCompleted ? 'actual' : 'plan'}')">
+                    <div class="ps-card-top">
+                        <span class="ps-chip">${isGlobal ? '🌍' : '🇰🇷'} ${esc(inferTripSubRegion(trip))}</span>
+                        ${chip.text ? `<span class="ps-chip ${chip.cls}">${esc(chip.text)}</span>` : ''}
+                    </div>
+                    <div class="ps-card-body">
+                        <p class="ps-card-kicker">${isGlobal ? 'Overseas' : 'Domestic'} · ${Number(trip.memberCount || 8)} travelers</p>
+                        <h3 class="ps-card-title">${esc(trip.name || '제목 없음')}</h3>
+                        <p class="ps-card-meta">${esc(formatWithDayOfWeek(trip.startDate))} — ${esc(formatWithDayOfWeek(trip.endDate))}</p>
+                    </div>
+                </article>`;
+            }).join('');
+            wrap.innerHTML = cards + `
+                <article class="ps-card ps-new" onclick="openNewTripForm()">
+                    <span class="ps-plus"><i class="fa-solid fa-plus"></i></span>
+                    <b style="font-family:var(--display);font-size:18px;font-weight:800">New Trip</b>
+                    <span style="font-size:12px;color:var(--g500)">새 여행 만들기</span>
+                </article>`;
+            applyTripSearch();
+        }
+
+        window.openNewTripForm = function() {
+            const card = document.getElementById('trip-accordion-card');
+            try { toggleAccordion('trip-form-body', 'trip-form-chevron', true); } catch (_) {}
+            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+
+        let tripSearchQuery = '';
+        window.onTripSearch = function(q) {
+            tripSearchQuery = String(q || '').trim().toLowerCase();
+            applyTripSearch();
+        };
+        function applyTripSearch() {
+            const q = tripSearchQuery;
+            let shown = 0;
+            document.querySelectorAll('#trip-carousel .ps-card[data-search], #trip-cards-container .trip-cover-card[data-search]').forEach(el => {
+                const ok = !q || (el.getAttribute('data-search') || '').includes(q);
+                el.style.display = ok ? '' : 'none';
+                if (ok && el.classList.contains('ps-card')) shown++;
+            });
+            const newCard = document.querySelector('#trip-carousel .ps-new');
+            if (newCard) newCard.style.display = q ? 'none' : '';
+            const empty = document.getElementById('trip-search-empty');
+            if (empty) empty.classList.toggle('hidden', !(q && shown === 0));
+        }
+
+        // 일정 탭 위 여행 헤더
+        function renderTripHero() {
+            const box = document.getElementById('trip-hero');
+            const trip = tripsData.find(t => t.id === currentTripId);
+            if (!box || !trip) return;
+            const cover = getTripCover(trip, true);
+            const chip = getTripStatusChip(trip, 'is-live');
+            box.innerHTML = `
+            <div class="ps-trip-head">
+                <div class="ps-avatar ${cover.cls}" style="${cover.style}" onclick="openTripCoverPicker()" title="커버 사진 변경">
+                    <span class="ps-cam"><i class="fa-solid fa-camera"></i></span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="ps-trip-name">${esc(trip.name || '여행')}</div>
+                    <div class="ps-trip-meta">${esc(formatWithDayOfWeek(trip.startDate))} — ${esc(formatWithDayOfWeek(trip.endDate))} · ${Number(currentMemberCount || trip.memberCount || 8)}명 · 일정 ${expectedData.length}곳</div>
+                </div>
+                ${chip.text ? `<span class="ps-pill ${chip.cls === 'is-live' ? 'is-live' : ''}">${esc(chip.text)}</span>` : ''}
+            </div>`;
+        }
+
+        // 커버 사진 변경·삭제 (여행 문서의 coverPhoto 에 압축 이미지 저장)
+        window.openTripCoverPicker = function() {
+            if (!currentTripId || !db) return;
+            if (!checkEditable()) return;
+            const input = document.getElementById('trip-cover-input');
+            if (input) input.click();
+        };
+        window.onTripCoverSelected = async function(event) {
+            const file = event.target.files && event.target.files[0];
+            event.target.value = '';
+            if (!file || !currentTripId || !db) return;
+            try {
+                let data = await compressImageFile(file, 1080, 0.72);
+                if (data.length > 650000) data = await compressImageFile(file, 820, 0.6);
+                await db.collection('trips').doc(currentTripId).update({ coverPhoto: data });
+                const t = tripsData.find(x => x.id === currentTripId);
+                if (t) t.coverPhoto = data;
+                renderTripHero();
+                try { renderToolsHero(); } catch (_) {}
+                try { renderTripCards(); } catch (_) {}
+            } catch (err) {
+                showError('커버 사진 저장 중 오류: ' + (err && err.message ? err.message : err));
+            }
+        };
+        window.removeTripCover = async function() {
+            if (!currentTripId || !db) return;
+            if (!checkEditable()) return;
+            if (!confirm('이 여행의 커버 사진을 삭제할까요?')) return;
+            await db.collection('trips').doc(currentTripId).update({ coverPhoto: '' });
+            const t = tripsData.find(x => x.id === currentTripId);
+            if (t) t.coverPhoto = '';
+            renderTripHero();
+            try { renderToolsHero(); } catch (_) {}
+            try { renderTripCards(); } catch (_) {}
+        };
 
         function buildSingleTripCardHtml(trip) {
             const subReg = inferTripSubRegion(trip);
@@ -5757,6 +5988,8 @@
             const isGlobal = trip.region === 'global';
             const tone = trip.isCompleted ? 'done' : (isGlobal ? 'global' : 'kr');
             const kicker = `${isGlobal ? 'OVERSEAS' : 'DOMESTIC'} · ${esc(subReg)}`;
+            const cover = getTripCover(trip, false);
+            const searchKey = `${trip.name || ''} ${subReg} ${isGlobal ? '해외' : '국내'}`.toLowerCase();
             let statusPill = '';
             if (trip.isCompleted) statusPill = `<span class="cover-pill">완료</span>`;
             else if (info && info.state === 'upcoming') statusPill = `<span class="cover-pill">${esc(info.big)}</span>`;
@@ -5768,8 +6001,8 @@
                 : `<button type="button" onclick="selectTrip('${trip.id}')" class="bg-blue-600 active:bg-blue-800 text-white px-3.5 py-2 rounded-lg text-xs font-bold cursor-pointer">입장하기</button>`;
 
             return `
-            <article class="trip-cover-card">
-                <div class="trip-cover tone-${tone}" data-mono="${getTripMonogram(trip)}" onclick="selectTrip('${trip.id}', '${trip.isCompleted ? 'actual' : 'plan'}')">
+            <article class="trip-cover-card" data-search="${esc(searchKey)}">
+                <div class="trip-cover ${cover.cls}" style="${cover.style}" onclick="selectTrip('${trip.id}', '${trip.isCompleted ? 'actual' : 'plan'}')">
                     <div class="cover-top"><span class="cover-kicker">${kicker}</span>${statusPill}</div>
                     <div>
                         <h3 class="cover-title">${esc(trip.name || '제목 없음')}</h3>
@@ -5786,6 +6019,8 @@
 
         function renderTripCards() {
             try { renderTripStoriesBar(); } catch (_) {}
+            try { if (currentTripId) renderTripHero(); } catch (_) {}
+            setTimeout(() => { try { applyTripSearch(); } catch (_) {} }, 0);
             const container = document.getElementById('trip-cards-container');
             if (!container) return;
 

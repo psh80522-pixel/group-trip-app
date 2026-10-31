@@ -24,17 +24,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
     <style id="theme-modern">
-        :root { --g100: #F2EEE6; --g200: #DCD5C7; --g600: #67635C; --g900: #1E2A38; --blue: #2E4256; }
-        body { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', system-ui, sans-serif !important;
-               background: var(--g100) !important; color: var(--g900); -webkit-font-smoothing: antialiased; letter-spacing: -0.02em; word-break: keep-all; }
-        body .rounded-2xl { border-radius: 12px !important; }
-        body .rounded-xl { border-radius: 8px !important; }
-        body .shadow-sm, body .shadow-md { box-shadow: 0 1px 2px rgba(0,23,51,.04), 0 4px 16px rgba(0,23,51,.04) !important; }
-        body [class*="border-"] { border-color: var(--g200) !important; }
+        :root { --bg: #FFF7EF; --card: #FFFFFF; --line: rgba(0,41,61,.09); --g500: #69788C; --g900: #00293D; --accent: #F11F4C; }
+        @media (prefers-color-scheme: dark) { :root { --bg: #0A1820; --card: #11232D; --line: rgba(255,255,255,.08); --g500: #8199A7; --g900: #F5F9FB; --accent: #FF3B66; color-scheme: dark; } }
+        body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif !important; background: var(--bg) !important; color: var(--g900); word-break: keep-all; }
+        body .bg-white, body [class*="bg-slate-"], body [class*="bg-blue-50"] { background-color: var(--card) !important; }
+        body [class*="text-slate-"] { color: var(--g900) !important; }
+        body .text-slate-500, body .text-slate-600 { color: var(--g500) !important; }
+        body [class*="border-"] { border-color: var(--line) !important; }
         body .border-2 { border-width: 1px !important; }
-        body .text-slate-800, body .text-slate-900 { color: var(--g900) !important; }
-        body .text-slate-500, body .text-slate-600 { color: var(--g600) !important; }
-        body .bg-blue-600 { background-color: var(--blue) !important; }
+        body .rounded-2xl { border-radius: 22px !important; }
+        body .rounded-xl { border-radius: 14px !important; }
+        body .bg-blue-600 { background-color: var(--accent) !important; }
         body .text-xs { font-size: 13px !important; line-height: 1.6 !important; }
     </style>
 </head>
