@@ -51,6 +51,7 @@
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
     <!-- ================================================================
          [디자인 레이어 v5] Polarsteps 스타일 (지도 중심 · 레드핑크 포인트 · 휴대폰 설정 따라 라이트/다크 자동)
@@ -1021,17 +1022,17 @@
         body button.w-full.text-white.justify-between .bg-white { background: var(--g100) !important; color: var(--g700) !important; }
         /* 일차 헤더: 지도 경로 색과 같은 왼쪽 띠 */
         body button.w-full.text-white.justify-between[class*="hover:bg-"] { box-shadow: inset 4px 0 0 var(--acc, var(--accent)), inset 0 -1px 0 var(--line) !important; padding-left: 18px !important; }
-        body button.w-full.text-white.justify-between.bg-blue-600 { --acc: #2563eb; }
-        body button.w-full.text-white.justify-between.bg-purple-600 { --acc: #9333ea; }
-        body button.w-full.text-white.justify-between.bg-emerald-600 { --acc: #059669; }
-        body button.w-full.text-white.justify-between.bg-amber-600 { --acc: #d97706; }
+        body button.w-full.text-white.justify-between.bg-blue-600 { --acc: #3D5A73; }
+        body button.w-full.text-white.justify-between.bg-purple-600 { --acc: #7A6A8A; }
+        body button.w-full.text-white.justify-between.bg-emerald-600 { --acc: #5E7D6C; }
+        body button.w-full.text-white.justify-between.bg-amber-600 { --acc: #A08259; }
         body button.w-full.text-white.justify-between[class*="hover:bg-"] i.fa-sun,
         body button.w-full.text-white.justify-between[class*="hover:bg-"] i.fa-cloud-sun { color: var(--acc) !important; }
         /* 지도 범례 점은 실제 경로 색 그대로 */
-        body span.rounded-full.inline-block.bg-blue-600 { background-color: #2563eb !important; }
-        body span.rounded-full.inline-block.bg-purple-600 { background-color: #9333ea !important; }
-        body span.rounded-full.inline-block.bg-emerald-600 { background-color: #059669 !important; }
-        body span.rounded-full.inline-block.bg-amber-500 { background-color: #d97706 !important; }
+        body span.rounded-full.inline-block.bg-blue-600 { background-color: #3D5A73 !important; }
+        body span.rounded-full.inline-block.bg-purple-600 { background-color: #7A6A8A !important; }
+        body span.rounded-full.inline-block.bg-emerald-600 { background-color: #5E7D6C !important; }
+        body span.rounded-full.inline-block.bg-amber-500 { background-color: #A08259 !important; }
         #trip-completed-banner { background: var(--card) !important; color: var(--g900) !important; box-shadow: inset 4px 0 0 var(--accent), var(--shadow) !important; }
         #trip-completed-banner [class*="text-"]:not([class*="bg-"]) { color: var(--g700) !important; }
         body div.bg-emerald-600.text-white.rounded-xl, body div.bg-blue-600.text-white.rounded-xl { background: var(--forest) !important; }
@@ -1322,6 +1323,229 @@
         .car-name span { font-size: 11px; font-weight: 700; color: var(--g500); margin-left: 4px; }
         .car-sub { margin-top: 2px; font-size: 12px; color: var(--g500); overflow-wrap: anywhere; }
         .car-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    </style>
+    <style id="theme-v7">
+        /* ===== v7 · 차분한 모노톤 — 남색·회색 한 계열, 강조는 굵기와 크기로 ===== */
+        :root {
+            --accent: #00293D; --accent-press: #0B3A52; --accent-tint: rgba(0, 41, 61, 0.06); --on-accent: #FFFFFF;
+            --red: #A8423D;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --accent: #E6ECEF; --accent-press: #FFFFFF; --accent-tint: rgba(255, 255, 255, 0.08); --on-accent: #0A1820;
+                --red: #E08A84;
+            }
+        }
+        :root {
+            --t-warm-1: var(--g50); --t-warm-2: var(--g100); --t-warm-solid: var(--ink); --t-warm-text: var(--g700); --t-warm-mid: var(--g500);
+            --t-blue-1: var(--g50); --t-blue-2: var(--g100); --t-blue-solid: var(--ink); --t-blue-text: var(--g700); --t-blue-mid: var(--g500);
+            --t-green-1: var(--g50); --t-green-2: var(--g100); --t-green-solid: var(--ink); --t-green-text: var(--g700); --t-green-mid: var(--g500);
+            --t-violet-1: var(--g50); --t-violet-2: var(--g100); --t-violet-solid: var(--ink); --t-violet-text: var(--g700); --t-violet-mid: var(--g500);
+            --t-red-1: var(--g50); --t-red-2: var(--g100); --t-red-solid: var(--ink); --t-red-text: var(--red); --t-red-mid: var(--red);
+        }
+        .animate-pulse { animation: none !important; }
+
+        /* 흰 글자가 강조색 위에 올라가는 곳 → 모드별 대비 색 */
+        .ps-card.ps-new .ps-plus, .ps-avatar .ps-cam, .ps-pill.is-live, .dg-now,
+        body .st-mini--accent, body .st-visit, .ck-box input:checked + span { color: var(--on-accent) !important; }
+        .ps-chip.is-live, .cover-pill.is-live { background: rgba(255, 255, 255, 0.92) !important; color: #0A1820 !important; }
+        body .st-visit.is-done { color: var(--g600) !important; }
+
+        /* 헤더: 편집 상태 버튼을 조용한 알약으로 */
+        body > header[class] #btn-edit-lock,
+        body > header[class] #btn-edit-lock.bg-rose-600,
+        body > header[class] #btn-edit-lock.bg-indigo-800 { color: var(--g800) !important; background: var(--g100) !important; border-color: transparent !important; box-shadow: none !important; font-weight: 700 !important; }
+
+        /* 첫 화면 헤드라인 */
+        .ps-kicker { color: var(--g500); font-size: 10.5px; letter-spacing: 0.18em; font-weight: 700; }
+        .ps-title { font-size: 28px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.18; }
+        .ps-title em { color: var(--g400); }
+
+        /* 사진 카드: 작고 가는 글씨 */
+        .ps-card { height: 340px; }
+        .ps-card::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(4, 14, 20, 0.66) 100%); }
+        .ps-card-body { left: 20px; right: 20px; bottom: 22px; }
+        .ps-card-kicker { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; opacity: 0.72; }
+        .ps-card-title { font-size: 21px; font-weight: 700; line-height: 1.3; letter-spacing: -0.02em; margin: 6px 0 6px; text-shadow: none; }
+        .ps-card-meta { font-size: 12px; opacity: 0.78; letter-spacing: 0.01em; }
+        .ps-chip { font-size: 11px; font-weight: 700; padding: 5px 10px; background: rgba(255, 255, 255, 0.18); }
+
+        /* 일정·체크리스트 강조 줄이기 */
+        .st.is-next .st-dot { border-color: var(--g900); color: var(--g900); box-shadow: 0 0 0 4px var(--accent-tint); }
+        .st-flag { color: var(--g700); background: var(--g100); }
+        .dg-title { font-size: 17px; font-weight: 700; }
+        .dg-title em { font-size: 14px; font-weight: 600; color: var(--g400); }
+        .st-title { font-size: 15px; font-weight: 700; }
+        .st-meta b { font-weight: 700; }
+        .bs-stat--accent .bs-num { color: var(--g900); }
+        .bs-num { font-weight: 700; }
+        main h2 i, main h3 i { color: var(--g400) !important; }
+
+        /* 가계부 목록: 줄 형태 */
+        #pre-trip-budget-list, #actual-manage-list { display: flex; flex-direction: column; gap: 10px; }
+        .lg-group { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 4px 14px 4px; }
+        .lg-head { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0 6px; font-size: 12px; font-weight: 700; color: var(--g500); }
+        .lg-head em { font-style: normal; font-weight: 500; margin-left: 4px; }
+        .lg-head span:last-child { font-family: var(--display); font-weight: 700; color: var(--g700); }
+        .lg-row { cursor: pointer; padding: 11px 0; }
+        .lg-row + .lg-row { border-top: 1px solid var(--line); }
+        .lg-line { display: flex; align-items: center; gap: 10px; }
+        .lg-main { flex: 1; min-width: 0; }
+        .lg-meta { font-size: 11.5px; color: var(--g500); }
+        .lg-title { margin-top: 2px; font-size: 14.5px; font-weight: 700; color: var(--g900); overflow-wrap: anywhere; }
+        .lg-amt { font-family: var(--display); font-size: 14px; font-weight: 700; color: var(--g900); white-space: nowrap; }
+        .lg-chev { color: var(--g400); font-size: 11px; transition: transform .2s ease; }
+        .lg-row.is-open .lg-chev { transform: rotate(180deg); }
+        .lg-detail { margin-top: 10px; border-top: 1px solid var(--line); cursor: default; }
+
+
+        /* 첫 화면 '지금 여행' 카드 */
+        #recent-trip-widget { background: var(--card) !important; color: var(--g900) !important; border: 1px solid var(--line) !important; border-radius: 24px !important; padding: 20px !important; }
+        .rw-kicker { font-family: var(--display); font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--g500); }
+        .rw-title { margin-top: 6px; font-size: 19px; font-weight: 700; letter-spacing: -0.02em; color: var(--g900); }
+        .rw-sub { margin-top: 3px; font-size: 12px; color: var(--g500); }
+        .rw-list { margin-top: 12px; border-top: 1px solid var(--line); }
+        .rw-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+        .rw-row.is-empty { cursor: default; color: var(--g500); }
+        .rw-tag { width: 34px; flex-shrink: 0; font-size: 11px; font-weight: 700; color: var(--g500); }
+        .rw-main { flex: 1; min-width: 0; }
+        .rw-meta { font-size: 11.5px; color: var(--g500); }
+        .rw-place { margin-top: 1px; font-size: 14.5px; font-weight: 700; color: var(--g900); overflow-wrap: anywhere; }
+        .rw-row.is-empty .rw-place { font-weight: 500; color: var(--g500); }
+        .rw-chev { font-size: 11px; color: var(--g400); }
+        body .rw-go { margin-top: 14px; width: 100%; height: 46px; border: 0; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: 13.5px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+        .trip-cover .cover-title { font-size: 19px !important; font-weight: 700 !important; }
+        .cover-kicker { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; opacity: 0.8; }
+
+        /* 사진이 없을 때의 커버 톤: 채도 낮은 풍경색 */
+        .ps-tone-0 { background: linear-gradient(170deg, #3E5466 0%, #7C8E9C 60%, #B9B3A8 100%) !important; }
+        .ps-tone-1 { background: linear-gradient(170deg, #2E4A4F 0%, #5E7F80 55%, #A9B7B0 100%) !important; }
+        .ps-tone-2 { background: linear-gradient(170deg, #3B3A44 0%, #6E6870 55%, #B4A79C 100%) !important; }
+        .ps-tone-3 { background: linear-gradient(170deg, #2F4038 0%, #5E7563 55%, #A7B09A 100%) !important; }
+        .ps-tone-4 { background: linear-gradient(170deg, #4A3F3A 0%, #85776B 55%, #C2B5A2 100%) !important; }
+        .ps-tone-5 { background: linear-gradient(170deg, #1E2A33 0%, #3A4A57 55%, #7D8B95 100%) !important; }
+    </style>
+    <style id="theme-v8">
+        /* ===== v8 · 모노톤 + 포인트 색 하나 (핵심 버튼·선택·다음 일정에만) ===== */
+        :root { --accent: #8C2F3D; --accent-press: #8C2F3D; --accent-tint: rgba(140,47,61,0.09); --on-accent: #FFFFFF; --pt: #8C2F3D; --pt-tint: rgba(140,47,61,0.09); }
+        @media (prefers-color-scheme: dark) {
+            :root { --accent: #A84657; --accent-press: #B85A68; --accent-tint: rgba(227,144,156,0.14); --on-accent: #FFFFFF; --pt: #E3A0AA; --pt-tint: rgba(227,144,156,0.14); }
+        }
+        .ps-kicker, .rw-kicker { color: var(--pt) !important; }
+        .ps-title em { color: var(--pt) !important; }
+        main h2 i, main h3 i { color: var(--pt) !important; }
+        .st.is-next .st-dot { border-color: var(--pt) !important; color: var(--pt) !important; box-shadow: 0 0 0 4px var(--pt-tint) !important; }
+        .st-flag { color: var(--pt) !important; background: var(--pt-tint) !important; }
+        .dg-now { background: var(--accent) !important; color: #FFFFFF !important; }
+        .bs-stat--accent { background: var(--pt-tint) !important; }
+        .bs-stat--accent .bs-num { color: var(--pt) !important; }
+        .ps-chip.is-live, .cover-pill.is-live { background: var(--accent) !important; color: #FFFFFF !important; }
+        .ps-card-kicker, .cover-kicker { opacity: 0.85; }
+        .rw-tag { color: var(--pt) !important; }
+        .ck-group-head span:first-child { color: var(--g700); }
+        .lg-head span:first-child { color: var(--g700); }
+        .tl-count:first-child { color: var(--pt); }
+        #chk-progress-bar { background: var(--accent) !important; }
+        /* 방문 완료 칩·세부정보 배경에 아주 옅은 포인트 톤 */
+        .st.is-open .st-card { background: color-mix(in srgb, var(--pt) 4%, var(--card)); }
+        .ck.is-done .ck-title { color: var(--g400); }
+
+    </style>
+    <style id="theme-v9">
+        /* ===== v9 · Editorial — 오프화이트/블랙, 얇은 선, 각진 모서리, 고정폭 라벨 ===== */
+        :root {
+            --bg: #F3F2EE; --card: #FBFAF8; --glass: rgba(243, 242, 238, 0.9);
+            --line: rgba(17, 17, 17, 0.10); --line-strong: rgba(17, 17, 17, 0.22);
+            --g50: #F6F5F2; --g100: #ECEAE5; --g200: #E0DDD7; --g300: #CCC9C2; --g400: #A09C95; --g500: #74716B; --g600: #55524D; --g700: #3A3834; --g800: #222120; --g900: #111111;
+            --ink: #111111; --forest: #3A3834; --shadow: none;
+            --accent: #111111; --accent-press: #000000; --accent-tint: rgba(17, 17, 17, 0.05); --on-accent: #FFFFFF;
+            --pt: #8C2F3D; --pt-tint: rgba(140, 47, 61, 0.08);
+            --display: 'Inter Tight', 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+            --mono: 'IBM Plex Mono', 'Pretendard Variable', Pretendard, ui-monospace, monospace;
+            --ig: linear-gradient(170deg, #1C1C1C 0%, #2B2A28 100%);
+            --r: 8px; --r-lg: 12px;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0B0B0B; --card: #131313; --glass: rgba(11, 11, 11, 0.9);
+                --line: rgba(255, 255, 255, 0.09); --line-strong: rgba(255, 255, 255, 0.20);
+                --g50: #181818; --g100: #1F1F1F; --g200: #2A2A2A; --g300: #3A3A3A; --g400: #6E6E6E; --g500: #9A9A9A; --g600: #BEBEBE; --g700: #D6D6D6; --g800: #E8E8E8; --g900: #F3F3F3;
+                --ink: #2A2A2A; --forest: #3A3A3A;
+                --accent: #F3F3F3; --accent-press: #FFFFFF; --accent-tint: rgba(255, 255, 255, 0.06); --on-accent: #0B0B0B;
+                --pt: #E3A0AA; --pt-tint: rgba(227, 160, 170, 0.12);
+                --ig: linear-gradient(170deg, #1A1A1A 0%, #101010 100%);
+            }
+        }
+        body { font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif !important; letter-spacing: -0.005em; }
+
+        /* --- 모서리: 각지게 --- */
+        body .rounded-2xl, body .rounded-3xl { border-radius: var(--r-lg) !important; }
+        body .rounded-xl, body .rounded-lg { border-radius: var(--r) !important; }
+        body button.rounded-xl, body button.rounded-lg, body a.rounded-xl, body a.rounded-lg, body button.rounded-md, body button.rounded-full, body a.rounded-full { border-radius: var(--r) !important; }
+        body input, body select, body textarea { border-radius: var(--r) !important; }
+        main section.bg-white, main div.bg-white.rounded-2xl { box-shadow: 0 0 0 1px var(--line) !important; }
+        .dg, .ck-group, .lg-group, #recent-trip-widget, .bs-stat, .st-card, #car-list { border-radius: var(--r-lg) !important; }
+        .ps-card, .trip-cover { border-radius: var(--r-lg) !important; }
+        .ps-search, .ps-search input { border-radius: var(--r) !important; }
+        body .st-visit, body .rw-go, body .bs-share, body .st-add, body .st-mini, body .st-chip, .dg-count, .st-flag, .dg-now, .ps-chip, .ps-pill, .cover-pill, body > header[class] button, body > header[class] a { border-radius: 6px !important; }
+        body .st-ib i { border-radius: var(--r) !important; }
+        .ck-box span { border-radius: 5px !important; width: 22px !important; height: 22px !important; }
+
+        /* --- 타이포: 가볍고 촘촘한 제목, 고정폭 라벨 --- */
+        .ps-kicker, .rw-kicker, .ps-card-kicker, .cover-kicker, .ck-group-head, .lg-meta, .st-meta, .rw-meta, .dg-sub, .bs-label, .tl-count, .st-seg-main, .dg-count, .st-flag, .dg-now {
+            font-family: var(--mono) !important; letter-spacing: 0.02em !important;
+        }
+        .ps-kicker, .rw-kicker, .ps-card-kicker, .cover-kicker, .ck-group-head, .bs-label { text-transform: uppercase; font-size: 10.5px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; }
+        .ps-kicker, .rw-kicker { color: var(--pt) !important; }
+        .ps-title { font-family: var(--display) !important; font-weight: 500 !important; font-size: 32px !important; letter-spacing: -0.045em !important; line-height: 1.05 !important; }
+        .ps-title em { color: var(--g400) !important; font-style: normal; }
+        .bi-en { font-family: var(--display) !important; font-weight: 600 !important; letter-spacing: -0.035em !important; }
+        .bi-ko { font-family: var(--mono) !important; font-size: 10.5px !important; letter-spacing: 0.02em; color: var(--g500) !important; }
+        body h1, body h2, body h3, .rw-title, .dg-title, .ps-card-title, .cover-title { font-family: var(--display), 'Pretendard Variable' !important; letter-spacing: -0.03em !important; }
+        .ps-card-title, .trip-cover .cover-title { font-weight: 500 !important; font-size: 21px !important; }
+        .rw-title { font-weight: 600 !important; font-size: 20px !important; }
+        .dg-title { font-weight: 600 !important; font-size: 18px !important; }
+        .dg-title em { font-weight: 400 !important; }
+        .st-title, .ck-title, .lg-title, .rw-place, .car-name { font-weight: 600 !important; letter-spacing: -0.015em; }
+        .st-meta b, .lg-amt, .ck-price, .st-amount, .bs-num { font-family: var(--mono) !important; font-weight: 500 !important; letter-spacing: -0.01em !important; }
+        .bs-num { font-size: 15px !important; }
+        main h2 i, main h3 i { color: var(--g400) !important; }
+
+        /* --- 헤더: 얇은 선, 블러 --- */
+        body > header[class] { background: var(--glass) !important; box-shadow: inset 0 -1px 0 var(--line) !important; }
+        body > header[class] #btn-edit-lock, body > header[class] #btn-edit-lock.bg-rose-600, body > header[class] #btn-edit-lock.bg-indigo-800 { background: transparent !important; box-shadow: inset 0 0 0 1px var(--line-strong) !important; color: var(--g800) !important; }
+
+        /* --- 카드: 그림자 없이 선 하나 --- */
+        .dg, .ck-group, .lg-group, #recent-trip-widget { background: var(--card) !important; border: 1px solid var(--line) !important; box-shadow: none !important; }
+        .bs-stat { background: transparent !important; border: 1px solid var(--line); }
+        .bs-stat--accent { background: transparent !important; border-color: var(--line-strong); }
+        .bs-stat--accent .bs-num { color: var(--g900) !important; }
+        .st.is-open .st-card { background: var(--g50) !important; }
+        .dg-bar { width: 2px !important; }
+        .dg-count { background: transparent !important; box-shadow: inset 0 0 0 1px var(--line-strong); color: var(--g600) !important; }
+
+        /* --- 버튼: 검정/흰 사각 --- */
+        body .st-visit, body .rw-go { background: var(--accent) !important; color: var(--on-accent) !important; height: 44px; font-weight: 600 !important; letter-spacing: -0.01em; }
+        body .st-visit.is-done { background: transparent !important; box-shadow: inset 0 0 0 1px var(--line-strong); color: var(--g600) !important; }
+        body .bs-share, body .st-add { border-style: solid !important; border-width: 1px !important; }
+        body .st-ib i { background: transparent !important; border: 1px solid var(--line-strong) !important; }
+
+        /* --- 포인트(버건디): 작은 신호에만 --- */
+        .st-flag { color: var(--pt) !important; background: var(--pt-tint) !important; }
+        .dg-now { background: var(--pt) !important; color: #FFFFFF !important; }
+        .st.is-next .st-dot { border-color: var(--pt) !important; color: var(--pt) !important; box-shadow: 0 0 0 4px var(--pt-tint) !important; }
+        .ps-chip.is-live, .cover-pill.is-live { background: var(--pt) !important; color: #FFFFFF !important; }
+        #bottom-nav-bar button.text-blue-600 { color: var(--g900) !important; }
+        #bottom-nav-bar { background: var(--glass) !important; box-shadow: inset 0 1px 0 var(--line) !important; }
+        #bottom-nav-bar button span, #bottom-nav-bar button div { font-family: var(--mono) !important; letter-spacing: 0.02em; }
+        .ck-box input:checked + span { background: var(--accent) !important; border-color: var(--accent) !important; color: var(--on-accent) !important; }
+        #chk-progress-bar { background: var(--accent) !important; }
+
+        /* --- 사진 카드 --- */
+        .ps-card::after { background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.62) 100%) !important; }
+        .ps-chip { background: rgba(0, 0, 0, 0.28) !important; font-family: var(--mono) !important; font-weight: 500 !important; }
+        .ps-card.ps-new { box-shadow: inset 0 0 0 1px var(--line-strong) !important; }
+
     </style>
 </head>
 <body class="text-slate-800 pb-28">
@@ -3809,8 +4033,8 @@
             const norm = normalizeTime(timeStr);
             const hour = norm !== '99:99' ? parseInt(norm.split(':')[0], 10) : 12;
             const isPM = hour >= 12;
-            if (Number(day || 1) === 1) return isPM ? '#9333ea' : '#2563eb';
-            return isPM ? '#d97706' : '#059669';
+            if (Number(day || 1) === 1) return isPM ? '#7A6A8A' : '#3D5A73';
+            return isPM ? '#A08259' : '#5E7D6C';
         }
 
         // 단일 통합 지도(mapPlan) 동선 렌더링 (국내 카카오맵 & 해외 구글맵 공통)
@@ -3838,7 +4062,7 @@
                     validPts.push({ pos, item });
 
                     const isVisited = Boolean(item.visited);
-                    const color = isVisited ? '#0284c7' : getSegmentColor(item.day, item.time);
+                    const color = isVisited ? '#26343D' : getSegmentColor(item.day, item.time);
                     const el = document.createElement('div');
                     el.style.cssText = `width:23px;height:23px;border-radius:50%;background:${color};border:2px solid #fff;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,0.35);cursor:pointer;`;
                     el.innerText = idx + 1;
@@ -3851,7 +4075,7 @@
                             content: `<div style="padding:8px 10px;font-size:11px;line-height:1.4;min-width:165px;">
                                 <b>[${esc(item.day || 1)}일차 · ${esc(item.time || '')}] ${esc(item.place_name)}</b><br>
                                 <span style="color:#64748b;">${esc(item.address || '')}</span><br>
-                                상태: <b style="color:${isVisited ? '#0284c7' : '#d97706'};">${isVisited ? '✓ 방문완료(블루)' : '계획전(노랑)'}</b> · 예산 ${Number(item.budget || 0).toLocaleString()}원
+                                상태: <b style="color:${isVisited ? '#26343D' : '#A08259'};">${isVisited ? '✓ 방문완료' : '계획전'}</b> · 예산 ${Number(item.budget || 0).toLocaleString()}원
                             </div>`
                         });
                         activeInfoWindow.open(mapPlan);
@@ -3918,7 +4142,7 @@
                     validPts.push({ pos, item });
 
                     const isVisited = Boolean(item.visited);
-                    const color = isVisited ? '#0284c7' : getSegmentColor(item.day, item.time);
+                    const color = isVisited ? '#26343D' : getSegmentColor(item.day, item.time);
 
                     const marker = new google.maps.Marker({
                         position: pos,
@@ -3938,7 +4162,7 @@
                         gInfo.setContent(`<div style="font-size:11px;line-height:1.4;">
                             <b>[${esc(item.day || 1)}일차 · ${esc(item.time || '')}] ${esc(item.place_name)}</b><br>
                             ${esc(item.address || '')}<br>
-                            상태: <b>${isVisited ? '✓ 방문완료(블루)' : '계획전(노랑)'}</b> · 예산: ${Number(item.budget || 0).toLocaleString()}원
+                            상태: <b>${isVisited ? '✓ 방문완료' : '계획전'}</b> · 예산: ${Number(item.budget || 0).toLocaleString()}원
                         </div>`);
                         gInfo.open(mapPlan, marker);
                     });
@@ -4257,7 +4481,7 @@
                     const isAutoFocusGroup = smartFocus.focusHalfDayKeys.has(halfKey);
                     const isGroupExpanded = isExpandAllTimeline || expandedHalfDayKeys.has(halfKey) || (isAutoFocusGroup && !manuallyCollapsedHalfDayKeys.has(halfKey));
 
-                    const routeColor = (day === 1) ? (isPM ? '#9333ea' : '#2563eb') : (isPM ? '#d97706' : '#059669');
+                    const routeColor = (day === 1) ? (isPM ? '#7A6A8A' : '#3D5A73') : (isPM ? '#A08259' : '#5E7D6C');
                     const dayDateText = String(dayDateLabel || '').replace(/[()]/g, '').trim();
                     const doneCnt = periodEntries.filter(e => e.entryType === 'exp' && e.data.visited).length;
                     const addHalfDayBtnHtml = !isCurrentTripCompleted
@@ -4631,12 +4855,9 @@
                 const dayDateLabel = getDayDateLabel(day);
                 const daySum = groups[day].reduce((s, i) => s + Number(i.budget || 0), 0);
                 html += `
-                <div class="space-y-2">
-                    <div class="bg-amber-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl flex flex-wrap justify-between items-center gap-1 shadow-sm">
-                        <span>📋 ${esc(day)}일차 여행전 예상 예산 <span class="text-amber-100 font-extrabold ml-1">${esc(dayDateLabel)}</span></span>
-                        <span class="bg-amber-700/60 px-2.5 py-0.5 rounded-full text-[11px]">${groups[day].length}건 · 소계 ${daySum.toLocaleString()}원</span>
-                    </div>
-                    <div class="space-y-2">`;
+                <div class="lg-group">
+                    <div class="lg-head"><span>Day ${esc(day)} <em>${esc(String(dayDateLabel || '').replace(/[()]/g, '').trim())}</em></span><span>${groups[day].length}건 · ${daySum.toLocaleString()}원</span></div>
+                    <div class="lg-items">`;
 
                 groups[day].forEach(item => {
                     const isDetailOpen = expandedPreBudgetIds.has(item.id);
@@ -4645,34 +4866,27 @@
                     const isVisited = Boolean(item.visited);
 
                     html += `
-                    <div onclick="togglePreBudgetExpand('${item.id}')" class="bg-yellow-50/90 hover:bg-yellow-100/60 p-3 rounded-xl border border-amber-200 space-y-2 shadow-sm cursor-pointer transition">
-                        <!-- 기본 요약 줄: 시간, 가계부 변환 카테고리, 일정 제목, 예상 예산 금액만 깔끔하게 표시 -->
-                        <div class="flex justify-between items-center gap-2">
-                            <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-                                <span class="text-[11px] font-bold text-amber-900 bg-white border border-amber-200 px-2 py-0.5 rounded shrink-0">${esc(item.time || '')}</span>
-                                <span class="text-[11px] font-extrabold text-amber-800">${catIcon}[${esc(mappedCat)}]</span>
-                                <h4 class="font-extrabold text-slate-900 text-sm break-words">${esc(item.place_name)}</h4>
-                                ${isVisited ? `<span class="text-[10px] font-bold bg-sky-100 text-sky-800 px-1.5 py-0.5 rounded">✓방문완료</span>` : ''}
+                    <div onclick="togglePreBudgetExpand('${item.id}')" class="lg-row ${isDetailOpen ? 'is-open' : ''}">
+                        <div class="lg-line">
+                            <div class="lg-main">
+                                <p class="lg-meta">${esc(item.time || '')} · ${esc(mappedCat)}${isVisited ? ' · 방문 완료' : ''}</p>
+                                <p class="lg-title">${esc(item.place_name)}</p>
                             </div>
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <span class="text-xs sm:text-sm font-extrabold text-amber-900 whitespace-nowrap">${Number(item.budget || 0).toLocaleString()}원</span>
-                                <span class="text-[10px] text-slate-500 bg-white/80 px-1.5 py-0.5 rounded-full border border-slate-200">
-                                    <i class="fa-solid ${isDetailOpen ? 'fa-chevron-up' : 'fa-chevron-down'}"></i>
-                                </span>
-                            </div>
+                            <span class="lg-amt">${Number(item.budget || 0).toLocaleString()}원</span>
+                            <i class="fa-solid fa-chevron-down lg-chev"></i>
                         </div>
 
                         <!-- 터치 시 펼쳐지는 상세 정보 -->
                         ${isDetailOpen ? `
-                        <div class="pt-2 space-y-1.5 border-t border-amber-200/80 text-xs">
-                            <p class="text-slate-600">📌 일정 원래 구분: <b>${esc(item.category || '관광')}</b> ➔ 가계부 분류: <b>${esc(mappedCat)}</b></p>
-                            ${item.memo ? `<p class="text-slate-700 leading-relaxed break-words bg-white/70 p-2 rounded-lg">📝 ${esc(item.memo)}</p>` : ''}
+                        <div class="lg-detail pt-2 space-y-1.5 text-xs">
+                            <p class="text-slate-600">일정 구분: <b>${esc(item.category || '관광')}</b> ➔ 가계부 분류: <b>${esc(mappedCat)}</b></p>
+                            ${item.memo ? `<p class="text-slate-700 leading-relaxed break-words">${esc(item.memo)}</p>` : ''}
                             ${item.address ? `<p class="text-slate-500 break-words"><i class="fa-solid fa-location-dot mr-1"></i>${esc(item.address)}</p>` : ''}
                             ${item.phone ? `<p class="text-blue-700 font-semibold"><i class="fa-solid fa-phone mr-1"></i>${esc(item.phone)}</p>` : ''}
                             ${!isCurrentTripCompleted ? `
                             <div class="flex flex-wrap items-center gap-1.5 pt-1.5">
                                 <button type="button" onclick="event.stopPropagation(); editExp('${item.id}')" class="bg-white border border-amber-300 text-amber-900 px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer">
-                                    ✏️ 예상 일정·예산 수정
+                                    예상 일정·예산 수정
                                 </button>
                             </div>` : ''}
                         </div>` : ''}
@@ -4699,12 +4913,9 @@
                 const dayDateLabel = getDayDateLabel(day);
                 const dayTotal = actGroups[day].reduce((sum, i) => sum + Number(i.expense || 0), 0);
                 html += `
-                <div class="space-y-2">
-                    <div class="bg-emerald-600 text-white text-xs font-bold px-3.5 py-2.5 rounded-xl flex flex-wrap justify-between items-center gap-1 shadow-sm">
-                        <span>🧾 ${esc(day)}일차 여행중·완료 실제 지출 <span class="text-amber-200 font-extrabold ml-1">${esc(dayDateLabel)}</span></span>
-                        <span class="bg-emerald-700 px-2.5 py-0.5 rounded-full text-[11px]">${actGroups[day].length}건 · 소계 ${dayTotal.toLocaleString()}원</span>
-                    </div>
-                    <div class="space-y-2">`;
+                <div class="lg-group">
+                    <div class="lg-head"><span>Day ${esc(day)} <em>${esc(String(dayDateLabel || '').replace(/[()]/g, '').trim())}</em></span><span>${actGroups[day].length}건 · ${dayTotal.toLocaleString()}원</span></div>
+                    <div class="lg-items">`;
 
                 actGroups[day].forEach(item => {
                     const isDetailOpen = expandedActualManageIds.has(item.id);
@@ -4736,28 +4947,21 @@
                         : '';
 
                     html += `
-                    <div onclick="toggleActualManageExpand('${item.id}')" class="bg-sky-50/90 hover:bg-sky-100/60 p-3 rounded-xl border border-sky-300 space-y-2 shadow-sm cursor-pointer transition">
-                        <!-- 기본 요약 줄: 시간, 가계부 카테고리, 일정 제목(방문장소명), 금액만 깔끔하게 표시 -->
-                        <div class="flex justify-between items-center gap-2">
-                            <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-                                <span class="text-[11px] font-bold text-sky-900 bg-white border border-sky-200 px-2 py-0.5 rounded shrink-0">${esc(item.time || '')}</span>
-                                <span class="text-[11px] font-extrabold text-sky-700">${catIcon}[${esc(mappedCat)}]</span>
-                                <h4 class="font-extrabold text-slate-900 text-sm break-words">${esc(item.place)}</h4>
-                                ${item.receipt ? `<span class="text-[10px] font-extrabold text-amber-800 bg-amber-100 px-1.5 py-0.5 rounded shrink-0">🧾영수증</span>` : ''}
+                    <div onclick="toggleActualManageExpand('${item.id}')" class="lg-row ${isDetailOpen ? 'is-open' : ''}">
+                        <div class="lg-line">
+                            <div class="lg-main">
+                                <p class="lg-meta">${esc(item.time || '')} · ${esc(mappedCat)}${item.receipt ? ' · 영수증' : ''}</p>
+                                <p class="lg-title">${esc(item.place)}</p>
                             </div>
-                            <div class="flex items-center gap-1.5 shrink-0">
-                                <span class="text-xs sm:text-sm font-extrabold text-sky-900 whitespace-nowrap">${Number(item.expense || 0).toLocaleString()}원</span>
-                                <span class="text-[10px] text-slate-500 bg-white/80 px-1.5 py-0.5 rounded-full border border-slate-200">
-                                    <i class="fa-solid ${isDetailOpen ? 'fa-chevron-up' : 'fa-chevron-down'}"></i>
-                                </span>
-                            </div>
+                            <span class="lg-amt">${Number(item.expense || 0).toLocaleString()}원</span>
+                            <i class="fa-solid fa-chevron-down lg-chev"></i>
                         </div>
 
                         <!-- 터치 시 펼쳐지는 상세 정보 -->
                         ${isDetailOpen ? `
-                        <div class="pt-2 space-y-1.5 border-t border-sky-200/80 text-xs">
-                            <p class="text-slate-700 font-semibold">👤 결제자: <b>${esc(item.traveler || '총무(공통)')}</b></p>
-                            ${item.action ? `<p class="text-slate-700 leading-relaxed break-words bg-white/70 p-2 rounded-lg">📝 ${esc(item.action)}</p>` : ''}
+                        <div class="lg-detail pt-2 space-y-1.5 text-xs">
+                            <p class="text-slate-700 font-semibold">결제자: <b>${esc(item.traveler || '총무(공통)')}</b></p>
+                            ${item.action ? `<p class="text-slate-700 leading-relaxed break-words">${esc(item.action)}</p>` : ''}
                             ${item.address ? `<p class="text-slate-500 break-words leading-relaxed"><i class="fa-solid fa-location-dot mr-1"></i>${esc(item.address)}</p>` : ''}
                             ${item.phone ? `<p class="text-blue-700 font-semibold"><i class="fa-solid fa-phone mr-1"></i>${esc(item.phone)}</p>` : ''}
                             ${receiptThumbHtml}
@@ -5342,70 +5546,30 @@
                 const targetFocusId = next ? next.id : (prev ? prev.id : '');
                 const subReg = inferTripSubRegion(targetTrip);
 
-                const buildMiniScheduleCard = (item, labelBadge, boxStyle) => {
+                const buildMiniScheduleCard = (item, label) => {
                     if (!item) {
-                        return `
-                        <div class="${boxStyle} p-3 rounded-xl border flex items-center justify-between text-xs opacity-75">
-                            <span>${labelBadge}</span>
-                            <span class="font-semibold">해당 일정 없음</span>
-                        </div>`;
+                        return `<div class="rw-row is-empty"><span class="rw-tag">${label}</span><p class="rw-place">해당 일정 없음</p></div>`;
                     }
-                    const moveInfoHtml = (item === prev && next)
-                        ? (() => {
-                            const mv = getSegmentMoveInfo(prev, next);
-                            return `<span class="text-[10px] bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-bold">다음 이동 약 ${mv.km}km · ${mv.timeFormatted}</span>`;
-                        })()
-                        : '';
-
                     return `
-                    <div onclick="enterTripAtCurrentSchedule('${targetTrip.id}', '${item.id}')" class="${boxStyle} p-3 rounded-xl border space-y-1 cursor-pointer transition shadow-sm">
-                        <div class="flex flex-wrap justify-between items-center gap-1">
-                            <div class="flex items-center gap-1.5">
-                                ${labelBadge}
-                                <span class="text-xs font-extrabold text-slate-800"><i class="fa-regular fa-clock mr-0.5 text-blue-600"></i>${esc(item.day || 1)}일차 ${esc(item.time || '')}</span>
-                            </div>
-                            ${moveInfoHtml}
+                    <div class="rw-row" onclick="enterTripAtCurrentSchedule('${targetTrip.id}', '${item.id}')">
+                        <span class="rw-tag">${label}</span>
+                        <div class="rw-main">
+                            <p class="rw-meta">${esc(item.day || 1)}일차 ${esc(item.time || '')}${item.category ? ` · ${esc(item.category)}` : ''}${item.visited ? ' · 방문 완료' : ''}</p>
+                            <p class="rw-place">${esc(item.place_name)}</p>
                         </div>
-                        <p class="font-extrabold text-slate-900 text-sm break-words">${item.category ? `<span class="text-blue-700">[${esc(item.category)}]</span> ` : ''}${esc(item.place_name)}</p>
-                        ${item.address ? `<p class="text-[11px] text-slate-600 truncate"><i class="fa-solid fa-location-dot mr-1 text-slate-400"></i>${esc(item.address)}</p>` : ''}
+                        <i class="fa-solid fa-chevron-right rw-chev"></i>
                     </div>`;
                 };
 
-                const prevCardHtml = buildMiniScheduleCard(
-                    prev,
-                    `<span class="bg-indigo-100 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded-full text-[10px] font-extrabold">⏮ 직전 일정</span>`,
-                    prev && prev.visited ? 'bg-sky-50 border-sky-200 hover:bg-sky-100' : 'bg-yellow-50 border-amber-200 hover:bg-yellow-100'
-                );
-
-                const nextCardHtml = buildMiniScheduleCard(
-                    next,
-                    `<span class="bg-rose-600 text-white px-2 py-0.5 rounded-full text-[10px] font-extrabold animate-pulse">🔥 다음 일정</span>`,
-                    next && next.visited ? 'bg-sky-50 border-sky-200 hover:bg-sky-100' : 'bg-yellow-50 border-amber-300 hover:bg-yellow-100'
-                );
-
                 widgetEl.innerHTML = `
-                    <div class="flex flex-wrap justify-between items-start gap-2">
-                        <div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full">⚡ 진행중인 최근 여행</span>
-                                <span class="text-[11px] text-blue-100 font-bold">📍 ${esc(subReg)} · ${Number(targetTrip.memberCount || 8)}인</span>
-                            </div>
-                            <h2 class="text-base sm:text-lg font-extrabold text-white mt-1 break-words">${esc(targetTrip.name)}</h2>
-                            <p class="text-[11px] text-blue-100">${esc(formatWithDayOfWeek(targetTrip.startDate))} ~ ${esc(formatWithDayOfWeek(targetTrip.endDate))}</p>
-                        </div>
-                        <span class="text-[11px] bg-white/15 px-2.5 py-1 rounded-full font-bold text-amber-200">
-                            <i class="fa-regular fa-clock mr-1"></i>현재 ${getLocalTimeStr()} 기준
-                        </span>
+                    <p class="rw-kicker">Up next · ${esc(subReg)} · ${Number(targetTrip.memberCount || 8)}인</p>
+                    <h2 class="rw-title">${esc(targetTrip.name)}</h2>
+                    <p class="rw-sub">${esc(formatWithDayOfWeek(targetTrip.startDate))} ~ ${esc(formatWithDayOfWeek(targetTrip.endDate))} · 현재 ${getLocalTimeStr()} 기준</p>
+                    <div class="rw-list">
+                        ${buildMiniScheduleCard(prev, '직전')}
+                        ${buildMiniScheduleCard(next, '다음')}
                     </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-slate-800">
-                        ${prevCardHtml}
-                        ${nextCardHtml}
-                    </div>
-
-                    <button type="button" onclick="enterTripAtCurrentSchedule('${targetTrip.id}', '${targetFocusId}')" class="w-full bg-amber-400 hover:bg-amber-300 active:bg-amber-500 text-slate-900 py-3 px-4 rounded-xl text-xs sm:text-sm font-extrabold cursor-pointer flex items-center justify-center gap-2 shadow-md transition">
-                        <i class="fa-solid fa-bolt"></i> 현재 시간의 일정 목록으로 입장하기 ▶
-                    </button>
+                    <button type="button" class="rw-go" onclick="enterTripAtCurrentSchedule('${targetTrip.id}', '${targetFocusId}')">지금 일정 보기 <i class="fa-solid fa-arrow-right"></i></button>
                 `;
                 widgetEl.classList.remove('hidden');
             });
