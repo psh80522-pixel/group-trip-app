@@ -1201,6 +1201,128 @@
             #photo-modal img { background: #000; }
         }
     </style>
+    <style id="theme-v6">
+        /* ===== v6 · Polarsteps 내부 화면 — 처음엔 간단히, 누르면 자세히 ===== */
+        .ps-hint { display: none !important; }
+        .tl-count { font-size: 12px; font-weight: 700; color: var(--g500); }
+        .tl-count + .tl-count::before { content: '·'; margin: 0 6px 0 2px; color: var(--g400); }
+
+        /* 일차·오전/오후 그룹 */
+        #expected-timeline-list { display: flex; flex-direction: column; gap: 12px; }
+        .dg { background: var(--card); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; }
+        .dg-head { width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: transparent; border: 0; text-align: left; cursor: pointer; color: var(--g900); }
+        body button.dg-head:active { transform: none; background: var(--g50); }
+        .dg-bar { width: 4px; align-self: stretch; min-height: 36px; border-radius: 4px; background: var(--dg-color); flex-shrink: 0; }
+        .dg-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+        .dg-title { font-family: var(--display); font-weight: 800; font-size: 19px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; color: var(--g900); }
+        .dg-title em { font-style: normal; font-weight: 700; font-size: 15px; color: var(--g500); }
+        .dg-now { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; color: #fff; background: var(--accent); padding: 2px 8px; border-radius: 999px; }
+        .dg-sub { font-size: 12px; color: var(--g500); }
+        .dg-count { font-family: var(--display); font-weight: 800; font-size: 12.5px; color: var(--g600); background: var(--g100); padding: 4px 10px; border-radius: 999px; }
+        .dg-chev, .st-chev, .ck-chev { color: var(--g400); font-size: 11px; transition: transform .2s ease; }
+        .dg.is-open .dg-chev, .st.is-open .st-chev, .ck.is-open .ck-chev { transform: rotate(180deg); }
+        .dg-body { padding: 2px 12px 14px; }
+        .dg-empty { font-size: 12.5px; color: var(--g500); text-align: center; padding: 8px 0 12px; }
+
+        /* 스텝(장소) */
+        .st-list { position: relative; }
+        .st { position: relative; padding: 0 0 6px 46px; }
+        .st::before { content: ''; position: absolute; left: 16px; top: 40px; bottom: -4px; border-left: 2px dotted var(--g300); }
+        .st:last-child::before { display: none; }
+        .st-dot { position: absolute; left: 0; top: 8px; width: 34px; height: 34px; border-radius: 50%; background: var(--card); border: 2px solid var(--dg-color); color: var(--dg-color); display: flex; align-items: center; justify-content: center; font-size: 13px; z-index: 1; }
+        .st.is-done .st-dot { background: var(--dg-color); color: #fff; }
+        .st.is-next .st-dot { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 5px var(--accent-tint); }
+        .st--act .st-dot { border-style: dashed; color: var(--g500); border-color: var(--g400); }
+        .st-card { border-radius: 18px; padding: 10px 12px; cursor: pointer; transition: background-color .15s ease; }
+        .st-card:active { background: var(--g50); }
+        .st.is-open .st-card { background: var(--g50); }
+        .st-head { display: flex; align-items: center; gap: 10px; }
+        .st-main { flex: 1; min-width: 0; }
+        .st-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; font-size: 12px; color: var(--g500); }
+        .st-meta b { font-family: var(--display); font-weight: 800; color: var(--g700); }
+        .st-meta > span:not(.st-flag)::before { content: '·'; margin-right: 6px; color: var(--g400); }
+        .st-flag { font-size: 10.5px; font-weight: 800; color: var(--accent); background: var(--accent-tint); padding: 1px 8px; border-radius: 999px; }
+        .st-title { margin-top: 2px; font-weight: 800; font-size: 15.5px; line-height: 1.35; color: var(--g900); word-break: keep-all; overflow-wrap: anywhere; }
+        .st.is-done .st-title { color: var(--g600); }
+        .st-amount { font-family: var(--display); font-weight: 800; font-size: 14px; color: var(--g900); white-space: nowrap; }
+        .st-photos { display: flex; gap: 6px; margin-top: 8px; }
+        .st-photos img { width: 64px; height: 64px; object-fit: cover; border-radius: 12px; cursor: zoom-in; }
+
+        /* 펼친 세부 정보 */
+        .st-body { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; cursor: default; }
+        .st-memo { margin: 0; font-size: 13.5px; line-height: 1.65; color: var(--g700); }
+        .st-rows { display: flex; flex-direction: column; gap: 7px; }
+        .st-row { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; line-height: 1.5; color: var(--g600); }
+        .st-row > i { width: 14px; text-align: center; margin-top: 3px; font-size: 11px; color: var(--g400); flex-shrink: 0; }
+        .st-row > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+        .st-row a { color: var(--g900); font-weight: 700; text-decoration: none; }
+        .st-row b { color: var(--g900); }
+        body .st-mini { font-size: 11px; font-weight: 700; color: var(--g600); background: var(--card); border: 1px solid var(--line-strong); padding: 3px 10px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+        body .st-mini--danger { color: var(--red); }
+        body .st-mini--accent { color: #fff; background: var(--accent); border-color: var(--accent); }
+        .st-alts { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+        .st-alts-label { width: 100%; font-size: 11px; font-weight: 800; color: var(--g500); }
+        body .st-chip { font-size: 12px; font-weight: 700; color: var(--g800); background: var(--card); border: 1px solid var(--line-strong); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+        body .st-chip i { font-size: 10px; color: var(--g400); margin-right: 2px; }
+        .st-actions { display: flex; flex-direction: column; gap: 12px; }
+        body .st-visit { width: 100%; height: 44px; border-radius: 999px; border: 0; background: var(--accent); color: #fff; font-weight: 800; font-size: 13.5px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; cursor: pointer; }
+        body .st-visit.is-done { background: var(--g100); color: var(--g600); }
+        .st-icons { display: flex; justify-content: space-between; gap: 4px; }
+        body .st-ib { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: none; border: 0; padding: 0; cursor: pointer; color: var(--g700); text-decoration: none; font-size: 10.5px; font-weight: 700; }
+        body .st-ib i { width: 38px; height: 38px; border-radius: 50%; background: var(--card); border: 1px solid var(--line-strong); display: flex; align-items: center; justify-content: center; font-size: 13.5px; }
+        body .st-ib.is-danger { color: var(--red); }
+
+        /* 장소 사이 이동 구간 */
+        .st-seg { display: flex; align-items: center; gap: 10px; padding: 2px 0 4px 12px; }
+        body .st-seg-main { background: none; border: 0; padding: 4px 0; font-size: 12px; font-weight: 600; color: var(--g500); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+        .st-seg-main i { font-size: 11px; color: var(--g400); }
+        .st-seg-tag { font-size: 10.5px; font-weight: 800; color: var(--forest); }
+        body .st-seg-edit { background: none; border: 0; padding: 0; font-size: 11px; font-weight: 700; color: var(--g500); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+        body .st-add { width: 100%; height: 42px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; border-radius: 999px; border: 1.5px dashed var(--line-strong); background: transparent; color: var(--g600); font-size: 12.5px; font-weight: 700; cursor: pointer; }
+
+        /* 체크리스트 */
+        .ck-group { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 6px 4px 6px; }
+        .ck-group-head { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px 4px; font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--g500); }
+        .ck-group-head span:last-child { font-family: var(--display); letter-spacing: 0; text-transform: none; }
+        .ck + .ck { border-top: 1px solid var(--line); }
+        .ck-items { padding: 0 8px; }
+        .ck-row { display: flex; align-items: center; gap: 12px; min-height: 52px; }
+        .ck-box { position: relative; display: flex; cursor: pointer; flex-shrink: 0; }
+        .ck-box input { position: absolute; opacity: 0; width: 0; height: 0; }
+        .ck-box span { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--g300); display: flex; align-items: center; justify-content: center; color: transparent; font-size: 12px; transition: all .15s ease; }
+        .ck-box input:checked + span { background: var(--accent); border-color: var(--accent); color: #fff; }
+        .ck-box input:focus-visible + span { box-shadow: 0 0 0 3px var(--accent-tint); }
+        body .ck-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; background: none; border: 0; padding: 12px 0; text-align: left; cursor: pointer; color: var(--g900); }
+        body button.ck-main:active { transform: none; }
+        .ck-title { flex: 1; min-width: 0; font-size: 14.5px; font-weight: 700; line-height: 1.4; overflow-wrap: anywhere; }
+        .ck.is-done .ck-title { color: var(--g400); text-decoration: line-through; }
+        .ck-price { font-family: var(--display); font-size: 13px; font-weight: 800; color: var(--g700); white-space: nowrap; }
+        .ck-body { display: flex; flex-direction: column; gap: 8px; padding: 0 0 14px 38px; }
+        .ck-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+        .ck-sent { font-size: 11px; font-weight: 800; color: var(--forest); }
+        #chk-list-prep, #chk-list-food, #chk-list-buy, #chk-list-etc { display: flex; flex-direction: column; gap: 10px; }
+
+
+        /* 가계부 요약 */
+        .bs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .bs-stat { background: var(--g50); border-radius: 18px; padding: 12px 10px; min-width: 0; }
+        .bs-label { font-size: 11px; font-weight: 800; color: var(--g500); letter-spacing: 0.02em; }
+        .bs-num { margin-top: 4px; font-family: var(--display); font-weight: 800; font-size: 15px; white-space: nowrap; color: var(--g900); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+        .bs-sub { margin-top: 3px; font-size: 10.5px; color: var(--g500); line-height: 1.35; }
+        .bs-stat--accent .bs-num { color: var(--accent); }
+        body .bs-share { width: 100%; height: 44px; display: flex; align-items: center; justify-content: center; gap: 7px; border-radius: 999px; border: 1px solid var(--line-strong); background: var(--card); color: var(--g800); font-weight: 800; font-size: 13px; cursor: pointer; }
+
+        /* 차량 */
+        #car-list { display: flex !important; flex-direction: column; gap: 0 !important; background: var(--g50); border-radius: 18px; padding: 2px 12px; }
+        .car-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+        .car-row + .car-row { border-top: 1px solid var(--line); }
+        .car-ic { width: 36px; height: 36px; border-radius: 50%; background: var(--card); color: var(--g700); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        .car-main { flex: 1; min-width: 0; }
+        .car-name { font-weight: 800; font-size: 14.5px; color: var(--g900); }
+        .car-name span { font-size: 11px; font-weight: 700; color: var(--g500); margin-left: 4px; }
+        .car-sub { margin-top: 2px; font-size: 12px; color: var(--g500); overflow-wrap: anywhere; }
+        .car-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    </style>
 </head>
 <body class="text-slate-800 pb-28">
 
@@ -1306,7 +1428,7 @@
         <section id="trip-accordion-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
             <button type="button" onclick="toggleAccordion('trip-form-body', 'trip-form-chevron')" class="w-full p-4 flex justify-between items-center bg-slate-50 hover:bg-slate-100 cursor-pointer text-left">
                 <span id="trip-form-title" class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">New Trip</span><span class="bi-ko">새로운 여행 직접 만들기 · 터치하여 열기</span></span>
+                    <i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">New Trip</span><span class="bi-ko">새 여행 만들기</span></span>
                 </span>
                 <i id="trip-form-chevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
             </button>
@@ -1451,8 +1573,8 @@
 
             <!-- 1. 상단 지도 화면 -->
             <div id="plan-map-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-2">
-                <h3 class="text-xs sm:text-sm font-extrabold text-blue-800 flex items-center gap-2"><i class="fa-solid fa-map-location-dot"></i><span class="bi"><span class="bi-en">Route Map</span><span class="bi-ko">통합 타임라인 지도 · 방문전 실선 / 방문완료 굵은 선</span></span></h3>
-                <p class="text-[11px] text-slate-500">* 마커나 선을 클릭하면 장소 정보와 구간 이동거리·소요시간(자동/수동)이 표시됩니다.</p>
+                <h3 class="text-xs sm:text-sm font-extrabold text-blue-800 flex items-center gap-2"><i class="fa-solid fa-map-location-dot"></i><span class="bi"><span class="bi-en">Route Map</span><span class="bi-ko">경로 지도</span></span></h3>
+                <p class="ps-hint text-[11px] text-slate-500">* 마커나 선을 클릭하면 장소 정보와 구간 이동거리·소요시간(자동/수동)이 표시됩니다.</p>
                 <div class="flex flex-wrap gap-3 text-[11px] font-bold pt-0.5 pb-1">
                     <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-600 inline-block"></span>1일차 오전</span>
                     <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-purple-600 inline-block"></span>1일차 오후</span>
@@ -1466,7 +1588,7 @@
             <div id="exp-accordion-card" class="bg-white rounded-2xl shadow-sm border-2 border-blue-200 overflow-hidden">
                 <button type="button" onclick="toggleExpFormAccordion()" class="w-full p-3.5 flex justify-between items-center bg-blue-50/70 hover:bg-blue-100/60 cursor-pointer text-left">
                     <span id="exp-form-title" class="text-xs sm:text-sm font-extrabold text-blue-900 flex items-center gap-1.5">
-                        <i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">새 일정 직접 입력 · 수정</span></span>
+                        <i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">일정 추가</span></span>
                     </span>
                     <i id="exp-form-chevron" class="fa-solid fa-chevron-down text-blue-600 transition-transform"></i>
                 </button>
@@ -1616,24 +1738,15 @@
             <div id="plan-timeline-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
                     <div>
-                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-regular fa-calendar-check text-blue-600"></i><span class="bi"><span class="bi-en">Timeline</span><span class="bi-ko">오전·오후별 일정 · 직전·다음 자동 펼침</span></span></h3>
-                        <p class="text-[11px] text-slate-500 mt-0.5">오전/오후 제목을 누르면 요약 목록(시간·장소·사진)이 열리고, 장소를 한 번 더 누르면 상세 정보가 펼쳐집니다. (현재 시간 직전·다음 일정은 자동 펼침)</p>
+                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-regular fa-calendar-check text-blue-600"></i><span class="bi"><span class="bi-en">Timeline</span><span class="bi-ko">일정</span></span></h3>
+                        <p class="ps-hint">오전/오후 제목을 누르면 요약 목록(시간·장소·사진)이 열리고, 장소를 한 번 더 누르면 상세 정보가 펼쳐집니다. (현재 시간 직전·다음 일정은 자동 펼침)</p>
                     </div>
                     <div class="flex items-center gap-1.5 shrink-0">
-                        <span id="exp-count-badge" class="text-[11px] bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded-full font-bold">계획전 0곳</span>
-                        <span id="act-count-badge" class="text-[11px] bg-sky-50 text-sky-800 border border-sky-200 px-2.5 py-1 rounded-full font-bold">방문·지출 0건</span>
+                        <span id="exp-count-badge" class="tl-count">계획전 0곳</span>
+                        <span id="act-count-badge" class="tl-count">방문·지출 0건</span>
                     </div>
                 </div>
-                <!-- 색상 구분 범례 바 -->
-                <div class="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-bold">
-                    <span class="inline-flex items-center gap-1.5 bg-yellow-50 border border-amber-300 text-amber-900 px-2.5 py-1 rounded-lg shadow-sm">
-                        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span> 연한 노랑 = 계획전 일정
-                    </span>
-                    <span class="inline-flex items-center gap-1.5 bg-sky-50 border border-sky-300 text-sky-900 px-2.5 py-1 rounded-lg shadow-sm">
-                        <span class="w-2.5 h-2.5 rounded-full bg-sky-500 inline-block"></span> 연한 블루 = 방문완료·지출
-                    </span>
-                </div>
-                <div id="expected-timeline-list" class="space-y-4"></div>
+                <div id="expected-timeline-list"></div>
             </div>
         </section>
 
@@ -1645,7 +1758,7 @@
             <!-- 1. 상단 정산 요약 및 [🏁 여행완료하기] 확정 보드 -->
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
-                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-calculator text-emerald-600"></i><span class="bi"><span class="bi-en">Budget &amp; Split</span><span class="bi-ko">실시간 예산 비교 · 1/N 회비 정산</span></span></h3>
+                    <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-calculator text-emerald-600"></i><span class="bi"><span class="bi-en">Budget &amp; Split</span><span class="bi-ko">예산 · 정산</span></span></h3>
                     <div class="flex items-center gap-2">
                         <div class="flex items-center gap-1 text-xs">
                             <span class="text-slate-500 font-semibold">인원:</span>
@@ -1658,26 +1771,26 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                    <div class="bg-amber-50/70 border border-amber-200 p-3 rounded-xl">
-                        <p class="text-[11px] font-bold text-amber-800">📋 여행전 총 예상 예산</p>
-                        <p id="calc-exp-total" class="text-base font-extrabold text-slate-800 mt-0.5">0원</p>
-                        <p id="calc-exp-per" class="text-[11px] text-slate-500 mt-0.5">1인 예상 약 0원</p>
+                <div class="bs-grid">
+                    <div class="bs-stat">
+                        <p class="bs-label">예상 예산</p>
+                        <p id="calc-exp-total" class="bs-num">0원</p>
+                        <p id="calc-exp-per" class="bs-sub">1인 예상 약 0원</p>
                     </div>
-                    <div class="bg-sky-50/80 border border-sky-200 p-3 rounded-xl">
-                        <p class="text-[11px] font-bold text-sky-800">🧾 여행중·완료 실제 지출액</p>
-                        <p id="calc-act-total" class="text-base font-extrabold text-sky-900 mt-0.5">0원</p>
-                        <p id="calc-diff-text" class="text-[11px] text-slate-600 mt-0.5">예산 여유 +0원</p>
+                    <div class="bs-stat">
+                        <p class="bs-label">실제 지출</p>
+                        <p id="calc-act-total" class="bs-num">0원</p>
+                        <p id="calc-diff-text" class="bs-sub">예산 여유 +0원</p>
                     </div>
-                    <div class="bg-emerald-50/80 border border-emerald-200 p-3 rounded-xl">
-                        <p class="text-[11px] font-bold text-emerald-800">💰 실제 지출 기준 1인당 회비</p>
-                        <p id="calc-per-person-exact" class="text-base font-extrabold text-emerald-900 mt-0.5">0원</p>
-                        <p id="calc-per-person-round" class="text-[11px] text-emerald-700 font-semibold mt-0.5">100원 올림: 0원</p>
+                    <div class="bs-stat bs-stat--accent">
+                        <p class="bs-label">1인 회비</p>
+                        <p id="calc-per-person-exact" class="bs-num">0원</p>
+                        <p id="calc-per-person-round" class="bs-sub">100원 올림: 0원</p>
                     </div>
                 </div>
 
-                <button type="button" onclick="copySettlementReport()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-xl text-xs font-extrabold cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-share-nodes"></i> 카카오톡 공유용 가계부 정산 내역 (카테고리 요약 포함) 복사하기
+                <button type="button" onclick="copySettlementReport()" class="bs-share">
+                    <i class="fa-solid fa-share-nodes"></i> 정산 내역 복사 (카톡 공유용)
                 </button>
             </div>
 
@@ -1686,13 +1799,13 @@
                 <button type="button" onclick="toggleAccordion('account-stats-body', 'account-stats-chev')" class="w-full p-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white flex justify-between items-center cursor-pointer text-left">
                     <div>
                         <span id="account-stats-title" class="text-xs sm:text-sm font-extrabold flex items-center gap-1.5">
-                            <i class="fa-solid fa-chart-pie text-amber-300"></i> <span class="bi"><span class="bi-en">Spending Insights</span><span class="bi-ko">카테고리별 통계 · 여행 전후 비교</span></span>
+                            <i class="fa-solid fa-chart-pie text-amber-300"></i> <span class="bi"><span class="bi-en">Spending Insights</span><span class="bi-ko">지출 통계</span></span>
                         </span>
-                        <p class="text-[11px] text-indigo-100 mt-0.5">여행전(예상) vs 여행후(실제) 비교 및 각각 독립 통계를 확인하세요.</p>
+                        <p class="ps-hint text-[11px] text-indigo-100 mt-0.5">여행전(예상) vs 여행후(실제) 비교 및 각각 독립 통계를 확인하세요.</p>
                     </div>
-                    <i id="account-stats-chev" class="fa-solid fa-chevron-down text-white transition-transform" style="transform: rotate(180deg);"></i>
+                    <i id="account-stats-chev" class="fa-solid fa-chevron-down text-white transition-transform"></i>
                 </button>
-                <div id="account-stats-body" class="p-4 space-y-3 bg-slate-50/50">
+                <div id="account-stats-body" class="hidden p-4 space-y-3 bg-slate-50/50">
                     <!-- 3가지 통계 모드 전환 탭 버튼 -->
                     <div class="grid grid-cols-3 gap-1.5 bg-slate-200/80 p-1 rounded-xl text-[11px] sm:text-xs font-extrabold">
                         <button type="button" id="btn-stat-mode-compare" onclick="setAccountStatsMode('compare')" class="py-2 px-1.5 rounded-lg bg-white text-indigo-700 shadow-sm cursor-pointer">
@@ -1714,7 +1827,7 @@
             <div id="act-accordion-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <button type="button" onclick="toggleActFormAccordion()" class="w-full p-4 flex justify-between items-center bg-emerald-50/60 hover:bg-emerald-50 cursor-pointer text-left">
                     <span id="act-form-title" class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">Add Expense</span><span class="bi-ko">실제 방문·지출·영수증 입력 · 터치하여 열기</span></span>
+                        <i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">Add Expense</span><span class="bi-ko">지출 입력</span></span>
                     </span>
                     <i id="act-form-chevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
                 </button>
@@ -1850,9 +1963,9 @@
                 <button type="button" onclick="toggleAccordion('pre-trip-budget-body', 'pre-trip-budget-chev')" class="w-full p-4 bg-amber-50 hover:bg-amber-100/70 flex justify-between items-center cursor-pointer text-left">
                     <div>
                         <h3 class="text-sm font-extrabold text-amber-900 flex items-center gap-1.5">
-                            <i class="fa-solid fa-clipboard-list text-amber-600"></i> <span class="bi"><span class="bi-en">Planned Budget</span><span class="bi-ko">1. 여행전 예산 목록 · 터치하여 열기</span></span>
+                            <i class="fa-solid fa-clipboard-list text-amber-600"></i> <span class="bi"><span class="bi-en">Planned Budget</span><span class="bi-ko">계획 예산</span></span>
                         </h3>
-                        <p class="text-[11px] text-amber-700 mt-0.5">출발 전 계획한 예상 일정 예산입니다. 각 항목을 누르면 상세 내용이 펼쳐집니다.</p>
+                        <p class="ps-hint text-[11px] text-amber-700 mt-0.5">출발 전 계획한 예상 일정 예산입니다. 각 항목을 누르면 상세 내용이 펼쳐집니다.</p>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
                         <span id="pre-trip-list-badge" class="text-xs bg-amber-200/80 text-amber-900 px-2.5 py-0.5 rounded-full font-extrabold">0건</span>
@@ -1869,9 +1982,9 @@
                 <button type="button" onclick="toggleAccordion('post-trip-actual-body', 'post-trip-actual-chev')" class="w-full p-4 bg-sky-50 hover:bg-sky-100/70 flex justify-between items-center cursor-pointer text-left">
                     <div>
                         <h3 class="text-sm font-extrabold text-sky-900 flex items-center gap-1.5">
-                            <i class="fa-solid fa-receipt text-sky-600"></i> <span class="bi"><span class="bi-en">Actual Spending</span><span class="bi-ko">2. 여행중·완료 실제 지출 목록</span></span>
+                            <i class="fa-solid fa-receipt text-sky-600"></i> <span class="bi"><span class="bi-en">Actual Spending</span><span class="bi-ko">실제 지출</span></span>
                         </h3>
-                        <p class="text-[11px] text-sky-700 mt-0.5">일정 제목과 금액만 깔끔하게 표시되며, 항목을 터치하면 상세 내역과 영수증이 펼쳐집니다.</p>
+                        <p class="ps-hint text-[11px] text-sky-700 mt-0.5">일정 제목과 금액만 깔끔하게 표시되며, 항목을 터치하면 상세 내역과 영수증이 펼쳐집니다.</p>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
                         <span id="post-trip-list-badge" class="text-xs bg-sky-200/80 text-sky-900 px-2.5 py-0.5 rounded-full font-extrabold">0건</span>
@@ -1893,13 +2006,13 @@
             <!-- 1. 차량 배치 및 참가자 명단 -->
             <div id="car-section-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex justify-between items-center">
-                    <h3 id="car-form-title" class="text-sm font-extrabold text-slate-800"><span class="bi"><span class="bi-en">Vehicles</span><span class="bi-ko">차량 배치 · 운전자·탑승자 명단</span></span></h3>
+                    <h3 id="car-form-title" class="text-sm font-extrabold text-slate-800"><span class="bi"><span class="bi-en">Vehicles</span><span class="bi-ko">차량 배치</span></span></h3>
                     <button type="button" onclick="toggleAccordion('car-form-wrap', 'car-form-chevron')" class="bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1">
                         <span>+ 차량 추가/수정</span>
                         <i id="car-form-chevron" class="fa-solid fa-chevron-down text-[10px] transition-transform"></i>
                     </button>
                 </div>
-                <p class="text-[11px] text-slate-500">* 여기에 등록된 운전자·동승자 이름이 체크리스트 담당자 및 가계부 결제자 목록에 자동 연동됩니다.</p>
+                <p class="ps-hint text-[11px] text-slate-500">* 여기에 등록된 운전자·동승자 이름이 체크리스트 담당자 및 가계부 결제자 목록에 자동 연동됩니다.</p>
 
                 <div id="car-form-wrap" class="hidden pt-2 border-t border-slate-200">
                     <form id="car-form" class="space-y-2.5">
@@ -1924,7 +2037,7 @@
             <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2">
                     <div>
-                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-clipboard-check text-indigo-600"></i><span class="bi"><span class="bi-en">Checklist</span><span class="bi-ko">준비물 · 먹거리 · 현장구입</span></span></h3>
+                        <h3 class="text-sm font-extrabold text-slate-800 flex items-center gap-2"><i class="fa-solid fa-clipboard-check text-indigo-600"></i><span class="bi"><span class="bi-en">Checklist</span><span class="bi-ko">체크리스트</span></span></h3>
                         <p id="chk-progress-text" class="text-xs font-bold text-indigo-600 mt-0.5">0% (0/0 완료)</p>
                     </div>
                     <div class="flex items-center gap-1.5">
@@ -1944,7 +2057,7 @@
             <div id="chk-editor-card" class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
                 <button type="button" onclick="toggleAccordion('chk-form-body', 'chk-form-chevron')" class="w-full p-4 flex justify-between items-center bg-indigo-50/60 hover:bg-indigo-50 cursor-pointer text-left">
                     <span id="chk-form-title" class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i class="fa-solid fa-plus-circle text-indigo-600"></i> <span class="bi"><span class="bi-en">Add Item</span><span class="bi-ko">체크리스트 항목 추가 · 터치하여 열기</span></span>
+                        <i class="fa-solid fa-plus-circle text-indigo-600"></i> <span class="bi"><span class="bi-en">Add Item</span><span class="bi-ko">항목 추가</span></span>
                     </span>
                     <i id="chk-form-chevron" class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
                 </button>
@@ -2525,7 +2638,7 @@
                     actBtn.className = "bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-xl text-xs font-extrabold cursor-pointer flex items-center gap-1 shadow-sm";
                 }
                 if (statsTitle) {
-                    statsTitle.innerHTML = `<i class="fa-solid fa-chart-pie text-amber-300"></i> <span class="bi"><span class="bi-en">Spending Insights</span><span class="bi-ko">카테고리별 통계 · 여행 전후 비교</span></span>`;
+                    statsTitle.innerHTML = `<i class="fa-solid fa-chart-pie text-amber-300"></i> <span class="bi"><span class="bi-en">Spending Insights</span><span class="bi-ko">지출 통계</span></span>`;
                 }
             }
             updateEditLockButtonUI();
@@ -3070,7 +3183,7 @@
             document.getElementById('trip-count').value = 8;
             document.getElementById('trip-region').value = 'kr';
             onChangeTripRegion('강원도');
-            document.getElementById('trip-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">New Trip</span><span class="bi-ko">새로운 여행 직접 만들기 · 터치하여 열기</span></span>`;
+            document.getElementById('trip-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">New Trip</span><span class="bi-ko">새 여행 만들기</span></span>`;
             document.getElementById('trip-submit-btn').innerText = "새 여행 저장";
             toggleAccordion('trip-form-body', 'trip-form-chevron', false);
         };
@@ -4144,302 +4257,181 @@
                     const isAutoFocusGroup = smartFocus.focusHalfDayKeys.has(halfKey);
                     const isGroupExpanded = isExpandAllTimeline || expandedHalfDayKeys.has(halfKey) || (isAutoFocusGroup && !manuallyCollapsedHalfDayKeys.has(halfKey));
 
-                    const headerBgClass = (day === 1)
-                        ? (isPM ? 'bg-purple-600 hover:bg-purple-700' : 'bg-blue-600 hover:bg-blue-700')
-                        : (isPM ? 'bg-amber-600 hover:bg-amber-700' : 'bg-emerald-600 hover:bg-emerald-700');
-
-                    const addBtnBorderClass = (day === 1)
-                        ? (isPM ? 'border-purple-300 text-purple-700 bg-purple-50/70 hover:bg-purple-100' : 'border-blue-300 text-blue-700 bg-blue-50/70 hover:bg-blue-100')
-                        : (isPM ? 'border-amber-300 text-amber-800 bg-amber-50/70 hover:bg-amber-100' : 'border-emerald-300 text-emerald-800 bg-emerald-50/70 hover:bg-emerald-100');
-
-                    // 여행완료 상태가 아닐 때만 반나절 바로 위에 [+ N일차 오전/오후 일정 추가하기] 버튼 노출
+                    const routeColor = (day === 1) ? (isPM ? '#9333ea' : '#2563eb') : (isPM ? '#d97706' : '#059669');
+                    const dayDateText = String(dayDateLabel || '').replace(/[()]/g, '').trim();
+                    const doneCnt = periodEntries.filter(e => e.entryType === 'exp' && e.data.visited).length;
                     const addHalfDayBtnHtml = !isCurrentTripCompleted
-                        ? `<button type="button" onclick="openExpectedEditorForHalfDay(${day}, '${period}')" class="w-full py-2 px-3 rounded-xl border border-dashed ${addBtnBorderClass} text-xs font-extrabold flex items-center justify-center gap-1.5 cursor-pointer transition shadow-sm">
-                               <i class="fa-solid fa-circle-plus"></i> + ${esc(day)}일차 ${periodLabel} 일정 추가하기
-                           </button>`
+                        ? `<button type="button" onclick="openExpectedEditorForHalfDay(${day}, '${period}')" class="st-add"><i class="fa-solid fa-plus"></i> ${esc(day)}일차 ${periodLabel} 일정 추가</button>`
                         : '';
 
                     html += `
-                    <div class="space-y-1.5 pt-1">
-                        ${addHalfDayBtnHtml}
-                        <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
-                            <button type="button" onclick="toggleHalfDayGroup('${halfKey}', ${isAutoFocusGroup})" class="w-full ${headerBgClass} text-white px-3.5 py-2.5 flex flex-wrap justify-between items-center gap-2 cursor-pointer text-left transition">
-                                <div class="flex flex-wrap items-center gap-1.5">
-                                    <i class="fa-solid ${isPM ? 'fa-cloud-sun' : 'fa-sun'} text-amber-200"></i>
-                                    <span class="day-en">Day ${esc(day)} · ${isPM ? 'Afternoon' : 'Morning'}</span>
-                                    <span class="day-ko">${esc(day)}일차 ${periodLabel} ${esc(dayDateLabel)}</span>
-                                    ${isAutoFocusGroup ? `<span class="bg-rose-500 text-white text-[10px] px-2 py-0.5 rounded-full font-extrabold animate-pulse">현재 진행구간</span>` : ''}
-                                </div>
-                                <div class="flex items-center gap-1.5 shrink-0">
-                                    <span class="bg-yellow-100 text-amber-900 px-2 py-0.5 rounded-full text-[10px] font-extrabold">계획전 ${periodUnvisitedCount}</span>
-                                    <span class="bg-sky-100 text-sky-900 px-2 py-0.5 rounded-full text-[10px] font-extrabold">방문 ${periodVisitedCount}</span>
-                                    <span class="text-[10px] bg-black/20 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-                                        ${isGroupExpanded ? '접기 <i class="fa-solid fa-chevron-up text-[9px]"></i>' : '목록보기 <i class="fa-solid fa-chevron-down text-[9px]"></i>'}
-                                    </span>
-                                </div>
-                            </button>`;
+                    <div class="dg ${isGroupExpanded ? 'is-open' : ''}" style="--dg-color:${routeColor}">
+                        <button type="button" onclick="toggleHalfDayGroup('${halfKey}', ${isAutoFocusGroup})" class="dg-head">
+                            <span class="dg-bar"></span>
+                            <span class="dg-text">
+                                <span class="dg-title">Day ${esc(day)} <em>${isPM ? 'Afternoon' : 'Morning'}</em>${isAutoFocusGroup ? '<span class="dg-now">NOW</span>' : ''}</span>
+                                <span class="dg-sub">${esc(dayDateText)} · ${periodLabel}</span>
+                            </span>
+                            <span class="dg-count">${periodExpCount ? `${doneCnt}/${periodExpCount}` : '0'}</span>
+                            <i class="fa-solid fa-chevron-down dg-chev"></i>
+                        </button>`;
 
                     if (isGroupExpanded) {
+                        html += `<div class="dg-body">`;
                         if (periodEntries.length === 0) {
-                            html += `
-                            <div class="p-4 text-center text-xs text-slate-400 bg-slate-50/50 border-t border-slate-100">
-                                등록된 ${esc(day)}일차 ${periodLabel} 일정이 없습니다.
-                            </div>`;
+                            html += `<p class="dg-empty">${esc(day)}일차 ${periodLabel} 일정이 없습니다.</p>`;
                         } else {
-                            html += `<div class="p-3 bg-slate-50/40 border-t border-slate-100"><div class="relative border-l-2 border-blue-200 ml-2.5 space-y-2.5 py-1">`;
-
+                            html += `<div class="st-list">`;
                             periodEntries.forEach(entry => {
                                 if (entry.entryType === 'exp') {
                                     const item = entry.data;
                                     const nextItem = entry.nextExp;
                                     const isVisited = Boolean(item.visited);
                                     const linkedAct = actualData.find(a => a.linkedExpId === item.id);
-
                                     const isPrevFocus = Boolean(smartFocus.prevItem && smartFocus.prevItem.id === item.id);
                                     const isNextFocus = Boolean(smartFocus.nextItem && smartFocus.nextItem.id === item.id);
                                     const isAutoFocus = isPrevFocus || isNextFocus;
+                                    const isCardExpanded = isExpandAllTimeline || expandedTimelineIds.has(item.id);
 
-                                    const isCardExpanded = isExpandAllTimeline || expandedTimelineIds.has(item.id) || (isAutoFocus && !manuallyCollapsedIds.has(item.id));
-
-                                    const cardBgClass = isVisited
-                                        ? 'bg-sky-50/95 border-sky-300 hover:bg-sky-100/70'
-                                        : 'bg-yellow-50/95 border-amber-200 hover:bg-yellow-100/60';
-                                    const focusRingClass = isNextFocus
-                                        ? 'ring-2 ring-blue-500 shadow-md'
-                                        : (isPrevFocus ? 'ring-2 ring-indigo-300 shadow-sm' : 'shadow-sm');
-                                    const dotColor = isVisited ? 'bg-sky-500' : 'bg-amber-400';
-
-                                    const statusTagHtml = isVisited
-                                        ? `<span class="text-[10px] font-extrabold text-sky-800 bg-sky-200/80 px-2 py-0.5 rounded-full">✓ 방문완료</span>`
-                                        : `<span class="text-[10px] font-extrabold text-amber-900 bg-amber-200/80 px-2 py-0.5 rounded-full">계획전</span>`;
-
-                                    const focusBadgeHtml = isNextFocus
-                                        ? `<span class="text-[10px] font-extrabold text-white bg-rose-600 px-2 py-0.5 rounded-full animate-pulse">🔥 다음 일정</span>`
-                                        : (isPrevFocus ? `<span class="text-[10px] font-extrabold text-indigo-800 bg-indigo-100 border border-indigo-300 px-2 py-0.5 rounded-full">⏮ 직전 일정</span>` : '');
-
-                                    let photosGalleryHtml = '';
+                                    let photosHtml = '';
                                     if (Array.isArray(item.photos) && item.photos.length > 0) {
-                                        photosGalleryHtml = `<div class="grid grid-cols-3 gap-1.5 pt-1.5">`;
-                                        item.photos.forEach((pSrc, pIdx) => {
-                                            photosGalleryHtml += `
-                                            <div onclick="event.stopPropagation(); viewExpPhoto('${item.id}', ${pIdx})" class="relative h-16 sm:h-20 rounded-lg overflow-hidden border border-slate-200 bg-white cursor-pointer group shadow-sm">
-                                                <img src="${pSrc}" alt="장소사진" class="w-full h-full object-cover group-hover:scale-105 transition">
-                                                <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[9px] px-1.5 py-0.2 rounded font-bold"><i class="fa-solid fa-magnifying-glass-plus"></i> ${pIdx + 1}</span>
-                                            </div>`;
-                                        });
-                                        photosGalleryHtml += `</div>`;
+                                        photosHtml = `<div class="st-photos">` + item.photos.map((pSrc, pIdx) =>
+                                            `<img src="${pSrc}" alt="장소 사진" onclick="event.stopPropagation(); viewExpPhoto('${item.id}', ${pIdx})">`).join('') + `</div>`;
                                     }
 
-                                    let expandedDetailsHtml = '';
+                                    let bodyHtml = '';
                                     if (isCardExpanded) {
-                                        const visitBtnHtml = !isCurrentTripCompleted
-                                            ? (isVisited
-                                                ? `<button type="button" onclick="event.stopPropagation(); toggleVisitStatus('${item.id}')" class="bg-sky-600 hover:bg-sky-700 text-white border border-sky-600 px-2.5 py-1 rounded-lg text-[11px] font-extrabold cursor-pointer shadow-sm flex items-center gap-1">
-                                                     <i class="fa-solid fa-check"></i> 방문완료 (취소클릭)
-                                                   </button>`
-                                                : `<button type="button" onclick="event.stopPropagation(); toggleVisitStatus('${item.id}')" class="bg-amber-400 hover:bg-amber-500 text-slate-900 border border-amber-500 px-2.5 py-1 rounded-lg text-[11px] font-extrabold cursor-pointer shadow-sm flex items-center gap-1">
-                                                     <i class="fa-regular fa-circle"></i> 방문전 (완료체크)
-                                                   </button>`)
-                                            : '';
-
-                                        const navReviewUrl = `https://search.naver.com/search.naver?where=view&query=${encodeURIComponent(item.place_name + ' 후기 리뷰')}`;
-                                        const phoneBtnHtml = item.phone
-                                            ? `<a href="tel:${esc(item.phone)}" onclick="event.stopPropagation();" class="bg-white hover:bg-slate-100 border border-blue-300 text-blue-700 px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1">
-                                                 <i class="fa-solid fa-phone"></i> 전화
-                                               </a>`
-                                            : '';
-
-                                        let linkedActInfoHtml = '';
+                                        const rows = [];
+                                        if (item.address) rows.push(`<div class="st-row"><i class="fa-solid fa-location-dot"></i><span>${esc(item.address)}</span><button type="button" class="st-mini" onclick="event.stopPropagation(); copyExpAddressById('${item.id}')">복사</button></div>`);
+                                        if (item.phone) rows.push(`<div class="st-row"><i class="fa-solid fa-phone"></i><span><a href="tel:${esc(item.phone)}" onclick="event.stopPropagation();">${esc(item.phone)}</a></span></div>`);
+                                        rows.push(`<div class="st-row"><i class="fa-solid fa-wallet"></i><span>예상 ${Number(item.budget || 0).toLocaleString()}원</span></div>`);
                                         if (isVisited && linkedAct) {
-                                            const receiptThumb = linkedAct.receipt
-                                                ? `<button type="button" onclick="event.stopPropagation(); viewActReceipt('${linkedAct.id}')" class="bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 px-2 py-0.5 rounded-md text-[11px] font-extrabold cursor-pointer inline-flex items-center gap-1">
-                                                     <i class="fa-solid fa-receipt text-amber-600"></i> 영수증 보기
-                                                   </button>`
-                                                : '';
-                                            const editActBtn = !isCurrentTripCompleted
-                                                ? `<button type="button" onclick="event.stopPropagation(); editAct('${linkedAct.id}')" class="bg-sky-100 hover:bg-sky-200 text-sky-900 px-2 py-0.5 rounded-md text-[11px] font-bold cursor-pointer">
-                                                     ✏️ 지출·영수증 수정
-                                                   </button>`
-                                                : '';
-                                            linkedActInfoHtml = `
-                                            <div class="mt-1.5 p-2.5 bg-white/90 rounded-lg border border-sky-200 flex flex-wrap justify-between items-center gap-2 text-xs">
-                                                <div class="flex flex-wrap items-center gap-1.5">
-                                                    <span class="font-extrabold text-sky-900"><i class="fa-solid fa-coins text-sky-600 mr-1"></i>실제지출: ${Number(linkedAct.expense || 0).toLocaleString()}원</span>
-                                                    <span class="text-[11px] text-slate-600">[${esc(linkedAct.category || '')}] (결제: ${esc(linkedAct.traveler || '공통')})</span>
-                                                </div>
-                                                <div class="flex items-center gap-1.5">
-                                                    ${receiptThumb}
-                                                    ${editActBtn}
-                                                </div>
-                                            </div>`;
+                                            rows.push(`<div class="st-row st-row--paid"><i class="fa-solid fa-receipt"></i><span>실제 <b>${Number(linkedAct.expense || 0).toLocaleString()}원</b> · ${esc(linkedAct.traveler || '공통')}</span>
+                                                ${linkedAct.receipt ? `<button type="button" class="st-mini" onclick="event.stopPropagation(); viewActReceipt('${linkedAct.id}')">영수증</button>` : ''}
+                                                ${!isCurrentTripCompleted ? `<button type="button" class="st-mini" onclick="event.stopPropagation(); editAct('${linkedAct.id}')">수정</button>` : ''}</div>`);
                                         }
-
-                                        let altButtonsHtml = '';
+                                        let altsHtml = '';
                                         if (!isCurrentTripCompleted && Array.isArray(item.alternatives) && item.alternatives.length > 0) {
-                                            altButtonsHtml = `<div class="flex flex-wrap items-center gap-1.5 pt-1">
-                                                <span class="text-[11px] font-bold text-indigo-700"><i class="fa-solid fa-repeat mr-0.5"></i>대안 교체:</span>`;
-                                            item.alternatives.forEach((alt, altIdx) => {
-                                                altButtonsHtml += `
-                                                <button type="button" onclick="event.stopPropagation(); swapWithAlternative('${item.id}', ${altIdx})" class="bg-white hover:bg-indigo-50 border border-indigo-200 text-indigo-800 px-2 py-0.5 rounded-md text-[11px] font-bold cursor-pointer">
-                                                    🔄 ${esc(alt.name)} (${Number(alt.budget || 0).toLocaleString()}원)
-                                                </button>`;
-                                            });
-                                            altButtonsHtml += `</div>`;
+                                            altsHtml = `<div class="st-alts"><span class="st-alts-label">대안으로 바꾸기</span>` + item.alternatives.map((alt, altIdx) =>
+                                                `<button type="button" class="st-chip" onclick="event.stopPropagation(); swapWithAlternative('${item.id}', ${altIdx})"><i class="fa-solid fa-repeat"></i> ${esc(alt.name)}</button>`).join('') + `</div>`;
                                         }
-
-                                        const editDeleteBtnsHtml = !isCurrentTripCompleted
-                                            ? `<button type="button" onclick="event.stopPropagation(); editExp('${item.id}')" class="ml-auto bg-white hover:bg-slate-100 border border-slate-300 text-blue-600 px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer">수정</button>
-                                               <button type="button" onclick="event.stopPropagation(); deleteSubItem('expected_places', '${item.id}')" class="bg-white hover:bg-slate-100 border border-slate-300 text-red-500 px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer">삭제</button>`
+                                        const visitBtn = !isCurrentTripCompleted
+                                            ? `<button type="button" class="st-visit ${isVisited ? 'is-done' : ''}" onclick="event.stopPropagation(); toggleVisitStatus('${item.id}')">${isVisited ? '<i class="fa-solid fa-check"></i> 방문 완료 · 취소하려면 누르기' : '<i class="fa-regular fa-circle"></i> 방문 완료로 표시'}</button>`
                                             : '';
-
-                                        expandedDetailsHtml = `
-                                        <div class="pt-2 space-y-1.5 border-t border-slate-200/80">
-                                            <div class="flex justify-between items-center text-xs">
-                                                <span class="text-slate-600 font-semibold">예상 예산: <b>${Number(item.budget || 0).toLocaleString()}원</b></span>
-                                                <button type="button" onclick="event.stopPropagation(); focusVisitByExpId('${item.id}')" class="text-[11px] font-bold text-blue-700 bg-white border border-blue-200 px-2 py-0.5 rounded-md cursor-pointer">📍 지도에서 위치확대</button>
-                                            </div>
-                                            ${item.address ? `
-                                            <div class="flex items-start gap-1.5 text-xs text-slate-600">
-                                                <i class="fa-solid fa-location-dot text-slate-400 mt-0.5 shrink-0"></i>
-                                                <span class="break-words flex-1 leading-relaxed">${esc(item.address)}</span>
-                                                <button type="button" onclick="event.stopPropagation(); copyExpAddressById('${item.id}')" class="text-[10px] bg-white border border-slate-300 px-1.5 py-0.5 rounded text-slate-700 font-semibold shrink-0 cursor-pointer">복사</button>
-                                            </div>` : ''}
-                                            ${item.phone ? `<p class="text-xs text-blue-700 font-semibold"><i class="fa-solid fa-phone mr-1"></i>${esc(item.phone)}</p>` : ''}
-                                            ${item.memo ? `<p class="text-xs text-slate-700 leading-relaxed break-words bg-white/60 p-2 rounded-lg">${esc(item.memo)}</p>` : ''}
-                                            ${linkedActInfoHtml}
-                                            ${altButtonsHtml}
-                                            <div class="flex flex-wrap items-center gap-1.5 pt-2 border-t border-slate-300/60">
-                                                ${visitBtnHtml}
-                                                ${phoneBtnHtml}
-                                                <button type="button" onclick="event.stopPropagation(); openPlaceMapByItem('exp', '${item.id}')" class="bg-white hover:bg-slate-100 border border-slate-300 text-emerald-700 px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 cursor-pointer">
-                                                    <i class="fa-solid fa-location-dot"></i> ${esc(getPlaceMapBtnLabel())}
-                                                </button>
-                                                <a href="${navReviewUrl}" target="_blank" onclick="event.stopPropagation();" class="bg-white hover:bg-slate-100 border border-amber-300 text-amber-700 px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1">
-                                                    <i class="fa-solid fa-star text-amber-500"></i> 리뷰
-                                                </a>
-                                                ${editDeleteBtnsHtml}
-                                            </div>
+                                        const reviewUrl = `https://search.naver.com/search.naver?where=view&query=${encodeURIComponent(item.place_name + ' 후기 리뷰')}`;
+                                        const icons = [
+                                            stIconBtn('fa-map-location-dot', '지도앱', `openPlaceMapByItem('exp', '${item.id}')`),
+                                            stIconBtn('fa-crosshairs', '위치', `focusVisitByExpId('${item.id}')`),
+                                            stIconLink('fa-star', '리뷰', reviewUrl)
+                                        ];
+                                        if (!isCurrentTripCompleted) {
+                                            icons.push(stIconBtn('fa-pen', '수정', `editExp('${item.id}')`));
+                                            icons.push(stIconBtn('fa-trash-can', '삭제', `deleteSubItem('expected_places', '${item.id}')`, 'is-danger'));
+                                        }
+                                        bodyHtml = `
+                                        <div class="st-body" onclick="event.stopPropagation()">
+                                            ${item.memo ? `<p class="st-memo">${esc(item.memo)}</p>` : ''}
+                                            <div class="st-rows">${rows.join('')}</div>
+                                            ${altsHtml}
+                                            <div class="st-actions">${visitBtn}<div class="st-icons">${icons.join('')}</div></div>
                                         </div>`;
                                     }
 
-                                    let routeBoxHtml = '';
-                                    if (nextItem && isCardExpanded) {
+                                    let segHtml = '';
+                                    if (nextItem) {
                                         const move = getSegmentMoveInfo(item, nextItem);
-                                        const modeBadge = move.isManual
-                                            ? `<span class="bg-emerald-600 text-white px-1.5 py-0.5 rounded text-[10px] font-extrabold shrink-0">수동입력</span>`
-                                            : `<span class="bg-blue-200/80 text-blue-800 px-1.5 py-0.5 rounded text-[10px] font-bold shrink-0">자동계산</span>`;
-                                        const distTimeText = (move.hasCoords || move.isManual)
-                                            ? `이동 <b>약 ${move.km}km</b> · <b>${move.timeFormatted}</b>`
-                                            : '길찾기 경로 확인';
-                                        const routeBtnLabel = getRouteBtnLabel();
-                                        const manualDistBtnHtml = !isCurrentTripCompleted
-                                            ? `<button type="button" onclick="event.stopPropagation(); promptManualMoveInfo('${item.id}', '${nextItem.id}')" class="text-[11px] font-bold text-slate-700 bg-white hover:bg-slate-100 border border-blue-300 px-2 py-1 rounded-lg cursor-pointer flex items-center gap-1 whitespace-nowrap">
-                                                 <i class="fa-solid fa-pen text-[10px] text-blue-600"></i> 거리·시간 입력
-                                               </button>`
-                                            : '';
-                                        routeBoxHtml = `
-                                        <div class="pt-2 pb-0.5 relative">
-                                            <span class="absolute -left-[25px] top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-blue-100 border border-blue-400 text-blue-700 flex items-center justify-center text-[9px] shadow-sm">
-                                                <i class="fa-solid fa-arrow-down"></i>
-                                            </span>
-                                            <div class="w-full bg-blue-50/90 border border-blue-200 rounded-xl px-3 py-2 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 shadow-sm">
-                                                <div onclick="openRouteByExpId('${item.id}', '${nextItem.id}')" class="text-xs text-blue-900 flex items-center gap-1.5 cursor-pointer min-w-[175px] flex-1 overflow-hidden">
-                                                    <i class="fa-solid fa-car-side text-blue-600 shrink-0"></i>
-                                                    ${modeBadge}
-                                                    <span class="whitespace-nowrap truncate">${distTimeText}</span>
-                                                </div>
-                                                <div class="flex items-center gap-1.5 shrink-0 ml-auto">
-                                                    ${manualDistBtnHtml}
-                                                    <button type="button" onclick="event.stopPropagation(); openRouteByExpId('${item.id}', '${nextItem.id}')" class="text-[11px] font-extrabold text-emerald-700 bg-white hover:bg-emerald-50 border border-emerald-200 px-2 py-1 rounded-lg cursor-pointer flex items-center gap-1 whitespace-nowrap">
-                                                        <i class="fa-solid fa-diamond-turn-right"></i> ${routeBtnLabel}
-                                                    </button>
-                                                </div>
-                                            </div>
+                                        const segText = (move.hasCoords || move.isManual) ? `${move.km}km · ${move.timeFormatted}` : '경로 보기';
+                                        segHtml = `
+                                        <div class="st-seg">
+                                            <button type="button" class="st-seg-main" onclick="event.stopPropagation(); openRouteByExpId('${item.id}', '${nextItem.id}')"><i class="fa-solid fa-car-side"></i> ${segText}${move.isManual ? ' <span class="st-seg-tag">직접 입력</span>' : ''}</button>
+                                            ${(!isCurrentTripCompleted && isCardExpanded) ? `<button type="button" class="st-seg-edit" onclick="event.stopPropagation(); promptManualMoveInfo('${item.id}', '${nextItem.id}')">거리 직접 입력</button>` : ''}
                                         </div>`;
                                     }
 
                                     html += `
-                                    <div id="timeline-card-${item.id}" class="relative pl-5">
-                                        <span class="absolute -left-[7px] top-3.5 w-3 h-3 rounded-full ${dotColor} ring-2 ring-white"></span>
-                                        <div onclick="toggleTimelineCardExpand('${item.id}', ${isAutoFocus})" class="${cardBgClass} ${focusRingClass} p-3 rounded-xl border space-y-1.5 cursor-pointer transition">
-                                            <div class="flex justify-between items-center gap-2">
-                                                <div class="flex flex-wrap items-center gap-1.5 min-w-0">
-                                                    <span class="text-xs font-extrabold text-slate-800 bg-white/90 border border-slate-200 px-2 py-0.5 rounded shrink-0"><i class="fa-regular fa-clock mr-1 text-blue-600"></i>${esc(item.time || '시간미정')}</span>
-                                                    ${statusTagHtml}
-                                                    ${focusBadgeHtml}
-                                                    <h4 class="font-extrabold text-slate-900 text-sm sm:text-base leading-snug break-words">${item.category ? `<span class="text-blue-700">[${esc(item.category)}]</span> ` : ''}${esc(item.place_name)}</h4>
+                                    <div id="timeline-card-${item.id}" class="st ${isVisited ? 'is-done' : ''} ${isNextFocus ? 'is-next' : ''} ${isCardExpanded ? 'is-open' : ''}">
+                                        <span class="st-dot"><i class="fa-solid ${isVisited ? 'fa-check' : stepIconFor(item.category)}"></i></span>
+                                        <div class="st-card" onclick="toggleTimelineCardExpand('${item.id}', false)">
+                                            <div class="st-head">
+                                                <div class="st-main">
+                                                    <div class="st-meta"><b>${esc(item.time || '시간 미정')}</b>${item.category ? `<span>${esc(item.category)}</span>` : ''}${isNextFocus ? '<span class="st-flag">다음</span>' : ''}</div>
+                                                    <div class="st-title">${esc(item.place_name)}</div>
                                                 </div>
-                                                <div class="flex items-center gap-1.5 shrink-0">
-                                                    <span class="text-[11px] font-bold text-slate-500 flex items-center gap-0.5 bg-white/80 px-2 py-0.5 rounded-full border border-slate-200/80">
-                                                        ${isCardExpanded ? '접기 <i class="fa-solid fa-chevron-up text-[9px] ml-0.5"></i>' : '상세 <i class="fa-solid fa-chevron-down text-[9px] ml-0.5"></i>'}
-                                                    </span>
-                                                </div>
+                                                <i class="fa-solid fa-chevron-down st-chev"></i>
                                             </div>
-                                            ${photosGalleryHtml}
-                                            ${expandedDetailsHtml}
+                                            ${photosHtml}
+                                            ${bodyHtml}
                                         </div>
-                                        ${routeBoxHtml}
+                                        ${segHtml}
                                     </div>`;
                                 } else {
-                                    // 단독 현장 방문·지출 항목 (연한 블루 박스)
                                     const act = entry.data;
                                     const actCardKey = `act_${act.id}`;
                                     const isActExpanded = isExpandAllTimeline || expandedTimelineIds.has(actCardKey);
                                     const mappedCat = mapExpCategoryToAct(act.category, act.place);
-
-                                    const receiptBtnHtml = act.receipt
-                                        ? `<button type="button" onclick="event.stopPropagation(); viewActReceipt('${act.id}')" class="bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 px-2.5 py-1 rounded-lg text-[11px] font-extrabold cursor-pointer flex items-center gap-1">
-                                             <i class="fa-solid fa-receipt text-amber-600"></i> 영수증 보기
-                                           </button>`
-                                        : '';
-
-                                    const actEditDeleteBtns = !isCurrentTripCompleted
-                                        ? `<button type="button" onclick="event.stopPropagation(); editAct('${act.id}')" class="ml-auto bg-white border border-slate-300 text-blue-600 px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer">수정</button>
-                                           <button type="button" onclick="event.stopPropagation(); deleteSubItem('actual_visits', '${act.id}')" class="bg-white border border-slate-300 text-red-500 px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer">삭제</button>`
-                                        : '';
-
-                                    html += `
-                                    <div class="relative pl-5">
-                                        <span class="absolute -left-[7px] top-3.5 w-3 h-3 rounded-full bg-sky-500 ring-2 ring-white"></span>
-                                        <div onclick="toggleTimelineCardExpand('${actCardKey}', false)" class="bg-sky-50/95 hover:bg-sky-100/70 p-3 rounded-xl border border-sky-300 space-y-1.5 shadow-sm cursor-pointer transition">
-                                            <div class="flex flex-wrap justify-between items-center gap-1">
-                                                <div class="flex flex-wrap items-center gap-1.5">
-                                                    <span class="text-xs font-extrabold text-slate-800 bg-white/90 border border-slate-200 px-2 py-0.5 rounded"><i class="fa-regular fa-clock mr-1 text-sky-600"></i>${esc(act.time || '')}</span>
-                                                    <span class="text-[10px] font-extrabold text-sky-800 bg-sky-200/80 px-2 py-0.5 rounded-full">✓ 현장지출</span>
-                                                    <h4 class="font-bold text-slate-900 text-sm leading-snug break-words"><span class="text-sky-700">[${esc(mappedCat)}]</span> ${esc(act.place)}</h4>
-                                                </div>
-                                                <div class="flex items-center gap-1.5 shrink-0">
-                                                    <span class="text-xs font-extrabold text-sky-800">${Number(act.expense || 0).toLocaleString()}원</span>
-                                                    <i class="fa-solid ${isActExpanded ? 'fa-chevron-up' : 'fa-chevron-down'} text-[10px] text-slate-400"></i>
-                                                </div>
+                                    let actBody = '';
+                                    if (isActExpanded) {
+                                        const icons = [stIconBtn('fa-crosshairs', '위치', `focusVisitByActId('${act.id}')`)];
+                                        if (act.receipt) icons.push(stIconBtn('fa-receipt', '영수증', `viewActReceipt('${act.id}')`));
+                                        if (!isCurrentTripCompleted) {
+                                            icons.push(stIconBtn('fa-pen', '수정', `editAct('${act.id}')`));
+                                            icons.push(stIconBtn('fa-trash-can', '삭제', `deleteSubItem('actual_visits', '${act.id}')`, 'is-danger'));
+                                        }
+                                        actBody = `
+                                        <div class="st-body" onclick="event.stopPropagation()">
+                                            ${act.action ? `<p class="st-memo">${esc(act.action)}</p>` : ''}
+                                            <div class="st-rows">
+                                                ${act.address ? `<div class="st-row"><i class="fa-solid fa-location-dot"></i><span>${esc(act.address)}</span></div>` : ''}
+                                                <div class="st-row"><i class="fa-solid fa-user"></i><span>결제 ${esc(act.traveler || '공통')}</span></div>
                                             </div>
-                                            ${isActExpanded ? `
-                                            <div class="pt-1.5 space-y-1.5 border-t border-sky-200/80">
-                                                ${act.address ? `<p class="text-xs text-slate-600 break-words leading-relaxed"><i class="fa-solid fa-location-dot mr-1"></i>${esc(act.address)}</p>` : ''}
-                                                <p class="text-xs text-slate-700 leading-relaxed break-words">${esc(act.action || '')} (결제: ${esc(act.traveler || '공통')})</p>
-                                                <div class="flex flex-wrap items-center gap-1.5 pt-1.5">
-                                                    <button type="button" onclick="event.stopPropagation(); focusVisitByActId('${act.id}')" class="bg-sky-600 text-white px-2.5 py-1 rounded-lg text-[11px] font-bold cursor-pointer flex items-center gap-1">
-                                                        <i class="fa-solid fa-location-dot"></i> 지도확대
-                                                    </button>
-                                                    ${receiptBtnHtml}
-                                                    ${actEditDeleteBtns}
+                                            <div class="st-actions"><div class="st-icons">${icons.join('')}</div></div>
+                                        </div>`;
+                                    }
+                                    html += `
+                                    <div class="st st--act ${isActExpanded ? 'is-open' : ''}">
+                                        <span class="st-dot"><i class="fa-solid fa-receipt"></i></span>
+                                        <div class="st-card" onclick="toggleTimelineCardExpand('${actCardKey}', false)">
+                                            <div class="st-head">
+                                                <div class="st-main">
+                                                    <div class="st-meta"><b>${esc(act.time || '')}</b><span>현장 지출</span></div>
+                                                    <div class="st-title">${esc(act.place)}</div>
                                                 </div>
-                                            </div>` : ''}
+                                                <span class="st-amount">${Number(act.expense || 0).toLocaleString()}원</span>
+                                                <i class="fa-solid fa-chevron-down st-chev"></i>
+                                            </div>
+                                            ${actBody}
                                         </div>
                                     </div>`;
                                 }
                             });
-
-                            html += `</div></div>`;
+                            html += `</div>`;
                         }
+                        html += `${addHalfDayBtnHtml}</div>`;
                     }
-
-                    html += `</div></div>`;
+                    html += `</div>`;
                 });
             });
 
             return html;
         }
+
+        // [v6] Polarsteps 스텝 카드 보조 함수
+        function stepIconFor(cat) {
+            const m = { '관광': 'fa-camera', '식당': 'fa-utensils', '카페': 'fa-mug-hot', '숙박': 'fa-bed', '장보기': 'fa-basket-shopping',
+                '쇼핑': 'fa-bag-shopping', '교통비': 'fa-car', '통신,보험': 'fa-shield-halved', '휴게소': 'fa-gas-pump', '출발/귀가': 'fa-flag', '기타': 'fa-location-dot' };
+            return m[String(cat || '').trim()] || 'fa-location-dot';
+        }
+        function stIconBtn(icon, label, js, extra = '') {
+            return `<button type="button" class="st-ib ${extra}" onclick="event.stopPropagation(); ${js}" aria-label="${label}"><i class="fa-solid ${icon}"></i><span>${label}</span></button>`;
+        }
+        function stIconLink(icon, label, href) {
+            return `<a class="st-ib" href="${href}" target="_blank" rel="noopener" onclick="event.stopPropagation();" aria-label="${label}"><i class="fa-solid ${icon}"></i><span>${label}</span></a>`;
+        }
+        window.toggleChkDetail = function(id) {
+            window.__chkOpen = window.__chkOpen || new Set();
+            if (window.__chkOpen.has(id)) window.__chkOpen.delete(id); else window.__chkOpen.add(id);
+            renderChecklistAll();
+        };
 
         // ==========================================
         // [Ver 1.5] 카테고리별 여행 통계 대시보드 (3가지 보기 모드 전환: ①여행전·후 비교 / ②여행전 통계만 / ③여행중·완료 통계만)
@@ -4826,8 +4818,8 @@
 
             const unvisitedCount = filteredExp.filter(x => !x.visited).length;
             const completedCount = filteredExp.filter(x => x.visited).length;
-            document.getElementById('exp-count-badge').innerText = `계획전 ${unvisitedCount}곳`;
-            document.getElementById('act-count-badge').innerText = `방문완료 ${completedCount}곳 · 지출 ${filteredAct.length}건`;
+            document.getElementById('exp-count-badge').innerText = `남은 일정 ${unvisitedCount}`;
+            document.getElementById('act-count-badge').innerText = `방문 ${completedCount} · 지출 ${filteredAct.length}`;
 
             const preBadgeEl = document.getElementById('pre-trip-list-badge');
             if (preBadgeEl) preBadgeEl.innerText = `${sortedExpAll.length}곳 · ${sortedExpAll.reduce((s, x) => s + Number(x.budget || 0), 0).toLocaleString()}원`;
@@ -4962,59 +4954,47 @@
                 });
 
                 let html = '';
+                const openSet = window.__chkOpen || new Set();
                 Object.keys(groups).forEach(minorName => {
                     const items = groups[minorName];
                     const subTotal = items.reduce((s, i) => s + Number(i.price || 0), 0);
-
+                    const doneInGroup = items.filter(i => i.checked).length;
                     html += `
-                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
-                        <div class="flex justify-between items-center border-b border-slate-200/80 pb-1.5">
-                            <span class="text-xs font-extrabold text-slate-800 flex items-center gap-1.5">
-                                <i class="fa-solid ${isBuySection ? 'fa-store text-emerald-600' : 'fa-folder-open text-blue-600'}"></i> ${esc(minorName)}
-                                <span class="text-[11px] font-normal text-slate-500">(${items.length}개)</span>
-                            </span>
-                            <div class="flex items-center gap-2">
-                                ${subTotal > 0 ? `<span class="text-xs font-bold text-emerald-700">소계: ${subTotal.toLocaleString()}원</span>` : ''}
-                            </div>
-                        </div>
-                        <div class="space-y-1.5">`;
-
+                    <div class="ck-group">
+                        <div class="ck-group-head"><span>${esc(minorName)}</span><span>${subTotal > 0 ? subTotal.toLocaleString() + '원 · ' : ''}${doneInGroup}/${items.length}</span></div>
+                        <div class="ck-items">`;
                     items.forEach(item => {
                         const isChecked = Boolean(item.checked);
                         const isSent = Boolean(item.sentToActual);
                         const priceNum = Number(item.price || 0);
-
+                        const isOpen = openSet.has(item.id);
                         const sendBtnHtml = (isBuySection && priceNum > 0)
                             ? (isSent
-                                ? `<span class="bg-emerald-100 text-emerald-800 px-2 py-1 rounded text-[10px] font-bold">✓ 가계부반영됨</span>`
-                                : (!isCurrentTripCompleted ? `<button type="button" onclick="sendBuyItemToActual('${item.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-2 py-1 rounded text-[10px] font-bold cursor-pointer">가계부반영</button>` : ''))
+                                ? `<span class="ck-sent"><i class="fa-solid fa-check"></i> 가계부 반영됨</span>`
+                                : (!isCurrentTripCompleted ? `<button type="button" class="st-mini st-mini--accent" onclick="sendBuyItemToActual('${item.id}')">가계부에 반영</button>` : ''))
                             : '';
-
-                        const chkEditDeleteBtns = !isCurrentTripCompleted
-                            ? `<button type="button" onclick="editChkItem('${item.id}')" class="bg-slate-100 text-blue-600 px-2 py-1 rounded text-[11px] font-bold cursor-pointer">수정</button>
-                               <button type="button" onclick="deleteSubItem('checklists', '${item.id}')" class="bg-slate-100 text-red-500 px-2 py-1 rounded text-[11px] font-bold cursor-pointer">삭제</button>`
+                        const editDel = !isCurrentTripCompleted
+                            ? `<button type="button" class="st-mini" onclick="editChkItem('${item.id}')">수정</button>
+                               <button type="button" class="st-mini st-mini--danger" onclick="deleteSubItem('checklists', '${item.id}')">삭제</button>`
                             : '';
-
                         html += `
-                        <div class="bg-white p-2.5 rounded-lg border ${isChecked ? 'border-emerald-200 bg-emerald-50/30' : 'border-slate-200'} flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                            <label class="flex items-start gap-2.5 cursor-pointer flex-1">
-                                <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleChkItem('${item.id}')" class="mt-0.5 w-4 h-4 accent-emerald-600 shrink-0 cursor-pointer">
-                                <div class="text-xs flex-1">
-                                    <div class="flex flex-wrap items-center gap-1.5">
-                                        <span class="font-bold ${isChecked ? 'line-through text-slate-400' : 'text-slate-800'} text-sm break-words">${esc(item.title)}</span>
-                                        <span class="bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.2 rounded text-[10px] font-bold">👤 ${esc(item.person || '공통')}</span>
-                                        ${priceNum > 0 ? `<span class="bg-emerald-50 text-emerald-700 px-1.5 py-0.2 rounded text-[11px] font-extrabold">${priceNum.toLocaleString()}원</span>` : ''}
-                                    </div>
-                                    ${item.memo ? `<p class="text-[11px] text-slate-500 mt-0.5 break-words">${esc(item.memo)}</p>` : ''}
-                                </div>
-                            </label>
-                            <div class="flex items-center justify-end gap-1 shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100">
-                                ${sendBtnHtml}
-                                ${chkEditDeleteBtns}
+                        <div class="ck ${isChecked ? 'is-done' : ''} ${isOpen ? 'is-open' : ''}">
+                            <div class="ck-row">
+                                <label class="ck-box"><input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleChkItem('${item.id}')"><span><i class="fa-solid fa-check"></i></span></label>
+                                <button type="button" class="ck-main" onclick="toggleChkDetail('${item.id}')">
+                                    <span class="ck-title">${esc(item.title)}</span>
+                                    ${priceNum > 0 ? `<span class="ck-price">${priceNum.toLocaleString()}원</span>` : ''}
+                                    <i class="fa-solid fa-chevron-down ck-chev"></i>
+                                </button>
                             </div>
+                            ${isOpen ? `
+                            <div class="ck-body">
+                                <div class="st-row"><i class="fa-solid fa-user"></i><span>${esc(item.person || '공통')}</span></div>
+                                ${item.memo ? `<div class="st-row"><i class="fa-regular fa-note-sticky"></i><span>${esc(item.memo)}</span></div>` : ''}
+                                <div class="ck-actions">${sendBtnHtml}${editDel}</div>
+                            </div>` : ''}
                         </div>`;
                     });
-
                     html += `</div></div>`;
                 });
 
@@ -5095,7 +5075,7 @@
             document.getElementById('chk-form').reset();
             document.getElementById('chk-edit-id').value = '';
             onChangeChkMajor();
-            document.getElementById('chk-form-title').innerHTML = `<i class="fa-solid fa-plus-circle text-indigo-600"></i> <span class="bi"><span class="bi-en">Add Item</span><span class="bi-ko">체크리스트 항목 추가 · 터치하여 열기</span></span>`;
+            document.getElementById('chk-form-title').innerHTML = `<i class="fa-solid fa-plus-circle text-indigo-600"></i> <span class="bi"><span class="bi-en">Add Item</span><span class="bi-ko">항목 추가</span></span>`;
             document.getElementById('chk-submit-btn').innerText = "체크리스트에 저장하기";
             if (!keepOpen) toggleAccordion('chk-form-body', 'chk-form-chevron', false);
         };
@@ -5244,7 +5224,7 @@
             document.getElementById('exp-alternatives-container').innerHTML = '';
             currentExpPhotos = [];
             renderExpPhotoPreviews();
-            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">새 일정 직접 입력 · 수정</span></span>`;
+            document.getElementById('exp-form-title').innerHTML = `<i class="fa-solid fa-calendar-plus text-blue-600"></i> <span class="bi"><span class="bi-en">Add Schedule</span><span class="bi-ko">일정 추가</span></span>`;
             document.getElementById('exp-submit-btn').innerText = "예상 일정 저장하기";
             if (!keepOpen) toggleExpFormAccordion(false);
         };
@@ -5284,7 +5264,7 @@
             document.getElementById('act-edit-id').value = '';
             currentActReceipt = '';
             renderActReceiptPreview();
-            document.getElementById('act-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">Add Expense</span><span class="bi-ko">실제 방문·지출·영수증 입력 · 터치하여 열기</span></span>`;
+            document.getElementById('act-form-title').innerHTML = `<i class="fa-solid fa-circle-plus text-emerald-600"></i> <span class="bi"><span class="bi-en">Add Expense</span><span class="bi-ko">지출 입력</span></span>`;
             document.getElementById('act-submit-btn').innerText = "가계부 지출 내역 저장하기";
             if (!keepOpen) toggleActFormAccordion(false);
         };
@@ -5307,7 +5287,7 @@
         window.resetCarForm = function(keepOpen = false) {
             document.getElementById('car-form').reset();
             document.getElementById('car-edit-id').value = '';
-            document.getElementById('car-form-title').innerHTML = `<span class="bi"><span class="bi-en">Vehicles</span><span class="bi-ko">차량 배치 · 운전자·탑승자 명단</span></span>`;
+            document.getElementById('car-form-title').innerHTML = `<span class="bi"><span class="bi-en">Vehicles</span><span class="bi-ko">차량 배치</span></span>`;
             document.getElementById('car-submit-btn').innerText = "차량 배치 저장";
             if (!keepOpen) toggleAccordion('car-form-wrap', 'car-form-chevron', false);
         };
@@ -5538,7 +5518,8 @@
         let toolsClockTimer = null;
 
         function getTripWeatherLocation(trip) {
-            const withCoord = sortByDayAndTime([...expectedData]).find(x => hasValidCoord(x.lat, x.lng));
+            const sortedForWx = sortByDayAndTime([...expectedData]).filter(x => hasValidCoord(x.lat, x.lng));
+            const withCoord = sortedForWx.find(x => !['출발/귀가', '교통비', '휴게소'].includes(String(x.category || '').trim())) || sortedForWx[0];
             if (withCoord) {
                 return { lat: Number(withCoord.lat), lng: Number(withCoord.lng), label: withCoord.place_name || withCoord.address || '첫 일정 장소', approx: false };
             }
@@ -6206,18 +6187,17 @@
                     const data = d.data();
                     carsData.push({ id: d.id, ...data });
                     const carEditBtns = !isCurrentTripCompleted
-                        ? `<div class="flex gap-1 shrink-0">
-                               <button type="button" onclick="editCar('${d.id}')" class="bg-white border border-slate-300 text-blue-600 px-2.5 py-1 rounded text-xs font-bold cursor-pointer">수정</button>
-                               <button type="button" onclick="deleteSubItem('cars', '${d.id}')" class="bg-white border border-slate-300 text-red-500 px-2.5 py-1 rounded text-xs font-bold cursor-pointer">삭제</button>
+                        ? `<div class="car-actions">
+                               <button type="button" onclick="editCar('${d.id}')" class="st-mini">수정</button>
+                               <button type="button" onclick="deleteSubItem('cars', '${d.id}')" class="st-mini st-mini--danger">삭제</button>
                            </div>`
                         : '';
                     html += `
-                    <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-start gap-2">
-                        <div class="space-y-1 text-xs">
-                            <span class="bg-blue-600 text-white px-2 py-0.5 rounded text-[10px] font-extrabold">${esc(data.carCode || '차량')}</span>
-                            <h4 class="font-bold text-slate-800 text-sm mt-1"><i class="fa-solid fa-car-side text-blue-600 mr-1"></i>${esc(data.carName)}</h4>
-                            <p class="text-slate-600"><b class="text-blue-700">운전자:</b> ${esc(data.driver)}</p>
-                            <p class="text-slate-600"><b>탑승자:</b> ${esc(data.members)}</p>
+                    <div class="car-row">
+                        <span class="car-ic"><i class="fa-solid fa-car-side"></i></span>
+                        <div class="car-main">
+                            <p class="car-name">${esc(data.carName)} <span>${esc(data.carCode || '')}</span></p>
+                            <p class="car-sub">운전 ${esc(data.driver || '-')} · 탑승 ${esc(data.members || '-')}</p>
                         </div>
                         ${carEditBtns}
                     </div>`;

@@ -81,6 +81,15 @@
 `<span class="bi"><span class="bi-en">Weather</span><span class="bi-ko">여행지 날씨</span></span>`
 대응표: My Trips(헤더) · Your Trips · All Trips · New Trip · Route Map · Timeline · Add Schedule · Budget & Split · Spending Insights · Planned Budget · Actual Spending · Vehicles · Checklist · Weather · Local Time · Currency · Safety · Navigation App · 탭: Trips · Plan · Budget · Checklist · Tools
 
+### 내부 화면 원칙 (v6) — 처음엔 간단히, 누르면 자세히
+- **일차 그룹**: `Day 1 Morning` 굵은 제목 + 날짜 한 줄 + 진행 `1/2` + 펼침 화살표. 왼쪽 세로 띠 = 지도 경로 색.
+- **스텝(장소)**: 접힌 상태엔 원형 아이콘(카테고리) · 시간 · 구분 · 장소명만. 방문 완료는 아이콘이 체크로 채워짐, 다음 일정은 레드핑크 링 + "다음".
+- **펼친 상태**: 메모 → 주소·전화·예산 줄 → 대안 칩 → [방문 완료로 표시] 큰 버튼 → 원형 아이콘 버튼(지도앱·위치·리뷰·수정·삭제).
+- **이동 구간**: 장소 사이에 회색 한 줄 `🚗 12.8km · 약 14분` (누르면 길찾기).
+- **체크리스트**: 둥근 체크 + 품목 + 금액 한 줄. 담당자·메모·수정/삭제는 품목을 눌러야 보임.
+- **가계부 요약**: 예상 예산 / 실제 지출 / 1인 회비 3칸 숫자. 통계는 기본 접힘.
+- 긴 안내 문구는 `.ps-hint`로 숨김. 한글 부제는 2~4글자로 짧게.
+
 ## 4. 하지 말 것
 
 - hex 색을 직접 쓰기 (다크 모드에서 깨짐) — 변수만 사용
