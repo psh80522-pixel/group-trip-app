@@ -1549,6 +1549,16 @@
         .ps-card.ps-new { box-shadow: inset 0 0 0 1px var(--line-strong) !important; }
 
     </style>
+    <style id="theme-v9-trips">
+        /* Your Trips 카드 정렬 (v9.1)
+           - 휴대폰: 옆 카드가 살짝 보이는 가로 스크롤은 유지(넘겨 볼 수 있다는 신호), 첫 카드 왼쪽을 제목·검색창 선에 맞춤
+           - PC(640px 이상): 스크롤 없이 3열 격자로 전부 보이게 (New Trip 카드가 잘리지 않음) */
+        .ps-carousel { scroll-padding-left: 16px; scroll-padding-right: 16px; }
+        @media (min-width: 640px) {
+            .ps-carousel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; overflow: visible; margin: 0; padding: 2px 4px 10px; scroll-snap-type: none; }
+            .ps-card { max-width: none; flex: none; }
+        }
+    </style>
 </head>
 <body class="text-slate-800 pb-28">
 
