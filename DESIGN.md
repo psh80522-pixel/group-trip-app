@@ -110,6 +110,17 @@
 - **버튼**: 주요 버튼은 검정(라이트)·흰색(다크) 사각. 보조 버튼은 1px 선만.
 - **버건디 `--pt`**: 작은 신호에만 — NOW, 다음 일정, 진행중 칩, 상단 작은 라벨.
 
+### 홈 화면 아이콘 (v9)
+- 오프화이트 `#F3F2EE` 바탕 + 검정 `#111111` 소문자 **trip** (Inter Tight 600, 자간 -0.05em)
+- i의 점 = 버건디 `#8C2F3D` 위치 핀 (포인트 색은 이 한 곳만)
+- 아래 회색 `#A09C95` 점선 + 검정 비행기
+- 파일: `apple-touch-icon.png`(180) · `icon-192.png` · `icon-512.png` · `icon-maskable-512.png`(안드로이드 원형, 80% 축소) · `favicon-32.png` · `manifest.webmanifest`(이름 '여행매니저', 테마색 `#F3F2EE`)
+- 그림 출처: Font Awesome Free (CC BY 4.0), 글꼴 Inter Tight (SIL OFL)
+
+### 캡처 서랍 연결 (capture-import.js)
+- 첫 화면 'Capture Drawer · 캡처 서랍에서 가져오기' 카드, 가져오기 창은 위 토큰 변수만 사용 (라이트/다크 자동)
+- 캡처 서랍(Claude 앱)도 같은 v9 토큰·서체로 맞춤
+
 ## 4. 하지 말 것
 
 - hex 색을 직접 쓰기 (다크 모드에서 깨짐) — 변수만 사용
