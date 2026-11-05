@@ -1559,6 +1559,30 @@
             .ps-card { max-width: none; flex: none; }
         }
     </style>
+    <style id="theme-v9-backup">
+        /* Backup & Restore 카드 (v9.2)
+           - 저장(Backup) 3칸은 같은 무게의 선 버튼, 데이터를 덮어쓰는 복원(Restore)은 아래 한 줄로 따로
+           - 영문 라벨 + 작은 한글, 색은 테마 변수만, 상태 표시만 버건디 점 */
+        #backup-card { display: grid; gap: 10px; }
+        #backup-card .bk-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        #backup-card h2 > i { color: var(--g900); }
+        .bk-status { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 8px; border: 1px solid var(--line); border-radius: var(--r); color: var(--g500); white-space: nowrap; }
+        .bk-status[data-state="ready"] { color: var(--g900); }
+        .bk-status[data-state="ready"]::before { content: '\25CF\00A0'; color: var(--pt); }
+        .bk-desc { margin: 0; font-size: 12.5px; line-height: 1.55; color: var(--g500); }
+        .bk-kick { margin-top: 4px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--g500); }
+        .bk-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+        #backup-card .bk-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 88px; padding: 12px; border: 1px solid var(--line-strong); border-radius: var(--r); background: transparent; color: var(--g900); text-align: left; cursor: pointer; box-shadow: none; transition: background .15s; }
+        #backup-card .bk-tile > i { font-size: 17px; margin-bottom: auto; padding-bottom: 10px; }
+        .bk-en { display: block; font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: -.03em; line-height: 1.2; color: var(--g900); }
+        .bk-ko { display: block; font-size: 11px; line-height: 1.35; color: var(--g500); }
+        .bk-restore { display: flex; align-items: center; gap: 12px; padding: 13px 14px; border: 1px solid var(--line-strong); border-radius: var(--r); color: var(--g900); cursor: pointer; transition: background .15s; }
+        .bk-restore > i:first-child { font-size: 17px; width: 20px; text-align: center; }
+        .bk-tx { flex: 1; min-width: 0; display: grid; gap: 2px; }
+        .bk-chev { font-size: 11px; color: var(--g400); }
+        #backup-card .bk-tile:hover, .bk-restore:hover { background: var(--g50); }
+        #backup-card .bk-tile:focus-visible, .bk-restore:focus-within { outline: 2px solid var(--g900); outline-offset: 2px; }
+    </style>
 </head>
 <body class="text-slate-800 pb-28">
 
@@ -1719,30 +1743,34 @@
             </div>
         </section>
 
-        <!-- 3. 엑셀 통합 백업 & 복원 카드 -->
-        <section class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
-            <div class="flex justify-between items-center">
+        <!-- 3. 엑셀 통합 백업 & 복원 카드 (v9.2: 백업 3칸 + 복원 1줄로 분리, 영문 라벨 + 작은 한글) -->
+        <section id="backup-card" class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
+            <div class="bk-head">
                 <h2 class="text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-                    <i class="fa-solid fa-file-excel text-emerald-600"></i> <span class="bi"><span class="bi-en">Backup &amp; Restore</span><span class="bi-ko">전체 여행 데이터 엑셀 백업 · 복원</span></span>
+                    <i class="fa-solid fa-box-archive"></i> <span class="bi"><span class="bi-en">Backup &amp; Restore</span><span class="bi-ko">전체 여행 데이터 · 엑셀 파일</span></span>
                 </h2>
-                <span id="backup-cache-status" class="text-[11px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold">백업 준비중</span>
+                <span id="backup-cache-status" class="bk-status" data-state="wait">Preparing</span>
             </div>
-            <p class="text-xs text-slate-500">모든 여행의 예상 일정(사진·수동거리 포함), 가계부(영수증 포함), 차량 배치, 체크리스트를 엑셀 파일 하나로 백업하거나 복원합니다.</p>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
-                <button type="button" onclick="exportExcelBackup('mobile')" class="bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
-                    <i class="fa-solid fa-mobile-screen-button"></i> 폰 저장/공유
+            <p class="bk-desc">모든 여행의 일정(사진·수동거리), 가계부(영수증), 차량 배치, 체크리스트를 엑셀 파일 하나로 저장하고, 그 파일로 다시 되돌립니다.</p>
+            <div class="bk-kick">Backup</div>
+            <div class="bk-grid">
+                <button type="button" onclick="exportExcelBackup('mobile')" class="bk-tile">
+                    <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span class="bk-en">Share</span><span class="bk-ko">폰 저장·공유</span>
                 </button>
-                <button type="button" onclick="exportExcelBackup('pc')" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
-                    <i class="fa-solid fa-download"></i> PC 다운로드
+                <button type="button" onclick="exportExcelBackup('pc')" class="bk-tile">
+                    <i class="fa-solid fa-download" aria-hidden="true"></i><span class="bk-en">Download</span><span class="bk-ko">PC에 저장</span>
                 </button>
-                <button type="button" onclick="exportExcelBackup('gdrive')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
-                    <i class="fa-brands fa-google-drive"></i> 구글드라이브
+                <button type="button" onclick="exportExcelBackup('gdrive')" class="bk-tile">
+                    <i class="fa-brands fa-google-drive" aria-hidden="true"></i><span class="bk-en">Drive</span><span class="bk-ko">구글 드라이브</span>
                 </button>
-                <label class="bg-amber-500 hover:bg-amber-600 text-white py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow-sm text-center">
-                    <i class="fa-solid fa-upload"></i> 엑셀 복원
-                    <input type="file" accept=".xlsx,.xls" onchange="restoreFromExcelFile(event)" class="hidden">
-                </label>
             </div>
+            <div class="bk-kick">Restore</div>
+            <label class="bk-restore">
+                <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+                <span class="bk-tx"><span class="bk-en">Restore from File</span><span class="bk-ko">백업 엑셀로 여행을 되돌립니다 · 사진·PDF 일정표는 캡처 서랍으로 안내</span></span>
+                <i class="fa-solid fa-chevron-right bk-chev" aria-hidden="true"></i>
+                <input type="file" accept=".xlsx,.xls,image/*,.pdf" onchange="restoreFromExcelFile(event)" class="hidden">
+            </label>
         </section>
 
         <!-- 5. 단양 샘플 생성 버튼 (제일 하단에 흐리게 배치) -->
@@ -6441,7 +6469,7 @@
         function scheduleBackupCache() {
             if (backupDebounceTimer) clearTimeout(backupDebounceTimer);
             const badge = document.getElementById('backup-cache-status');
-            if (badge) badge.innerText = "변경감지·갱신중...";
+            if (badge) { badge.innerText = "Updating…"; badge.dataset.state = "busy"; }
             backupDebounceTimer = setTimeout(() => {
                 prepareBackupCache();
             }, 1500);
@@ -6559,7 +6587,7 @@
                 window.cachedBackupBlob = blob;
                 window.cachedBackupFileName = fileName;
                 try { window.cachedBackupFile = new File([blob], fileName, { type: blob.type }); } catch (_) {}
-                if (badge) badge.innerText = "✓ 최신 백업 준비됨";
+                if (badge) { badge.innerText = "Ready"; badge.dataset.state = "ready"; }
             } catch (e) { console.error(e); }
         }
 
